@@ -1,0 +1,111 @@
+{
+  "HomePage": {
+    "heroTitle": "Lorem Ipsum Is Simply",
+    "heroSubtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
+    "heroTagline": "Lorem Ipsum Simply",
+    "aboutTitle": "Who We Are Defenders Of Your Digital Realm",
+    "aboutDescription": "At The SamurAI, we believe in more than just security. We believe in peace of mind, knowing your digital world is protected, your business is resilient, and your future is secure.",
+    "partnersTitle": "Why SentinelOne?",
+    "partners": {
+      "sentinelone": "SentinelOne",
+      "pingidentity": "PingIdentity",
+      "thales": "THALES",
+      "okta": "okta"
+    },
+    "cybersecurityTitle": "Cybersecurity, AI",
+    "cybersecurityDescription": "In today's ever-changing cyber threat landscape, AI-powered cybersecurity is essential.",
+    "cybersecurityDetail": "Our advanced system uses cutting-edge algorithms and machine learning for real-time.",
+    "consultationTitle": "IT Consultation",
+    "consultationDescription": "Improve your business technology with expert IT consultation services. Increase efficiency, security, and productivity with tailored solutions.",
+    "consultationButton": "Contact us for professional consultation today",
+    "solutionsTitle": "Cybersecurity Solutions",
+    "solutionsIntro": "Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks in order to succeed against bad actors.",
+    "solutions": {
+      "aiSecurity": "AI Security For LLMs",
+      "identity": "Identity And Access Management",
+      "lorem": "Lorem Ipsum",
+      "zeroTrust": "Zero-Trust",
+      "network": "Network Security",
+      "cloud": "Cloud Security",
+      "endpoint": "Endpoint Security"
+    },
+    "servicesTitle": "Our Services",
+    "servicesIntro": "Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks in order to succeed against bad actors.",
+    "services": {
+      "consulting": "Consulting Services",
+      "consultingDesc": "Lorem Ipsum Rules 26 Arms: Consolidate Approaches Due to Extreme Entropy Management Of Lower Extreme Energy Alerts US EPA and Merlin Wellish, Ours Hospital",
+      "infrastructure": "Next-Generation Infrastructure",
+      "infrastructureDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do Eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ex ea commodo consequat.",
+      "resourcing": "Strategic Resourcing",
+      "resourcingDesc": "Lorem Ipsum Rules 26 Arms: Consolidate Approaches Due to Extreme Entropy Management Of Lower Extreme Energy Alerts US EPA and Merlin Wellish, Ours Hospital",
+      "training": "Technology Labs And Training",
+      "trainingDesc": "Lorem Ipsum Rules 28 Arms: Consolidate Approaches Due to Extreme Entropy Management Of Lower Extreme Energy Alerts US EPA and Merlin Wellish, Ours Hospital",
+      "managed": "Managed IT",
+      "managedDesc": "Lorem Ipsum Rules 28 Arms: Consolidate Approaches Due to Extreme Entropy Management Of Lower Extreme Energy Alerts US EPA and Merlin Wellish, Ours Hospital",
+      "devsecops": "DevSecOps Automation",
+      "devsecopsDesc": "Lorem Ipsum Rules 28 Arms: Consolidate Approaches Due to Extreme Entropy Management Of Lower Extreme Energy Alerts US EPA and Merlin Wellish, Ours Hospital"
+    },
+    "valuesTitle": "Core Value Statements",
+    "valuesDescription1": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an un.",
+    "valuesDescription2": "Lorem Ipsum is simply dummy text of the printing and type",
+    "resourcesTitle": "Resources",
+    "resourcesIntro": "Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks in order to succeed against bad actors.",
+    "resources": {
+      "penetration": "Top ID Penetration Testing Tools Cybersecurity Experts Are Using Right Now",
+      "cybersecurity": "Top CyberSecurity Services Businesses Need In 2025",
+      "blackhat": "Black Hat USA 2025 Closes Out on a High Node In Los Vegas"
+    },
+    "footerTitle": "Lorem Ipsum Is Simply Dummy Text Of Printing",
+    "footerTagline": "Lorem Ipsum is Simply Dummy Text Of Printing",
+    "footerTeam": "Many Brainy As Dummy Text Of The Typewriting Industry",
+    "footerReadable": "Lorem Ipsum is Simply Dummy Text Of The Printing Your Type Setting Products: Lorem Ipsum Has Does The Industry's Standard Dummy Text? See Slocz The 1000s Who do Us Manage Printer You & Gallery",
+    "footerPhone1": "123-465-2050",
+    "footerPhone2": "130-465-2050",
+    "footerEmail": "info@loremipsum.com",
+    "footerWebsite": "Learn lorem is simply dummy text of bold letters.",
+    "footerNote": "Lorem Ipsum is Simply Dummy Text Of The Printing"
+  },
+  "Common": {
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "readMore": "Read More"
+  },
+  "Navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "Hero": {
+    "title": "Welcome to Phoenix",
+    "subtitle": "Building the future with innovative solutions",
+    "cta": "Get Started"
+  },
+  "Features": {
+    "title": "Our Features",
+    "feature1": "Fast Development",
+    "feature2": "Secure Platform",
+    "feature3": "24/7 Support",
+    "feature4": "Scalable Solutions"
+  },
+  "Services": {
+    "title": "Our Services",
+    "web": "Web Development",
+    "mobile": "Mobile Apps",
+    "design": "UI/UX Design",
+    "consulting": "IT Consulting"
+  },
+  "Stats": {
+    "clients": "Happy Clients",
+    "projects": "Projects Completed",
+    "awards": "Awards Won",
+    "team": "Team Members"
+  },
+  "Footer": {
+    "company": "Phoenix",
+    "description": "Building innovative solutions for tomorrow",
+    "rights": "All rights reserved"
+  }
+}
