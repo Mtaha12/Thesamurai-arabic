@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n';
 import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
+import ChatWidget from '@/components/chat/ChatWidget';
 
 // Language Switcher Component
 function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {
@@ -84,6 +85,7 @@ export default async function LocaleLayout({
           locale={locale}
         >
           {children}
+          <ChatWidget />
         </NextIntlClientProvider>
       </body>
     </html>

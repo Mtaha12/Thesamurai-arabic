@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import LanguageSwitcher from '@/components/layout/LanguageSwitcher';
+import Header from '@/components/layout/Header';
 
 export default function HomePage() {
   const t = useTranslations('HomePage');
@@ -15,65 +15,12 @@ export default function HomePage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#fff' }}>
-      {/* Header */}
-      <header style={{
-        background: 'linear-gradient(135deg, #1a1f71 0%, #0a0e3d 100%)',
-        padding: '1rem 3rem',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        position: 'sticky',
-        top: 0,
-        zIndex: 1000
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <Image 
-            src="/logo.png" 
-            alt="The SamurAI Logo" 
-            width={80} 
-            height={80}
-            style={{ objectFit: 'contain' }}
-          />
-          <span style={{
-            fontSize: '1.5rem',
-            fontWeight: '700',
-            color: '#fff'
-          }}></span>
-        </div>
-
-        <nav style={{
-          display: 'flex',
-          gap: '2rem',
-          alignItems: 'center',
-          color: '#fff'
-        }}>
-          <a href="#many" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem' }}>Many</a>
-          <a href="#ipsum" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem' }}>Ipsum Is</a>
-          <a href="#simply" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem' }}>Simply As</a>
-          <a href="#dummys" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem' }}>Dummys</a>
-          <a href="#text" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem' }}>Text Of The</a>
-          <a href="#print" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem' }}>Print</a>
-          <a href="#typesetting" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem' }}>Typesetting</a>
-          <a href="#industry" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem' }}>Industry</a>
-          <button style={{
-            background: '#00bcd4',
-            color: '#fff',
-            border: 'none',
-            padding: '0.6rem 1.5rem',
-            borderRadius: '25px',
-            fontWeight: '600',
-            cursor: 'pointer',
-            fontSize: '0.95rem'
-          }}>Lorem Ipsum</button>
-        </nav>
-
-        <LanguageSwitcher />
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section style={{
         background: 'linear-gradient(135deg, #1a1f71 0%, #0a0e3d 50%, #00bcd4 100%)',
-        padding: '8rem 3rem',
+        padding: 'clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 3rem)',
         textAlign: 'center',
         color: '#fff',
         position: 'relative',
@@ -90,7 +37,7 @@ export default function HomePage() {
         }}></div>
         
         <h1 style={{
-          fontSize: '4rem',
+          fontSize: 'clamp(2rem, 6vw, 4rem)',
           fontWeight: '800',
           marginBottom: '1.5rem',
           position: 'relative',
@@ -101,13 +48,14 @@ export default function HomePage() {
         </h1>
         
         <p style={{
-          fontSize: '1.2rem',
+          fontSize: 'clamp(1rem, 2vw, 1.2rem)',
           maxWidth: '700px',
           margin: '0 auto 2.5rem',
           lineHeight: '1.8',
           opacity: 0.9,
           position: 'relative',
-          zIndex: 1
+          zIndex: 1,
+          padding: '0 1rem'
         }}>
           {t('heroSubtitle')}
         </p>
@@ -116,9 +64,9 @@ export default function HomePage() {
           background: 'transparent',
           color: '#fff',
           border: '2px solid #fff',
-          padding: '0.8rem 2.5rem',
+          padding: 'clamp(0.7rem, 1.5vw, 0.8rem) clamp(1.5rem, 4vw, 2.5rem)',
           borderRadius: '30px',
-          fontSize: '1rem',
+          fontSize: 'clamp(0.9rem, 1.5vw, 1rem)',
           fontWeight: '600',
           cursor: 'pointer',
           transition: 'all 0.3s',
@@ -130,19 +78,19 @@ export default function HomePage() {
       </section>
 
       {/* Partners Section */}
-      <section style={{
+      <section id="industries" style={{
         background: '#0a0e3d',
-        padding: '3rem',
+        padding: 'clamp(2rem, 5vw, 3rem)',
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
         flexWrap: 'wrap',
-        gap: '2rem'
+        gap: 'clamp(1rem, 3vw, 2rem)'
       }}>
         {['ForgeRock', 'Microsoft Azure', 'SentinelOne', 'PingIdentity', 'THALES', 'okta'].map((partner) => (
           <div key={partner} style={{
             color: '#fff',
-            fontSize: '1.2rem',
+            fontSize: 'clamp(1rem, 2vw, 1.2rem)',
             fontWeight: '600',
             opacity: 0.8
           }}>
@@ -152,18 +100,18 @@ export default function HomePage() {
       </section>
 
       {/* Who We Are Section */}
-      <section style={{
-        padding: '6rem 3rem',
+      <section id="about" style={{
+        padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)',
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: '4rem',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))',
+        gap: 'clamp(2rem, 5vw, 4rem)',
         maxWidth: '1400px',
         margin: '0 auto'
       }}>
         <div>
-          <p style={{ color: '#666', fontSize: '0.95rem', marginBottom: '0.5rem' }}>Who We Are</p>
+          <p style={{ color: '#666', fontSize: 'clamp(0.9rem, 1.2vw, 0.95rem)', marginBottom: '0.5rem' }}>Who We Are</p>
           <h2 style={{
-            fontSize: '3rem',
+            fontSize: 'clamp(2rem, 5vw, 3rem)',
             fontWeight: '800',
             color: '#0a0e3d',
             lineHeight: '1.2',
@@ -171,7 +119,7 @@ export default function HomePage() {
           }}>
             Defenders Of<br />Your Digital Realm
           </h2>
-          <p style={{ color: '#666', lineHeight: '1.8', fontSize: '1.05rem' }}>
+          <p style={{ color: '#666', lineHeight: '1.8', fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)' }}>
             {t('aboutDescription')}
           </p>
         </div>
@@ -197,13 +145,13 @@ export default function HomePage() {
               color: '#00bcd4',
               fontSize: '1.5rem'
             }}>🔒</div>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: '700', color: '#0a0e3d', marginBottom: '0.75rem' }}>
+            <h3 style={{ fontSize: 'clamp(1.1rem, 2vw, 1.3rem)', fontWeight: '700', color: '#0a0e3d', marginBottom: '0.75rem' }}>
               {t('cybersecurityTitle')}
             </h3>
-            <p style={{ color: '#666', lineHeight: '1.6', marginBottom: '1rem' }}>
+            <p style={{ color: '#666', lineHeight: '1.6', marginBottom: '1rem', fontSize: 'clamp(0.9rem, 1.2vw, 1rem)' }}>
               {t('cybersecurityDescription')}
             </p>
-            <p style={{ color: '#666', lineHeight: '1.6', fontSize: '0.95rem' }}>
+            <p style={{ color: '#666', lineHeight: '1.6', fontSize: 'clamp(0.85rem, 1.2vw, 0.95rem)' }}>
               {t('cybersecurityDetail')}
             </p>
             <button style={{
@@ -236,13 +184,13 @@ export default function HomePage() {
               color: '#00bcd4',
               fontSize: '1.5rem'
             }}>💡</div>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: '700', color: '#0a0e3d', marginBottom: '0.75rem' }}>
+            <h3 style={{ fontSize: 'clamp(1.1rem, 2vw, 1.3rem)', fontWeight: '700', color: '#0a0e3d', marginBottom: '0.75rem' }}>
               {t('consultationTitle')}
             </h3>
-            <p style={{ color: '#666', lineHeight: '1.6', marginBottom: '1rem' }}>
+            <p style={{ color: '#666', lineHeight: '1.6', marginBottom: '1rem', fontSize: 'clamp(0.9rem, 1.2vw, 1rem)' }}>
               {t('consultationDescription')}
             </p>
-            <p style={{ color: '#666', lineHeight: '1.6', fontSize: '0.95rem' }}>
+            <p style={{ color: '#666', lineHeight: '1.6', fontSize: 'clamp(0.85rem, 1.2vw, 0.95rem)' }}>
               {t('consultationButton')}
             </p>
             <button style={{
@@ -258,24 +206,24 @@ export default function HomePage() {
       </section>
 
       {/* Cybersecurity Solutions Section */}
-      <section style={{
+      <section id="locations" style={{
         background: '#0a0e3d',
-        padding: '6rem 3rem',
+        padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)',
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: '4rem',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))',
+        gap: 'clamp(2rem, 5vw, 4rem)',
         alignItems: 'center'
       }}>
         <div>
           <h2 style={{
-            fontSize: '2.5rem',
+            fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
             fontWeight: '800',
             color: '#fff',
             marginBottom: '1.5rem'
           }}>
             {t('solutionsTitle')}
           </h2>
-          <p style={{ color: '#ccc', lineHeight: '1.8', marginBottom: '2rem' }}>
+          <p style={{ color: '#ccc', lineHeight: '1.8', marginBottom: '2rem', fontSize: 'clamp(0.95rem, 1.5vw, 1rem)' }}>
             {t('solutionsIntro')}
           </p>
 
@@ -395,10 +343,10 @@ export default function HomePage() {
       {/* Our Services Section */}
       <section style={{
         background: '#0a0e3d',
-        padding: '6rem 3rem'
+        padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)'
       }}>
         <h2 style={{
-          fontSize: '2.5rem',
+          fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
           fontWeight: '800',
           color: '#fff',
           textAlign: 'center',
@@ -410,16 +358,18 @@ export default function HomePage() {
           color: '#ccc',
           textAlign: 'center',
           maxWidth: '800px',
-          margin: '0 auto 4rem',
-          lineHeight: '1.8'
+          margin: '0 auto clamp(2rem, 5vw, 4rem)',
+          lineHeight: '1.8',
+          padding: '0 1rem',
+          fontSize: 'clamp(0.95rem, 1.5vw, 1rem)'
         }}>
           {t('servicesIntro')}
         </p>
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '2rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+          gap: 'clamp(1.5rem, 3vw, 2rem)',
           maxWidth: '1400px',
           margin: '0 auto'
         }}>
@@ -452,7 +402,7 @@ export default function HomePage() {
                 {service.icon}
               </div>
               <h3 style={{
-                fontSize: '1.3rem',
+                fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
                 fontWeight: '700',
                 color: '#fff',
                 marginBottom: '1rem'
@@ -462,7 +412,7 @@ export default function HomePage() {
               <p style={{
                 color: '#ccc',
                 lineHeight: '1.6',
-                fontSize: '0.95rem',
+                fontSize: 'clamp(0.9rem, 1.2vw, 0.95rem)',
                 marginBottom: '1.5rem'
               }}>
                 {service.desc}
@@ -482,10 +432,10 @@ export default function HomePage() {
       {/* Core Value Statements Section */}
       <section style={{
         background: '#00bcd4',
-        padding: '6rem 3rem',
+        padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)',
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: '4rem',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))',
+        gap: 'clamp(2rem, 5vw, 4rem)',
         alignItems: 'center'
       }}>
         <div>
@@ -548,12 +498,12 @@ export default function HomePage() {
       </section>
 
       {/* Resources Section */}
-      <section style={{
+      <section id="resources" style={{
         background: '#fff',
-        padding: '6rem 3rem'
+        padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)'
       }}>
         <h2 style={{
-          fontSize: '2.5rem',
+          fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
           fontWeight: '800',
           color: '#0a0e3d',
           textAlign: 'center',
@@ -565,16 +515,18 @@ export default function HomePage() {
           color: '#666',
           textAlign: 'center',
           maxWidth: '800px',
-          margin: '0 auto 4rem',
-          lineHeight: '1.8'
+          margin: '0 auto clamp(2rem, 5vw, 4rem)',
+          lineHeight: '1.8',
+          padding: '0 1rem',
+          fontSize: 'clamp(0.95rem, 1.5vw, 1rem)'
         }}>
           {t('resourcesIntro')}
         </p>
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '2rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+          gap: 'clamp(1.5rem, 3vw, 2rem)',
           maxWidth: '1400px',
           margin: '0 auto'
         }}>
@@ -599,9 +551,9 @@ export default function HomePage() {
               }}>
                 {resource.image}
               </div>
-              <div style={{ padding: '2rem' }}>
+              <div style={{ padding: 'clamp(1.5rem, 3vw, 2rem)' }}>
                 <h3 style={{
-                  fontSize: '1.1rem',
+                  fontSize: 'clamp(1rem, 1.5vw, 1.1rem)',
                   fontWeight: '700',
                   color: '#fff',
                   marginBottom: '1.5rem',
@@ -613,11 +565,11 @@ export default function HomePage() {
                   background: '#00bcd4',
                   color: '#0a0e3d',
                   border: 'none',
-                  padding: '0.7rem 1.5rem',
+                  padding: 'clamp(0.6rem, 1.5vw, 0.7rem) clamp(1.2rem, 2.5vw, 1.5rem)',
                   borderRadius: '8px',
                   fontWeight: '600',
                   cursor: 'pointer',
-                  fontSize: '0.9rem'
+                  fontSize: 'clamp(0.85rem, 1.2vw, 0.9rem)'
                 }}>
                   {common('readMore')}
                 </button>
@@ -628,9 +580,9 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section style={{
+      <section id="careers" style={{
         background: '#fff',
-        padding: '4rem 3rem',
+        padding: 'clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 3rem)',
         textAlign: 'center'
       }}>
         <div style={{
@@ -638,11 +590,11 @@ export default function HomePage() {
           margin: '0 auto',
           background: '#f8f9fa',
           borderRadius: '20px',
-          padding: '3rem',
+          padding: 'clamp(2rem, 5vw, 3rem)',
           border: '2px solid #e0e0e0'
         }}>
           <h2 style={{
-            fontSize: '2rem',
+            fontSize: 'clamp(1.5rem, 3vw, 2rem)',
             fontWeight: '800',
             color: '#0a0e3d',
             marginBottom: '1rem'
@@ -651,7 +603,8 @@ export default function HomePage() {
           </h2>
           <p style={{
             color: '#666',
-            marginBottom: '2rem'
+            marginBottom: '2rem',
+            fontSize: 'clamp(0.95rem, 1.5vw, 1rem)'
           }}>
             {t('footerTagline')}
           </p>
@@ -659,9 +612,9 @@ export default function HomePage() {
             background: '#00bcd4',
             color: '#fff',
             border: 'none',
-            padding: '1rem 3rem',
+            padding: 'clamp(0.8rem, 2vw, 1rem) clamp(2rem, 4vw, 3rem)',
             borderRadius: '30px',
-            fontSize: '1rem',
+            fontSize: 'clamp(0.9rem, 1.5vw, 1rem)',
             fontWeight: '700',
             cursor: 'pointer',
             boxShadow: '0 4px 12px rgba(0,188,212,0.3)'
@@ -675,15 +628,15 @@ export default function HomePage() {
       <footer style={{
         background: '#0a0e3d',
         color: '#fff',
-        padding: '4rem 3rem 2rem'
+        padding: 'clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 3rem) clamp(1rem, 3vw, 2rem)'
       }}>
         <div style={{
           maxWidth: '1400px',
           margin: '0 auto',
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '3rem',
-          marginBottom: '3rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))',
+          gap: 'clamp(2rem, 4vw, 3rem)',
+          marginBottom: 'clamp(2rem, 4vw, 3rem)'
         }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>

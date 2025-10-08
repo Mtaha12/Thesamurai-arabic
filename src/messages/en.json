@@ -75,8 +75,75 @@
     "home": "Home",
     "about": "About",
     "services": "Services",
-    "projects": "Projects",
-    "contact": "Contact"
+    "contact": "Contact",
+    "solutions": "Solutions",
+    "industries": "Industries",
+    "locations": "Locations",
+    "resources": "Resources",
+    "careers": "Careers",
+    "aboutUs": "About Us",
+    "getInTouch": "Get in touch",
+    "projects": "Projects"
+  },
+  "ServicesPage": {
+    "description": "We offer a comprehensive range of cybersecurity and IT services to protect your business",
+    "consulting": {
+      "title": "Consulting Services",
+      "hero": "Consulting Services",
+      "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Our expert consulting services help you navigate complex IT challenges and drive digital transformation.",
+      "learnMore": "Learn More",
+      "section1Title": "Lorem Ipsum",
+      "section1Para1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "section1Para2": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "section2Title": "Lorem Ipsum",
+      "section2Para1": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+      "section2Para2": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
+      "otherServices": "Other Services",
+      "infrastructure": "Next Gen Infrastructure",
+      "resourcing": "Strategic Resourcing",
+      "training": "Technology Labs & Training",
+      "managedIT": "Managed IT",
+      "devsecops": "DevSecOps Automation",
+      "serviceDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+      "resources": "Resources",
+      "resourcesIntro": "Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks.",
+      "readMore": "Read More",
+      "ctaTitle": "Lorem Ipsum Is Simply Dummy Text Of Printing",
+      "ctaDesc": "Lorem Ipsum is Simply Dummy Text Of Printing"
+    },
+    "infrastructure": {
+      "hero": "Next Generation Infrastructure",
+      "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Build cutting-edge infrastructure solutions that scale with your business needs.",
+      "getStarted": "Get Started"
+    },
+    "resourcing": {
+      "hero": "Strategic Resourcing",
+      "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Access top-tier talent and strategic resources to power your digital initiatives.",
+      "exploreSolutions": "Explore Solutions"
+    },
+    "training": {
+      "hero": "Technology Labs & Training",
+      "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Empower your team with the knowledge and skills needed to succeed in the digital landscape.",
+      "joinProgram": "Join Program"
+    },
+    "managedIT": {
+      "hero": "Managed IT",
+      "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Comprehensive managed IT services to keep your business running smoothly.",
+      "contactUs": "Contact Us"
+    },
+    "devsecops": {
+      "hero": "DevSecOps Automation",
+      "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Streamline development, security, and operations with advanced automation.",
+      "learnMore": "Learn More"
+    }
+  },
+  "Services": {
+    "consulting": "Consulting Services",
+    "infrastructure": "Next Gen Infrastructure",
+    "resourcing": "Strategic Resourcing",
+    "training": "Technology Labs & Training",
+    "managedIT": "Managed IT",
+    "devsecops": "DevSecOps Automation"
   },
   "Hero": {
     "title": "Welcome to Phoenix",
@@ -90,13 +157,6 @@
     "feature3": "24/7 Support",
     "feature4": "Scalable Solutions"
   },
-  "Services": {
-    "title": "Our Services",
-    "web": "Web Development",
-    "mobile": "Mobile Apps",
-    "design": "UI/UX Design",
-    "consulting": "IT Consulting"
-  },
   "Stats": {
     "clients": "Happy Clients",
     "projects": "Projects Completed",
@@ -107,5 +167,67 @@
     "company": "Phoenix",
     "description": "Building innovative solutions for tomorrow",
     "rights": "All rights reserved"
+  },
+  "ContactForm": {
+    "title": "Get In Touch",
+    "subtitle": "Have a question or want to work together? Fill out the form below and we'll get back to you as soon as possible.",
+    "fields": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "subject": "Subject",
+      "message": "Your Message"
+    },
+    "placeholders": {
+      "name": "Enter your full name",
+      "email": "your.email@example.com",
+      "phone": "+1 (555) 123-4567",
+      "subject": "Select a subject",
+      "message": "Tell us more about your inquiry..."
+    },
+    "subjects": {
+      "general": "General Inquiry",
+      "consulting": "Consulting Services",
+      "support": "Technical Support",
+      "partnership": "Partnership Opportunity",
+      "other": "Other"
+    },
+    "errors": {
+      "nameRequired": "Name is required",
+      "nameTooShort": "Name must be at least 2 characters",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email address",
+      "phoneRequired": "Phone number is required",
+      "phoneInvalid": "Please enter a valid phone number",
+      "subjectRequired": "Please select a subject",
+      "messageRequired": "Message is required",
+      "messageTooShort": "Message must be at least 10 characters"
+    },
+    "submit": "Send Message",
+    "submitting": "Sending...",
+    "successMessage": "Thank you! Your message has been sent successfully. We'll get back to you soon.",
+    "errorMessage": "Oops! Something went wrong. Please try again later."
+  },
+  "Contact": {
+    "title": "Contact Us",
+    "description": "Get in touch with our team"
+  },
+  "Chat": {
+    "title": "Chat Support",
+    "status": "Online now",
+    "openChat": "Open chat",
+    "closeChat": "Close chat",
+    "inputPlaceholder": "Type your message...",
+    "sendMessage": "Send message",
+    "welcomeMessage": "Hello! 👋 Welcome to The SamurAI. How can I help you today?",
+    "responses": {
+      "greeting": "Hi there! How can I assist you today?",
+      "help": "I'm here to help! You can ask me about our services, pricing, or any general questions. For specific inquiries, please use our contact form.",
+      "services": "We offer Cybersecurity Solutions, IT Consulting, Infrastructure Services, and more. Would you like to know more about a specific service?",
+      "pricing": "Our pricing varies based on your specific needs. Please contact our sales team for a customized quote. Would you like me to connect you?",
+      "contact": "You can reach us at info@thesamurai.com or call +1 (555) 123-4567. You can also fill out our contact form for detailed inquiries.",
+      "thanks": "You're welcome! Is there anything else I can help you with?",
+      "default": "I understand. For more detailed assistance, please contact our support team or fill out the contact form. Is there anything else I can help with?"
+    }
   }
 }
