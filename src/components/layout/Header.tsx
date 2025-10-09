@@ -10,6 +10,7 @@ import Image from 'next/image';
 
 export default function Header() {
   const t = useTranslations('Navigation');
+  const tServices = useTranslations('Services');
   const pathname = usePathname();
   const currentLocale = pathname.split('/')[1] || 'en';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,12 +18,12 @@ export default function Header() {
   const [solutionsOpen, setSolutionsOpen] = useState(false);
 
   const services = [
-    { name: 'Consulting Services', href: `/${currentLocale}/services/consulting` },
-    { name: 'Next Gen Infrastructure', href: `/${currentLocale}/services/infrastructure` },
-    { name: 'Strategic Resourcing', href: `/${currentLocale}/services/resourcing` },
-    { name: 'Technology Labs & Training', href: `/${currentLocale}/services/training` },
-    { name: 'Managed IT', href: `/${currentLocale}/services/managed-it` },
-    { name: 'DevSecOps Automation', href: `/${currentLocale}/services/devsecops` },
+    { name: tServices('consulting'), href: `/${currentLocale}/services/consulting` },
+    { name: tServices('infrastructure'), href: `/${currentLocale}/services/infrastructure` },
+    { name: tServices('resourcing'), href: `/${currentLocale}/services/resourcing` },
+    { name: tServices('training'), href: `/${currentLocale}/services/training` },
+    { name: tServices('managedIT'), href: `/${currentLocale}/services/managed-it` },
+    { name: tServices('devsecops'), href: `/${currentLocale}/services/devsecops` },
   ];
 
   return (
@@ -78,7 +79,7 @@ export default function Header() {
               gap: '0.25rem',
               padding: '0.5rem'
             }}>
-              Services <ChevronDown size={16} />
+              {t('services')} <ChevronDown size={16} />
             </button>
             {servicesOpen && (
               <div style={{
@@ -156,11 +157,11 @@ export default function Header() {
             )}
           </div>
 
-          <a href={`/${currentLocale}#industries`} style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}>Industries</a>
-          <a href={`/${currentLocale}#locations`} style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}>Locations</a>
-          <a href={`/${currentLocale}#resources`} style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}>Resources</a>
-          <a href={`/${currentLocale}#careers`} style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}>Careers</a>
-          <a href={`/${currentLocale}#about`} style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}>About Us</a>
+          <a href={`/${currentLocale}#industries`} style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}>{t('industries')}</a>
+          <a href={`/${currentLocale}#locations`} style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}>{t('locations')}</a>
+          <a href={`/${currentLocale}#resources`} style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}>{t('resources')}</a>
+          <a href={`/${currentLocale}#careers`} style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}>{t('careers')}</a>
+          <a href={`/${currentLocale}#about`} style={{ color: '#fff', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}>{t('aboutUs')}</a>
           
           <Link href={`/${currentLocale}/contact`}>
             <button style={{
@@ -174,7 +175,7 @@ export default function Header() {
               fontSize: '0.9rem',
               transition: 'all 0.3s'
             }}>
-              Get in touch
+              {t('getInTouch')}
             </button>
           </Link>
         </nav>
@@ -226,7 +227,7 @@ export default function Header() {
                   alignItems: 'center'
                 }}
               >
-                Services <ChevronDown size={16} />
+                {t('services')} <ChevronDown size={16} />
               </button>
               {servicesOpen && (
                 <div style={{ paddingLeft: '1rem', marginTop: '0.5rem' }}>

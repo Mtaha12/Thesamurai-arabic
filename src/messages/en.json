@@ -138,6 +138,7 @@
     }
   },
   "Services": {
+    "title": "Our Services",
     "consulting": "Consulting Services",
     "infrastructure": "Next Gen Infrastructure",
     "resourcing": "Strategic Resourcing",

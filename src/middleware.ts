@@ -13,6 +13,7 @@ export const config = {
     '/(ar|en)/:path*',
     
     // Enable redirects that add missing locales
-    '/((?!_next|_vercel|.*\\..*).*)'
+    // Exclude API routes, static files, and Next.js internals
+    '/((?!api|_next|_vercel|.*\\..*).*)'
   ]
 };

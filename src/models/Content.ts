@@ -61,8 +61,7 @@ const ContentSchema = new Schema({
   timestamps: true
 });
 
-// Index for better query performance
-ContentSchema.index({ slug: 1 });
+// Index for better query performance (slug already has unique: true, so no need for separate index)
 ContentSchema.index({ category: 1 });
 ContentSchema.index({ 'en.title': 'text', 'ar.title': 'text' });
 

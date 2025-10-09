@@ -1,4 +1,4 @@
-// app/layout.tsx (Modified)
+// app/layout.tsx - Root Layout (passes through to locale-specific layout)
 export default function RootLayout({
   children,
 }: {

@@ -98,5 +98,101 @@ When you visit `/en`, you should see:
 - **Locales**: English (en), Arabic (ar)
 - **Routing**: Middleware-based with locale prefixes (`/en`, `/ar`)
 
+## Backend API Requirements
+
+### API Endpoints Needed
+1. **GET `/api/locale`** - Retrieve current user locale preference
+2. **POST `/api/locale`** - Save user locale preference
+3. **GET `/api/translations/:locale`** - Fetch translations dynamically (optional)
+4. **GET `/api/content/:locale`** - Fetch locale-specific content
+
+### Database Schema
+```typescript
+// User locale preference
+{
+  userId: string,
+  locale: 'en' | 'ar',
+  updatedAt: Date
+}
+```
+
+### Environment Variables
+```env
+MONGODB_URI=your_mongodb_connection_string
+NEXT_PUBLIC_DEFAULT_LOCALE=en
+```
+
+### Implementation Notes
+- Use Next.js API routes in `src/app/api/` directory
+- Store user locale preferences in MongoDB (mongoose already installed)
+- Implement server-side locale detection based on user session
+- Add middleware to handle locale-based redirects
+- Cache translations for better performance
+
+## Cross-Browser Compatibility Testing
+
+### Browsers to Test
+1. **Chrome** (latest 2 versions)
+   -  Desktop: Windows, macOS, Linux
+   -  Mobile: Android, iOS
+2. **Firefox** (latest 2 versions)
+   -  Desktop: Windows, macOS, Linux
+3. **Safari** (latest 2 versions)
+   -  Desktop: macOS
+   -  Mobile: iOS
+4. **Edge** (latest 2 versions)
+   -  Desktop: Windows, macOS
+5. **Opera** (latest version)
+   -  Desktop: Windows, macOS
+
+### Features to Test
+- ✅ RTL layout rendering (especially in Safari and Firefox)
+- ✅ Font rendering for Arabic characters
+- ✅ Language switcher functionality
+- ✅ Navigation menu behavior
+- ✅ Responsive design on mobile browsers
+- ✅ CSS Grid/Flexbox RTL support
+- ✅ Text alignment and directionality
+- ✅ Form inputs in RTL mode
+
+### Testing Tools
+```bash
+# Install Playwright for automated browser testing
+npm install -D @playwright/test
+
+# Run cross-browser tests
+npx playwright test --project=chromium
+npx playwright test --project=firefox
+npx playwright test --project=webkit
+```
+
+### Manual Testing Checklist
+- [ ] Test `/en` route on all browsers
+- [ ] Test `/ar` route on all browsers
+- [ ] Verify RTL layout in Arabic mode
+- [ ] Check font rendering and readability
+- [ ] Test language switcher buttons
+- [ ] Verify navigation menu alignment
+- [ ] Test on mobile viewports (375px, 768px, 1024px)
+- [ ] Check console for errors in each browser
+- [ ] Verify smooth transitions between locales
+
+### Known Browser-Specific Issues
+- **Safari**: May require `-webkit-` prefixes for some RTL CSS properties
+- **Firefox**: Different font rendering for Arabic glyphs
+- **Edge**: Legacy versions may need polyfills (use latest only)
+
+### Recommended Browser Support
+```json
+{
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all",
+    "last 2 versions"
+  ]
+}
+```
+
 ## Status
 ✅ **COMPLETE** - Arabic translations now work correctly. Both layout direction and text content switch when changing languages.
