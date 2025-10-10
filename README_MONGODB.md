@@ -12,9 +12,9 @@ npx tsx scripts/seed-data.ts
 ```
 
 This will seed:
-- ✅ 8 Content items (pages, services, FAQs)
-- ✅ 5 Contact submissions
-- ✅ 5 Chat messages
+-  8 Content items (pages, services, FAQs)
+-  5 Contact submissions
+-  5 Chat messages
 
 ### Option 2: API Endpoint (Seeds Content Only)
 ```bash
@@ -130,12 +130,12 @@ curl http://localhost:3000/api/content
 
 **MongoDB Integration: COMPLETE**
 
-- ✅ Connection working
-- ✅ All endpoints functional
-- ✅ Seed script ready
-- ✅ Dummy data available
-- ✅ EN/AR translations working
-- ✅ No errors or warnings
+-  Connection working
+-  All endpoints functional
+-  Seed script ready
+-  Dummy data available
+-  EN/AR translations working
+-  No errors or warnings
 
 ---
 

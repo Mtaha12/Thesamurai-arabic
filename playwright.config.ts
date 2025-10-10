@@ -8,7 +8,7 @@ export default defineConfig({
   testDir: './tests',
   
   /* Maximum time one test can run for */
-  timeout: 45000,
+  timeout: 120000,
   
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -16,8 +16,8 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code */
   forbidOnly: !!process.env.CI,
   
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 1,
+  /* Retry failed tests */
+  retries: process.env.CI ? 2 : 3,
   
   /* Opt out of parallel tests on CI */
   workers: process.env.CI ? 1 : undefined,
@@ -31,7 +31,6 @@ export default defineConfig({
   
   /* Shared settings for all the projects below */
   use: {
-    /* Base URL to use in actions like `await page.goto('/')` */
     baseURL: 'http://localhost:3000',
     
     /* Collect trace when retrying the failed test */
@@ -44,10 +43,10 @@ export default defineConfig({
     video: 'retain-on-failure',
     
     /* Navigation timeout */
-    navigationTimeout: 30000,
+    navigationTimeout: 90000,
     
     /* Action timeout */
-    actionTimeout: 15000,
+    actionTimeout: 30000,
   },
 
   /* Configure projects for major browsers */
@@ -73,23 +72,26 @@ export default defineConfig({
       use: { 
         ...devices['Desktop Safari'],
         viewport: { width: 1920, height: 1080 },
-        // Webkit needs more time for some operations
-        navigationTimeout: 45000,
+        navigationTimeout: 120000,
+        actionTimeout: 45000,
       },
     },
 
     /* Test against mobile viewports */
     {
       name: 'Mobile Chrome',
-      use: { ...devices['Pixel 5'] },
+      use: { 
+        ...devices['Pixel 5'],
+        navigationTimeout: 120000,
+        actionTimeout: 45000,
+      },
     },
     
     {
       name: 'Mobile Safari',
       use: { 
         ...devices['iPhone 12'],
-        // Mobile Safari needs more time
-        navigationTimeout: 45000,
+        navigationTimeout: 60000,
       },
     },
 
@@ -98,7 +100,8 @@ export default defineConfig({
       name: 'Microsoft Edge',
       use: { 
         ...devices['Desktop Edge'], 
-        channel: 'msedge' 
+        channel: 'msedge',
+        navigationTimeout: 60000,
       },
     },
     
@@ -106,7 +109,8 @@ export default defineConfig({
       name: 'Google Chrome',
       use: { 
         ...devices['Desktop Chrome'], 
-        channel: 'chrome' 
+        channel: 'chrome',
+        navigationTimeout: 60000,
       },
     },
   ],

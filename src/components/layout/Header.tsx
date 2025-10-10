@@ -29,7 +29,7 @@ export default function Header() {
   return (
     <header style={{
       background: 'linear-gradient(135deg, #001F3F 0%, #000814 100%)',
-      padding: '1rem 3rem',
+      padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1rem, 4vw, 3rem)',
       position: 'sticky',
       top: 0,
       zIndex: 1000,
@@ -55,11 +55,11 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav style={{
-          display: 'flex',
+          display: 'none',
           gap: '2rem',
           alignItems: 'center',
           color: '#fff'
-        }} className="hidden md:flex">
+        }} className="desktop-nav">
           {/* Services Dropdown */}
           <div 
             style={{ position: 'relative' }}
@@ -185,13 +185,14 @@ export default function Header() {
           
           {/* Mobile menu button */}
           <button
-            className="md:hidden"
+            className="mobile-menu-btn"
             style={{
               background: 'transparent',
               border: 'none',
               color: '#fff',
               cursor: 'pointer',
-              padding: '0.5rem'
+              padding: '0.5rem',
+              display: 'none'
             }}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
@@ -202,7 +203,7 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden" style={{
+        <div className="mobile-nav" style={{
           background: '#001F3F',
           marginTop: '1rem',
           borderRadius: '8px',
@@ -255,9 +256,50 @@ export default function Header() {
             <a href={`/${currentLocale}#resources`} style={{ color: '#fff', textDecoration: 'none', padding: '0.5rem' }} onClick={() => setIsMenuOpen(false)}>{t('resources')}</a>
             <a href={`/${currentLocale}#careers`} style={{ color: '#fff', textDecoration: 'none', padding: '0.5rem' }} onClick={() => setIsMenuOpen(false)}>{t('careers')}</a>
             <a href={`/${currentLocale}#about`} style={{ color: '#fff', textDecoration: 'none', padding: '0.5rem' }} onClick={() => setIsMenuOpen(false)}>{t('aboutUs')}</a>
+            
+            <Link href={`/${currentLocale}/contact`} style={{ textDecoration: 'none' }} onClick={() => setIsMenuOpen(false)}>
+              <button style={{
+                background: 'transparent',
+                color: '#fff',
+                border: '2px solid #fff',
+                padding: '0.6rem 1.5rem',
+                borderRadius: '25px',
+                fontWeight: '600',
+                cursor: 'pointer',
+                fontSize: '0.9rem',
+                width: '100%',
+                marginTop: '0.5rem'
+              }}>
+                {t('getInTouch')}
+              </button>
+            </Link>
           </nav>
         </div>
       )}
+      
+      {/* Responsive Styles */}
+      <style jsx global>{`
+        @media (min-width: 769px) {
+          .desktop-nav {
+            display: flex !important;
+          }
+          .mobile-menu-btn {
+            display: none !important;
+          }
+          .mobile-nav {
+            display: none !important;
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .desktop-nav {
+            display: none !important;
+          }
+          .mobile-menu-btn {
+            display: block !important;
+          }
+        }
+      `}</style>
     </header>
   );
 }

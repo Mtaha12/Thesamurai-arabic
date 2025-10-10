@@ -1,2 +1,478 @@
-<testsuites id="" name="" tests="0" failures="0" skipped="0" errors="0" time="31.755342">
+<testsuites id="" name="" tests="203" failures="0" skipped="0" errors="0" time="363.108047">
+<testsuite name="api-endpoints.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="chromium" tests="8" failures="0" skipped="0" time="32.717" errors="0">
+<testcase name="API Endpoints - Cross-Browser Tests › should connect to MongoDB" classname="api-endpoints.spec.ts" time="6.037">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get all content" classname="api-endpoints.spec.ts" time="3.364">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get content by slug" classname="api-endpoints.spec.ts" time="8.895">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should submit contact form" classname="api-endpoints.spec.ts" time="3.145">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get all contacts" classname="api-endpoints.spec.ts" time="0.609">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should send chat message" classname="api-endpoints.spec.ts" time="5.403">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid contact submission" classname="api-endpoints.spec.ts" time="3.688">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid email" classname="api-endpoints.spec.ts" time="1.576">
+</testcase>
+</testsuite>
+<testsuite name="chat-widget.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="chromium" tests="3" failures="0" skipped="0" time="29.089" errors="0">
+<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in English" classname="chat-widget.spec.ts" time="9.986">
+</testcase>
+<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in Arabic" classname="chat-widget.spec.ts" time="10.4">
+</testcase>
+<testcase name="Chat Widget - Cross-Browser Tests › should be responsive on mobile" classname="chat-widget.spec.ts" time="8.703">
+</testcase>
+</testsuite>
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="chromium" tests="3" failures="0" skipped="0" time="27.637" errors="0">
+<testcase name="Contact Form - Cross-Browser Tests › should load contact page in English" classname="contact-form.spec.ts" time="15.108">
+</testcase>
+<testcase name="Contact Form - Cross-Browser Tests › should load contact page in Arabic with RTL" classname="contact-form.spec.ts" time="6.469">
+</testcase>
+<testcase name="Contact Form - Cross-Browser Tests › should be responsive on mobile" classname="contact-form.spec.ts" time="6.06">
+</testcase>
+</testsuite>
+<testsuite name="internationalization.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="chromium" tests="8" failures="0" skipped="0" time="58.486" errors="0">
+<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for English" classname="internationalization.spec.ts" time="6.215">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for Arabic" classname="internationalization.spec.ts" time="6.462">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set LTR direction for English" classname="internationalization.spec.ts" time="6.294">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set RTL direction for Arabic" classname="internationalization.spec.ts" time="5.815">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should maintain locale in URL navigation" classname="internationalization.spec.ts" time="5.568">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should handle locale switching" classname="internationalization.spec.ts" time="9.6">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should not mix locales in same page" classname="internationalization.spec.ts" time="9.599">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should handle invalid locale gracefully" classname="internationalization.spec.ts" time="8.933">
+</testcase>
+</testsuite>
+<testsuite name="page-navigation.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="chromium" tests="7" failures="0" skipped="0" time="40.666" errors="0">
+<testcase name="Page Navigation - Cross-Browser Tests › should load English homepage" classname="page-navigation.spec.ts" time="8.819">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should load Arabic homepage" classname="page-navigation.spec.ts" time="5.535">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should redirect root to default locale" classname="page-navigation.spec.ts" time="5.354">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should handle 404 pages" classname="page-navigation.spec.ts" time="4.942">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should load without JavaScript errors" classname="page-navigation.spec.ts" time="5.007">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should be responsive on mobile" classname="page-navigation.spec.ts" time="5.562">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should have proper meta tags" classname="page-navigation.spec.ts" time="5.447">
+</testcase>
+</testsuite>
+<testsuite name="api-endpoints.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="firefox" tests="8" failures="0" skipped="0" time="6.984" errors="0">
+<testcase name="API Endpoints - Cross-Browser Tests › should connect to MongoDB" classname="api-endpoints.spec.ts" time="0.537">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get all content" classname="api-endpoints.spec.ts" time="0.786">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get content by slug" classname="api-endpoints.spec.ts" time="4.154">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should submit contact form" classname="api-endpoints.spec.ts" time="0.296">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get all contacts" classname="api-endpoints.spec.ts" time="0.486">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should send chat message" classname="api-endpoints.spec.ts" time="0.447">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid contact submission" classname="api-endpoints.spec.ts" time="0.226">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid email" classname="api-endpoints.spec.ts" time="0.052">
+</testcase>
+</testsuite>
+<testsuite name="chat-widget.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="firefox" tests="3" failures="0" skipped="0" time="50.294" errors="0">
+<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in English" classname="chat-widget.spec.ts" time="9.299">
+</testcase>
+<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in Arabic" classname="chat-widget.spec.ts" time="21.194">
+</testcase>
+<testcase name="Chat Widget - Cross-Browser Tests › should be responsive on mobile" classname="chat-widget.spec.ts" time="19.801">
+</testcase>
+</testsuite>
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="firefox" tests="3" failures="0" skipped="0" time="41.329" errors="0">
+<testcase name="Contact Form - Cross-Browser Tests › should load contact page in English" classname="contact-form.spec.ts" time="17.508">
+</testcase>
+<testcase name="Contact Form - Cross-Browser Tests › should load contact page in Arabic with RTL" classname="contact-form.spec.ts" time="14.194">
+</testcase>
+<testcase name="Contact Form - Cross-Browser Tests › should be responsive on mobile" classname="contact-form.spec.ts" time="9.627">
+</testcase>
+</testsuite>
+<testsuite name="internationalization.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="firefox" tests="8" failures="0" skipped="0" time="69.933" errors="0">
+<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for English" classname="internationalization.spec.ts" time="9.538">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for Arabic" classname="internationalization.spec.ts" time="9.397">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set LTR direction for English" classname="internationalization.spec.ts" time="9.413">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set RTL direction for Arabic" classname="internationalization.spec.ts" time="7.998">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should maintain locale in URL navigation" classname="internationalization.spec.ts" time="8.147">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should handle locale switching" classname="internationalization.spec.ts" time="8.42">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should not mix locales in same page" classname="internationalization.spec.ts" time="8.005">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should handle invalid locale gracefully" classname="internationalization.spec.ts" time="9.015">
+</testcase>
+</testsuite>
+<testsuite name="page-navigation.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="firefox" tests="7" failures="0" skipped="0" time="52.452" errors="0">
+<testcase name="Page Navigation - Cross-Browser Tests › should load English homepage" classname="page-navigation.spec.ts" time="8.867">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should load Arabic homepage" classname="page-navigation.spec.ts" time="8.751">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should redirect root to default locale" classname="page-navigation.spec.ts" time="8.77">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should handle 404 pages" classname="page-navigation.spec.ts" time="6.587">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should load without JavaScript errors" classname="page-navigation.spec.ts" time="6.621">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should be responsive on mobile" classname="page-navigation.spec.ts" time="6.445">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should have proper meta tags" classname="page-navigation.spec.ts" time="6.411">
+</testcase>
+</testsuite>
+<testsuite name="api-endpoints.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="webkit" tests="8" failures="0" skipped="0" time="6.926" errors="0">
+<testcase name="API Endpoints - Cross-Browser Tests › should connect to MongoDB" classname="api-endpoints.spec.ts" time="0.407">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get all content" classname="api-endpoints.spec.ts" time="0.459">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get content by slug" classname="api-endpoints.spec.ts" time="0.453">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should submit contact form" classname="api-endpoints.spec.ts" time="2.513">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get all contacts" classname="api-endpoints.spec.ts" time="0.531">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should send chat message" classname="api-endpoints.spec.ts" time="2.411">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid contact submission" classname="api-endpoints.spec.ts" time="0.07">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid email" classname="api-endpoints.spec.ts" time="0.082">
+</testcase>
+</testsuite>
+<testsuite name="chat-widget.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="webkit" tests="3" failures="0" skipped="0" time="25.742" errors="0">
+<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in English" classname="chat-widget.spec.ts" time="8.354">
+</testcase>
+<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in Arabic" classname="chat-widget.spec.ts" time="7.698">
+</testcase>
+<testcase name="Chat Widget - Cross-Browser Tests › should be responsive on mobile" classname="chat-widget.spec.ts" time="9.69">
+</testcase>
+</testsuite>
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="webkit" tests="3" failures="0" skipped="0" time="25.258" errors="0">
+<testcase name="Contact Form - Cross-Browser Tests › should load contact page in English" classname="contact-form.spec.ts" time="9.097">
+</testcase>
+<testcase name="Contact Form - Cross-Browser Tests › should load contact page in Arabic with RTL" classname="contact-form.spec.ts" time="8.129">
+</testcase>
+<testcase name="Contact Form - Cross-Browser Tests › should be responsive on mobile" classname="contact-form.spec.ts" time="8.032">
+</testcase>
+</testsuite>
+<testsuite name="internationalization.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="webkit" tests="8" failures="0" skipped="0" time="61.245" errors="0">
+<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for English" classname="internationalization.spec.ts" time="8.26">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for Arabic" classname="internationalization.spec.ts" time="8.555">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set LTR direction for English" classname="internationalization.spec.ts" time="8.355">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set RTL direction for Arabic" classname="internationalization.spec.ts" time="8.098">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should maintain locale in URL navigation" classname="internationalization.spec.ts" time="7.402">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should handle locale switching" classname="internationalization.spec.ts" time="7.743">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should not mix locales in same page" classname="internationalization.spec.ts" time="6.99">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should handle invalid locale gracefully" classname="internationalization.spec.ts" time="5.842">
+</testcase>
+</testsuite>
+<testsuite name="page-navigation.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="webkit" tests="7" failures="0" skipped="0" time="45.234" errors="0">
+<testcase name="Page Navigation - Cross-Browser Tests › should load English homepage" classname="page-navigation.spec.ts" time="7.108">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should load Arabic homepage" classname="page-navigation.spec.ts" time="6.996">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should redirect root to default locale" classname="page-navigation.spec.ts" time="6.651">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should handle 404 pages" classname="page-navigation.spec.ts" time="4.922">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should load without JavaScript errors" classname="page-navigation.spec.ts" time="7.309">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should be responsive on mobile" classname="page-navigation.spec.ts" time="6.666">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should have proper meta tags" classname="page-navigation.spec.ts" time="5.582">
+</testcase>
+</testsuite>
+<testsuite name="api-endpoints.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Mobile Chrome" tests="8" failures="0" skipped="0" time="3.001" errors="0">
+<testcase name="API Endpoints - Cross-Browser Tests › should connect to MongoDB" classname="api-endpoints.spec.ts" time="0.412">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get all content" classname="api-endpoints.spec.ts" time="0.346">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get content by slug" classname="api-endpoints.spec.ts" time="0.463">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should submit contact form" classname="api-endpoints.spec.ts" time="0.495">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get all contacts" classname="api-endpoints.spec.ts" time="0.658">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should send chat message" classname="api-endpoints.spec.ts" time="0.5">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid contact submission" classname="api-endpoints.spec.ts" time="0.062">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid email" classname="api-endpoints.spec.ts" time="0.065">
+</testcase>
+</testsuite>
+<testsuite name="chat-widget.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Mobile Chrome" tests="3" failures="0" skipped="0" time="18.722" errors="0">
+<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in English" classname="chat-widget.spec.ts" time="4.399">
+</testcase>
+<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in Arabic" classname="chat-widget.spec.ts" time="6.994">
+</testcase>
+<testcase name="Chat Widget - Cross-Browser Tests › should be responsive on mobile" classname="chat-widget.spec.ts" time="7.329">
+</testcase>
+</testsuite>
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Mobile Chrome" tests="3" failures="0" skipped="0" time="18.19" errors="0">
+<testcase name="Contact Form - Cross-Browser Tests › should load contact page in English" classname="contact-form.spec.ts" time="6.664">
+</testcase>
+<testcase name="Contact Form - Cross-Browser Tests › should load contact page in Arabic with RTL" classname="contact-form.spec.ts" time="5.592">
+</testcase>
+<testcase name="Contact Form - Cross-Browser Tests › should be responsive on mobile" classname="contact-form.spec.ts" time="5.934">
+</testcase>
+</testsuite>
+<testsuite name="internationalization.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Mobile Chrome" tests="8" failures="0" skipped="0" time="50.26" errors="0">
+<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for English" classname="internationalization.spec.ts" time="6.383">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for Arabic" classname="internationalization.spec.ts" time="5.306">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set LTR direction for English" classname="internationalization.spec.ts" time="5.526">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set RTL direction for Arabic" classname="internationalization.spec.ts" time="7.025">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should maintain locale in URL navigation" classname="internationalization.spec.ts" time="6.473">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should handle locale switching" classname="internationalization.spec.ts" time="6.117">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should not mix locales in same page" classname="internationalization.spec.ts" time="6.195">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should handle invalid locale gracefully" classname="internationalization.spec.ts" time="7.235">
+</testcase>
+</testsuite>
+<testsuite name="page-navigation.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Mobile Chrome" tests="7" failures="0" skipped="0" time="43.725" errors="0">
+<testcase name="Page Navigation - Cross-Browser Tests › should load English homepage" classname="page-navigation.spec.ts" time="6.742">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should load Arabic homepage" classname="page-navigation.spec.ts" time="6.469">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should redirect root to default locale" classname="page-navigation.spec.ts" time="6.849">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should handle 404 pages" classname="page-navigation.spec.ts" time="5.626">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should load without JavaScript errors" classname="page-navigation.spec.ts" time="6.195">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should be responsive on mobile" classname="page-navigation.spec.ts" time="5.892">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should have proper meta tags" classname="page-navigation.spec.ts" time="5.952">
+</testcase>
+</testsuite>
+<testsuite name="api-endpoints.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Mobile Safari" tests="8" failures="0" skipped="0" time="3" errors="0">
+<testcase name="API Endpoints - Cross-Browser Tests › should connect to MongoDB" classname="api-endpoints.spec.ts" time="0.388">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get all content" classname="api-endpoints.spec.ts" time="0.502">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get content by slug" classname="api-endpoints.spec.ts" time="0.463">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should submit contact form" classname="api-endpoints.spec.ts" time="0.498">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get all contacts" classname="api-endpoints.spec.ts" time="0.5">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should send chat message" classname="api-endpoints.spec.ts" time="0.403">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid contact submission" classname="api-endpoints.spec.ts" time="0.176">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid email" classname="api-endpoints.spec.ts" time="0.07">
+</testcase>
+</testsuite>
+<testsuite name="chat-widget.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Mobile Safari" tests="3" failures="0" skipped="0" time="23.416" errors="0">
+<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in English" classname="chat-widget.spec.ts" time="7.871">
+</testcase>
+<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in Arabic" classname="chat-widget.spec.ts" time="7.893">
+</testcase>
+<testcase name="Chat Widget - Cross-Browser Tests › should be responsive on mobile" classname="chat-widget.spec.ts" time="7.652">
+</testcase>
+</testsuite>
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Mobile Safari" tests="3" failures="0" skipped="0" time="21.101" errors="0">
+<testcase name="Contact Form - Cross-Browser Tests › should load contact page in English" classname="contact-form.spec.ts" time="7.648">
+</testcase>
+<testcase name="Contact Form - Cross-Browser Tests › should load contact page in Arabic with RTL" classname="contact-form.spec.ts" time="6.901">
+</testcase>
+<testcase name="Contact Form - Cross-Browser Tests › should be responsive on mobile" classname="contact-form.spec.ts" time="6.552">
+</testcase>
+</testsuite>
+<testsuite name="internationalization.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Mobile Safari" tests="8" failures="0" skipped="0" time="55.973" errors="0">
+<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for English" classname="internationalization.spec.ts" time="6.786">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for Arabic" classname="internationalization.spec.ts" time="6.451">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set LTR direction for English" classname="internationalization.spec.ts" time="7.43">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set RTL direction for Arabic" classname="internationalization.spec.ts" time="6.296">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should maintain locale in URL navigation" classname="internationalization.spec.ts" time="6.592">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should handle locale switching" classname="internationalization.spec.ts" time="6.86">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should not mix locales in same page" classname="internationalization.spec.ts" time="8.121">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should handle invalid locale gracefully" classname="internationalization.spec.ts" time="7.437">
+</testcase>
+</testsuite>
+<testsuite name="page-navigation.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Mobile Safari" tests="7" failures="0" skipped="0" time="45.74" errors="0">
+<testcase name="Page Navigation - Cross-Browser Tests › should load English homepage" classname="page-navigation.spec.ts" time="7.734">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should load Arabic homepage" classname="page-navigation.spec.ts" time="7.873">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should redirect root to default locale" classname="page-navigation.spec.ts" time="6.511">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should handle 404 pages" classname="page-navigation.spec.ts" time="5.695">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should load without JavaScript errors" classname="page-navigation.spec.ts" time="5.603">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should be responsive on mobile" classname="page-navigation.spec.ts" time="5.7">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should have proper meta tags" classname="page-navigation.spec.ts" time="6.624">
+</testcase>
+</testsuite>
+<testsuite name="api-endpoints.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Microsoft Edge" tests="8" failures="0" skipped="0" time="3.664" errors="0">
+<testcase name="API Endpoints - Cross-Browser Tests › should connect to MongoDB" classname="api-endpoints.spec.ts" time="0.682">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get all content" classname="api-endpoints.spec.ts" time="0.542">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get content by slug" classname="api-endpoints.spec.ts" time="0.453">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should submit contact form" classname="api-endpoints.spec.ts" time="0.362">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get all contacts" classname="api-endpoints.spec.ts" time="0.836">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should send chat message" classname="api-endpoints.spec.ts" time="0.555">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid contact submission" classname="api-endpoints.spec.ts" time="0.149">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid email" classname="api-endpoints.spec.ts" time="0.085">
+</testcase>
+</testsuite>
+<testsuite name="chat-widget.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Microsoft Edge" tests="3" failures="0" skipped="0" time="35.952" errors="0">
+<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in English" classname="chat-widget.spec.ts" time="8.013">
+</testcase>
+<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in Arabic" classname="chat-widget.spec.ts" time="14.249">
+</testcase>
+<testcase name="Chat Widget - Cross-Browser Tests › should be responsive on mobile" classname="chat-widget.spec.ts" time="13.69">
+</testcase>
+</testsuite>
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Microsoft Edge" tests="3" failures="0" skipped="0" time="33.029" errors="0">
+<testcase name="Contact Form - Cross-Browser Tests › should load contact page in English" classname="contact-form.spec.ts" time="13.478">
+</testcase>
+<testcase name="Contact Form - Cross-Browser Tests › should load contact page in Arabic with RTL" classname="contact-form.spec.ts" time="9.869">
+</testcase>
+<testcase name="Contact Form - Cross-Browser Tests › should be responsive on mobile" classname="contact-form.spec.ts" time="9.682">
+</testcase>
+</testsuite>
+<testsuite name="internationalization.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Microsoft Edge" tests="8" failures="0" skipped="0" time="67.255" errors="0">
+<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for English" classname="internationalization.spec.ts" time="10.311">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for Arabic" classname="internationalization.spec.ts" time="7.64">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set LTR direction for English" classname="internationalization.spec.ts" time="9.31">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set RTL direction for Arabic" classname="internationalization.spec.ts" time="8.156">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should maintain locale in URL navigation" classname="internationalization.spec.ts" time="8.68">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should handle locale switching" classname="internationalization.spec.ts" time="7.177">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should not mix locales in same page" classname="internationalization.spec.ts" time="8.084">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should handle invalid locale gracefully" classname="internationalization.spec.ts" time="7.897">
+</testcase>
+</testsuite>
+<testsuite name="page-navigation.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Microsoft Edge" tests="7" failures="0" skipped="0" time="49.096" errors="0">
+<testcase name="Page Navigation - Cross-Browser Tests › should load English homepage" classname="page-navigation.spec.ts" time="7.309">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should load Arabic homepage" classname="page-navigation.spec.ts" time="6.786">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should redirect root to default locale" classname="page-navigation.spec.ts" time="8.059">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should handle 404 pages" classname="page-navigation.spec.ts" time="8.049">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should load without JavaScript errors" classname="page-navigation.spec.ts" time="7.595">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should be responsive on mobile" classname="page-navigation.spec.ts" time="8.031">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should have proper meta tags" classname="page-navigation.spec.ts" time="3.267">
+</testcase>
+</testsuite>
+<testsuite name="api-endpoints.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Google Chrome" tests="8" failures="0" skipped="0" time="5.404" errors="0">
+<testcase name="API Endpoints - Cross-Browser Tests › should connect to MongoDB" classname="api-endpoints.spec.ts" time="1.637">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get all content" classname="api-endpoints.spec.ts" time="0.479">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get content by slug" classname="api-endpoints.spec.ts" time="0.811">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should submit contact form" classname="api-endpoints.spec.ts" time="0.664">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should get all contacts" classname="api-endpoints.spec.ts" time="1.163">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should send chat message" classname="api-endpoints.spec.ts" time="0.484">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid contact submission" classname="api-endpoints.spec.ts" time="0.071">
+</testcase>
+<testcase name="API Endpoints - Cross-Browser Tests › should handle invalid email" classname="api-endpoints.spec.ts" time="0.095">
+</testcase>
+</testsuite>
+<testsuite name="chat-widget.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Google Chrome" tests="3" failures="0" skipped="0" time="20.67" errors="0">
+<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in English" classname="chat-widget.spec.ts" time="6.733">
+</testcase>
+<testcase name="Chat Widget - Cross-Browser Tests › should load homepage with chat widget in Arabic" classname="chat-widget.spec.ts" time="6.789">
+</testcase>
+<testcase name="Chat Widget - Cross-Browser Tests › should be responsive on mobile" classname="chat-widget.spec.ts" time="7.148">
+</testcase>
+</testsuite>
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Google Chrome" tests="3" failures="0" skipped="0" time="28.903" errors="0">
+<testcase name="Contact Form - Cross-Browser Tests › should load contact page in English" classname="contact-form.spec.ts" time="9.965">
+</testcase>
+<testcase name="Contact Form - Cross-Browser Tests › should load contact page in Arabic with RTL" classname="contact-form.spec.ts" time="10.255">
+</testcase>
+<testcase name="Contact Form - Cross-Browser Tests › should be responsive on mobile" classname="contact-form.spec.ts" time="8.683">
+</testcase>
+</testsuite>
+<testsuite name="internationalization.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Google Chrome" tests="8" failures="0" skipped="0" time="62.939" errors="0">
+<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for English" classname="internationalization.spec.ts" time="7.06">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set correct language attribute for Arabic" classname="internationalization.spec.ts" time="9.092">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set LTR direction for English" classname="internationalization.spec.ts" time="8.869">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should set RTL direction for Arabic" classname="internationalization.spec.ts" time="8.426">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should maintain locale in URL navigation" classname="internationalization.spec.ts" time="6.782">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should handle locale switching" classname="internationalization.spec.ts" time="7.832">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should not mix locales in same page" classname="internationalization.spec.ts" time="7.067">
+</testcase>
+<testcase name="Internationalization - Cross-Browser Tests › should handle invalid locale gracefully" classname="internationalization.spec.ts" time="7.811">
+</testcase>
+</testsuite>
+<testsuite name="page-navigation.spec.ts" timestamp="2025-10-10T13:08:01.638Z" hostname="Google Chrome" tests="7" failures="0" skipped="0" time="46.242" errors="0">
+<testcase name="Page Navigation - Cross-Browser Tests › should load English homepage" classname="page-navigation.spec.ts" time="6.488">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should load Arabic homepage" classname="page-navigation.spec.ts" time="8.421">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should redirect root to default locale" classname="page-navigation.spec.ts" time="7.378">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should handle 404 pages" classname="page-navigation.spec.ts" time="7.513">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should load without JavaScript errors" classname="page-navigation.spec.ts" time="6.942">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should be responsive on mobile" classname="page-navigation.spec.ts" time="4.931">
+</testcase>
+<testcase name="Page Navigation - Cross-Browser Tests › should have proper meta tags" classname="page-navigation.spec.ts" time="4.569">
+</testcase>
+</testsuite>
 </testsuites>

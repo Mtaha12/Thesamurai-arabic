@@ -1,4 +1,4 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -87,4 +87,25 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
+}
+
+/* Responsive Utility Classes */
+@media (max-width: 768px) {
+  .md\:flex {
+    display: flex !important;
+  }
+  
+  .md\:hidden {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .md\:flex {
+    display: flex !important;
+  }
+  
+  .md\:hidden {
+    display: none !important;
+  }
 }

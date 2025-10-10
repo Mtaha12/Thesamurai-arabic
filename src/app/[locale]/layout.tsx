@@ -6,6 +6,7 @@ import { routing } from '@/i18n';
 import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
 import ChatWidget from '@/components/chat/ChatWidget';
+import '../globals.css';
 
 // Language Switcher Component
 function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {

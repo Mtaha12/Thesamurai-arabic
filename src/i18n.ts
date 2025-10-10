@@ -1,4 +1,4 @@
-// i18n.ts
+
 import { getRequestConfig } from 'next-intl/server';
 import { defineRouting } from 'next-intl/routing';
 

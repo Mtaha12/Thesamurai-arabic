@@ -1,6 +1,6 @@
 # API Endpoints Testing Guide
 
-## ✅ Working Endpoints
+##  Working Endpoints
 
 ### 1. Test MongoDB Connection
 ```bash
@@ -58,9 +58,9 @@ curl "http://localhost:3000/api/chat?sessionId=YOUR_SESSION_ID"
 
 ## 🔧 Fixed Issues
 
-1. ✅ **Duplicate schema index** - Removed duplicate slug index from Content model
-2. ✅ **API routes excluded from i18n middleware** - API routes work at `/api/*` not `/en/api/*`
-3. ✅ **Root layout fixed** - Properly passes through to locale-specific layout
+1.  **Duplicate schema index** - Removed duplicate slug index from Content model
+2.  **API routes excluded from i18n middleware** - API routes work at `/api/*` not `/en/api/*`
+3.  **Root layout fixed** - Properly passes through to locale-specific layout
 
 ## 📝 Notes
 

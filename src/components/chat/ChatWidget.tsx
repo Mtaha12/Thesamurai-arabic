@@ -112,12 +112,13 @@ export default function ChatWidget() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
+          className="chat-button"
           style={{
             position: 'fixed',
-            bottom: '2rem',
-            right: '2rem',
-            width: '60px',
-            height: '60px',
+            bottom: 'clamp(1rem, 3vw, 2rem)',
+            right: 'clamp(1rem, 3vw, 2rem)',
+            width: 'clamp(50px, 12vw, 60px)',
+            height: 'clamp(50px, 12vw, 60px)',
             borderRadius: '50%',
             background: 'linear-gradient(135deg, #00bcd4 0%, #0a0e3d 100%)',
             border: 'none',
@@ -126,7 +127,7 @@ export default function ChatWidget() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '1.8rem',
+            fontSize: 'clamp(1.4rem, 4vw, 1.8rem)',
             transition: 'all 0.3s',
             zIndex: 1000,
             animation: 'pulse 2s infinite'
@@ -145,10 +146,10 @@ export default function ChatWidget() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div style={{
+        <div className="chat-window" style={{
           position: 'fixed',
-          bottom: '2rem',
-          right: '2rem',
+          bottom: 'clamp(1rem, 3vw, 2rem)',
+          right: 'clamp(1rem, 3vw, 2rem)',
           width: 'min(400px, calc(100vw - 2rem))',
           height: 'min(600px, calc(100vh - 4rem))',
           background: '#fff',
@@ -394,6 +395,27 @@ export default function ChatWidget() {
           }
           40% {
             transform: scale(1);
+          }
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+          .chat-button {
+            bottom: 1rem !important;
+            right: 1rem !important;
+            width: 50px !important;
+            height: 50px !important;
+            font-size: 1.4rem !important;
+          }
+          
+          .chat-window {
+            bottom: 0 !important;
+            right: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100vh !important;
+            border-radius: 0 !important;
+            max-height: 100vh !important;
           }
         }
       `}</style>
