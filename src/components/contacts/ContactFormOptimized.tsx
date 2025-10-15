@@ -122,6 +122,7 @@ export default function ContactFormOptimized() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitMessage, setSubmitMessage] = useState('');
 
   // Memoized validation functions
   const validateEmail = useCallback((email: string): boolean => {
@@ -193,6 +194,21 @@ export default function ContactFormOptimized() {
     setErrors(newErrors);
   }, 500);
 
+  const handleFocus = useCallback((e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const target = e.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+    target.style.borderColor = '#00bcd4';
+  }, []);
+
+  const handleBlur = useCallback((e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const target = e.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+    const { name } = target;
+    
+    // Only update border color for subject and message fields
+    if (name === 'subject' || name === 'message') {
+      target.style.borderColor = errors[name as keyof FormErrors] ? '#dc3545' : '#ddd';
+    }
+  }, [errors]);
+
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -208,15 +224,6 @@ export default function ContactFormOptimized() {
     }
   }, [errors, debouncedValidateField]);
 
-  const handleFocus = useCallback((e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.target.style.borderColor = '#00bcd4';
-  }, []);
-
-  const handleBlur = useCallback((e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const name = e.target.name;
-    e.target.style.borderColor = errors[name as keyof FormErrors] ? '#dc3545' : '#ddd';
-  }, [errors]);
-
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -226,8 +233,11 @@ export default function ContactFormOptimized() {
 
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setSubmitMessage('');
 
     try {
+      console.log('Submitting contact form...', formData);
+
       // Call backend API
       const response = await fetch(`/api/contact`, {
         method: 'POST',
@@ -241,14 +251,16 @@ export default function ContactFormOptimized() {
         }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Failed to submit form');
+        throw new Error(data.error || 'Failed to submit form');
       }
 
-      const data = await response.json();
       console.log('Form submitted successfully:', data);
       
       setSubmitStatus('success');
+      setSubmitMessage(t('successMessage'));
       
       // Reset form
       setFormData({
@@ -260,14 +272,18 @@ export default function ContactFormOptimized() {
       });
       
       // Clear success message after 5 seconds
-      setTimeout(() => setSubmitStatus('idle'), 5000);
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setSubmitMessage('');
+      }, 5000);
     } catch (error) {
       console.error('Submission error:', error);
       setSubmitStatus('error');
+      setSubmitMessage(error instanceof Error ? error.message : t('errorMessage'));
     } finally {
       setIsSubmitting(false);
     }
-  }, [formData, validateForm, currentLocale]);
+  }, [formData, validateForm, currentLocale, t]);
 
   // Memoized subject options
   const subjectOptions = useMemo(() => [
@@ -318,7 +334,7 @@ export default function ContactFormOptimized() {
           marginBottom: '1.5rem',
           textAlign: 'center'
         }}>
-          {t('successMessage')}
+          {submitMessage}
         </div>
       )}
 
@@ -333,7 +349,7 @@ export default function ContactFormOptimized() {
           marginBottom: '1.5rem',
           textAlign: 'center'
         }}>
-          {t('errorMessage')}
+          {submitMessage}
         </div>
       )}
 

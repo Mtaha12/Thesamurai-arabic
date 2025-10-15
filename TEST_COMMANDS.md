@@ -210,10 +210,10 @@ rm -rf test-results playwright-report
 
 ## 📈 Expected Results
 
-✅ **All tests should pass**: 210/210
-⏱️ **Total time**: 8-10 minutes
-🔄 **Retries**: Up to 2 per failed test
-📊 **Reports**: HTML + JSON + JUnit
+ **All tests should pass**: 210/210
+ **Total time**: 8-10 minutes
+ **Retries**: Up to 2 per failed test
+**Reports**: HTML + JSON + JUnit
 
 ---
 
@@ -232,4 +232,4 @@ Serving HTML report at http://localhost:9323
 ---
 
 **Last Updated**: 2025-10-10
-**Status**: ✅ All Systems Go
+**Status**:  All Systems Go

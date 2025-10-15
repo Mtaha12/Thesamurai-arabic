@@ -109,32 +109,38 @@
       "resourcesIntro": "Every day, new cybersecurity threats emerge, putting your organization at risk. The SamurAI offers an array of solutions to help mitigate these risks.",
       "readMore": "Read More",
       "ctaTitle": "Lorem Ipsum Is Simply Dummy Text Of Printing",
-      "ctaDesc": "Lorem Ipsum is Simply Dummy Text Of Printing"
+      "ctaDesc": "Lorem Ipsum is Simply Dummy Text Of Printing",
+      "consulting": "Consulting Services"  
     },
     "infrastructure": {
       "hero": "Next Generation Infrastructure",
       "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Build cutting-edge infrastructure solutions that scale with your business needs.",
-      "getStarted": "Get Started"
+      "getStarted": "Get Started",
+      "infrastructure": "Next Generation Infrastructure"  
     },
     "resourcing": {
       "hero": "Strategic Resourcing",
       "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Access top-tier talent and strategic resources to power your digital initiatives.",
-      "exploreSolutions": "Explore Solutions"
+      "exploreSolutions": "Explore Solutions",
+      "resourcing": "Strategic Resourcing" 
     },
     "training": {
       "hero": "Technology Labs & Training",
       "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Empower your team with the knowledge and skills needed to succeed in the digital landscape.",
-      "joinProgram": "Join Program"
+      "joinProgram": "Join Program",
+      "training": "Technology Labs & Training"
     },
     "managedIT": {
       "hero": "Managed IT",
       "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Comprehensive managed IT services to keep your business running smoothly.",
-      "contactUs": "Contact Us"
+      "contactUs": "Contact Us",
+      "managedIT": "Managed IT"  
     },
     "devsecops": {
       "hero": "DevSecOps Automation",
       "heroDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Streamline development, security, and operations with advanced automation.",
-      "learnMore": "Learn More"
+      "learnMore": "Learn More",
+      "devsecops": "DevSecOps Automation"  
     }
   },
   "Services": {

@@ -157,26 +157,6 @@ Each service page includes:
 7. Create actual Solutions pages
 8. Implement Industries, Locations, Careers pages
 
-## File Structure
-```
-src/
-├── app/[locale]/
-│   ├── page.tsx (Updated with new header)
-│   └── services/
-│       ├── consulting/page.tsx
-│       ├── infrastructure/page.tsx
-│       ├── resourcing/page.tsx
-│       ├── training/page.tsx
-│       ├── managed-it/page.tsx
-│       └── devsecops/page.tsx
-├── components/layout/
-│   ├── Header.tsx (New component)
-│   ├── Footer.tsx (Existing)
-│   └── LanguageSwitcher.tsx (Existing)
-└── messages/
-    ├── en.json (Updated)
-    └── ar.json (Updated)
-```
 
 ## Testing Checklist
 - ✅ Header displays correctly on all pages

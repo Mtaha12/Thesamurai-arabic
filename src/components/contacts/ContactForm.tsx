@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { usePathname } from 'next/navigation';
 
 interface FormData {
   name: string;
@@ -21,6 +22,8 @@ interface FormErrors {
 
 export default function ContactForm() {
   const t = useTranslations('ContactForm');
+  const pathname = usePathname();
+  const currentLocale = pathname.split('/')[1] || 'en';
   
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -33,6 +36,7 @@ export default function ContactForm() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitMessage, setSubmitMessage] = useState('');
 
   // Validation functions
   const validateEmail = (email: string): boolean => {
@@ -41,8 +45,9 @@ export default function ContactForm() {
   };
 
   const validatePhone = (phone: string): boolean => {
-    const phoneRegex = /^[\d\s\-\+\(\)]+$/;
-    return phone.length >= 10 && phoneRegex.test(phone);
+    const phoneRegex = /^[\d\s\-\+\(\)\.]+$/;
+    const cleanPhone = phone.replace(/\s/g, '');
+    return cleanPhone.length >= 10 && phoneRegex.test(phone);
   };
 
   const validateForm = (): boolean => {
@@ -104,15 +109,33 @@ export default function ContactForm() {
 
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setSubmitMessage('');
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Here you would normally send data to your backend
-      console.log('Form submitted:', formData);
+      console.log('Submitting contact form to API...', formData);
+
+      // Call your actual API endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          locale: currentLocale
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit form');
+      }
+
+      console.log('Form submitted successfully:', data);
       
       setSubmitStatus('success');
+      setSubmitMessage(t('successMessage'));
       
       // Reset form after successful submission
       setFormData({
@@ -124,10 +147,18 @@ export default function ContactForm() {
       });
       
       // Clear success message after 5 seconds
-      setTimeout(() => setSubmitStatus('idle'), 5000);
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setSubmitMessage('');
+      }, 5000);
     } catch (error) {
       console.error('Submission error:', error);
       setSubmitStatus('error');
+      setSubmitMessage(
+        error instanceof Error 
+          ? error.message 
+          : t('errorMessage')
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -172,7 +203,7 @@ export default function ContactForm() {
           marginBottom: '1.5rem',
           textAlign: 'center'
         }}>
-          {t('successMessage')}
+          {submitMessage}
         </div>
       )}
 
@@ -187,7 +218,7 @@ export default function ContactForm() {
           marginBottom: '1.5rem',
           textAlign: 'center'
         }}>
-          {t('errorMessage')}
+          {submitMessage}
         </div>
       )}
 
@@ -331,7 +362,8 @@ export default function ContactForm() {
               fontSize: 'clamp(0.9rem, 1.2vw, 1rem)',
               transition: 'border-color 0.3s',
               outline: 'none',
-              background: '#fff'
+              background: '#fff',
+              color: '#333'
             }}
             onFocus={(e) => e.target.style.borderColor = '#00bcd4'}
             onBlur={(e) => e.target.style.borderColor = errors.subject ? '#dc3545' : '#ddd'}
@@ -378,7 +410,8 @@ export default function ContactForm() {
             transition: 'border-color 0.3s',
             outline: 'none',
             resize: 'vertical',
-            fontFamily: 'inherit'
+            fontFamily: 'inherit',
+            color: '#333'
           }}
           onFocus={(e) => e.target.style.borderColor = '#00bcd4'}
           onBlur={(e) => e.target.style.borderColor = errors.message ? '#dc3545' : '#ddd'}

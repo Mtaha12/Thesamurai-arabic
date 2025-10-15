@@ -367,7 +367,10 @@ export default function ChatWidgetOptimized() {
                 borderRadius: '24px',
                 fontSize: '0.95rem',
                 outline: 'none',
-                transition: 'border-color 0.3s'
+                transition: 'border-color 0.3s',
+                color: '#111',
+                background: 'transparent',
+                caretColor: '#00bcd4'
               }}
               onFocus={(e) => e.target.style.borderColor = '#00bcd4'}
               onBlur={(e) => e.target.style.borderColor = '#ddd'}
