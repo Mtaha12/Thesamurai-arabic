@@ -62,7 +62,6 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
-  // Await params as required by Next.js 15
   const { locale } = await params;
   
   console.log('📍 Layout processing for locale:', locale);
@@ -79,17 +78,27 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
-      <body>
-        <NextIntlClientProvider 
-          messages={messages}
-          locale={locale}
-        >
-          {children}
-          <ChatWidget />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider 
+      messages={messages}
+      locale={locale}
+    >
+      <div
+        data-locale={locale}
+        dir={locale === 'ar' ? 'rtl' : 'ltr'}
+        style={{
+          margin: 0,
+          padding: 0,
+          width: '100%',
+          maxWidth: '100%',
+          overflowX: 'hidden',
+          WebkitTextSizeAdjust: '100%',
+          textSizeAdjust: '100%'
+        }}
+      >
+        {children}
+        <ChatWidget />
+      </div>
+    </NextIntlClientProvider>
   );
 }
 

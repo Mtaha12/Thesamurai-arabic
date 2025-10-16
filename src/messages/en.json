@@ -83,7 +83,17 @@
     "careers": "Careers",
     "aboutUs": "About Us",
     "getInTouch": "Get in touch",
-    "projects": "Projects"
+    "projects": "Projects",
+    "blog": "Blog",
+    "partners": "Partners"
+  },
+  "Blog": {
+    "title": "Our Blog",
+    "description": "Latest insights and articles from our team",
+    "readMore": "Read More",
+    "recentPosts": "Recent Posts",
+    "categories": "Categories",
+    "tags": "Tags"
   },
   "ServicesPage": {
     "description": "We offer a comprehensive range of cybersecurity and IT services to protect your business",
@@ -173,6 +183,7 @@
   "Footer": {
     "company": "Phoenix",
     "description": "Building innovative solutions for tomorrow",
+    "quickLinks": "Quick Links",
     "rights": "All rights reserved"
   },
   "ContactForm": {
