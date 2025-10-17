@@ -177,7 +177,7 @@ export default function Footer() {
             {navT('contact')}
           </h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', color: 'rgba(255,255,255,0.8)' }}>
-            <span>📧 hello@phoenix.com</span>
+            <span>📧 hello@thesamurai.com</span>
             <span>📞 +1 (555) 123-4567</span>
             <span>📍 123 Business District</span>
           </div>
@@ -194,7 +194,7 @@ export default function Footer() {
         }}
       >
         <p>
-          &copy; 2024 {t('company')}. {t('rights')}
+          &copy; 2025 {t('company')}. {t('rights')}
         </p>
       </div>
     </footer>

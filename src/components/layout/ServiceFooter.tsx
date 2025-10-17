@@ -1,93 +1,201 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-export default function ServiceFooter() {
-  const t = useTranslations('HomePage');
+export default function Footer() {
+  const t = useTranslations('Footer');
+  const navT = useTranslations('Navigation');
+  const commonT = useTranslations('Common');
+  const pathname = usePathname();
+  const currentLocale = pathname.split('/')[1] || 'en';
+
+  const quickLinks = [
+    { label: navT('home'), href: `/${currentLocale}` },
+    { label: navT('about'), href: `/${currentLocale}#about` },
+    { label: navT('services'), href: `/${currentLocale}/services` },
+    { label: navT('blog'), href: `/${currentLocale}/blog` },
+    { label: navT('contact'), href: `/${currentLocale}/contact` }
+  ];
 
   return (
-    <footer style={{
-      background: '#0a0e3d',
-      color: '#fff',
-      padding: '4rem 3rem 2rem'
-    }}>
-      <div style={{
-        maxWidth: '1400px',
-        margin: '0 auto',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-        gap: '3rem',
-        marginBottom: '3rem'
-      }}>
+    <footer
+      style={{
+        background: '#0a0e3d',
+        color: '#fff',
+        padding: 'clamp(3rem, 6vw, 4rem) clamp(1.5rem, 5vw, 3rem) clamp(2rem, 5vw, 3rem)'
+      }}
+    >
+      <div
+        style={{
+          maxWidth: '1400px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
+          gap: 'clamp(2rem, 4vw, 3rem)',
+          marginBottom: 'clamp(2rem, 5vw, 3rem)'
+        }}
+      >
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-            <Image 
-              src="/logo.png" 
-              alt="The SamurAI Logo" 
-              width={35} 
-              height={35}
-              style={{ objectFit: 'contain' }}
-            />
-            <span style={{ fontSize: '1.3rem', fontWeight: '700' }}>The SamurAI</span>
-          </div>
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
-            {['f', 't', 'in', 'y'].map((social) => (
-              <div key={social} style={{
-                width: '35px',
-                height: '35px',
-                background: 'rgba(255,255,255,0.1)',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer'
-              }}>
-                {social}
+          <h3
+            style={{
+              fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+              fontWeight: '700',
+              marginBottom: '1rem'
+            }}
+          >
+            {t('company')}
+          </h3>
+          <p
+            style={{
+              color: 'rgba(255,255,255,0.75)',
+              lineHeight: '1.8',
+              fontSize: 'clamp(0.9rem, 1.3vw, 1rem)',
+              marginBottom: '1.5rem',
+              maxWidth: '420px'
+            }}
+          >
+            {t('description')}
+          </p>
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            {['F', 'T', 'L'].map((icon) => (
+              <div
+                key={icon}
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  background: 'rgba(255,255,255,0.12)',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: '700',
+                  letterSpacing: '0.05em'
+                }}
+              >
+                {icon}
               </div>
             ))}
           </div>
         </div>
 
         <div>
-          <h4 style={{ marginBottom: '1rem', fontWeight: '700' }}>LOREM IPSUM</h4>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.9rem', opacity: 0.8 }}>
-            <a href="#" style={{ color: '#fff', textDecoration: 'none' }}>Many</a>
-            <a href="#" style={{ color: '#fff', textDecoration: 'none' }}>Ipsum Is</a>
-            <a href="#" style={{ color: '#fff', textDecoration: 'none' }}>Simply As</a>
-            <a href="#" style={{ color: '#fff', textDecoration: 'none' }}>Dummys</a>
-            <a href="#" style={{ color: '#fff', textDecoration: 'none' }}>Text</a>
-            <a href="#" style={{ color: '#fff', textDecoration: 'none' }}>Industry</a>
+          <h4
+            style={{
+              fontSize: '1rem',
+              fontWeight: '700',
+              marginBottom: '1rem'
+            }}
+          >
+            {t('quickLinks')}
+          </h4>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            {quickLinks.map(({ label, href }) => (
+              <Link
+                key={href}
+                href={href}
+                prefetch={false}
+                style={{
+                  color: 'rgba(255,255,255,0.8)',
+                  textDecoration: 'none',
+                  fontSize: '0.95rem',
+                  transition: 'color 0.3s ease'
+                }}
+                onMouseEnter={(event) => {
+                  event.currentTarget.style.color = '#69E8E1';
+                }}
+                onMouseLeave={(event) => {
+                  event.currentTarget.style.color = 'rgba(255,255,255,0.8)';
+                }}
+              >
+                {label}
+              </Link>
+            ))}
           </div>
         </div>
 
-        <div>
-          <h4 style={{ marginBottom: '1rem', fontWeight: '700' }}>READABLE</h4>
-          <p style={{ fontSize: '0.9rem', opacity: 0.8, lineHeight: '1.6' }}>
-            {t('footerReadable').substring(0, 150)}...
+        <div
+          style={{
+            background: '#1a1f71',
+            borderRadius: '16px',
+            padding: '2rem',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1.25rem'
+          }}
+        >
+          <h4
+            style={{
+              fontSize: '1rem',
+              fontWeight: '700'
+            }}
+          >
+            {navT('blog')}
+          </h4>
+          <p
+            style={{
+              color: 'rgba(255,255,255,0.85)',
+              lineHeight: '1.7',
+              fontSize: '0.95rem'
+            }}
+          >
+            {t('description')}
           </p>
+          <Link
+            href={`/${currentLocale}/blog`}
+            prefetch={false}
+            style={{
+              alignSelf: 'flex-start',
+              background: '#69E8E1',
+              color: '#0a0e3d',
+              textDecoration: 'none',
+              padding: '0.75rem 1.75rem',
+              borderRadius: '999px',
+              fontWeight: '600',
+              transition: 'transform 0.3s ease'
+            }}
+            onMouseEnter={(event) => {
+              event.currentTarget.style.transform = 'translateY(-2px)';
+            }}
+            onMouseLeave={(event) => {
+              event.currentTarget.style.transform = 'translateY(0)';
+            }}
+          >
+            {commonT('readMore')}
+          </Link>
         </div>
 
         <div>
-          <h4 style={{ marginBottom: '1rem', fontWeight: '700' }}>CONTACT US</h4>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.9rem', opacity: 0.8 }}>
-            <p>📞 {t('footerPhone1')}</p>
-            <p>📞 {t('footerPhone2')}</p>
-            <p>✉️ {t('footerEmail')}</p>
-            <p>🌐 {t('footerWebsite')}</p>
+          <h4
+            style={{
+              fontSize: '1rem',
+              fontWeight: '700',
+              marginBottom: '1rem'
+            }}
+          >
+            {navT('contact')}
+          </h4>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', color: 'rgba(255,255,255,0.8)' }}>
+            <span>📧 hello@thesamurai.com</span>
+            <span>📞 +1 (555) 123-4567</span>
+            <span>📍 123 Business District</span>
           </div>
         </div>
       </div>
 
-      <div style={{
-        borderTop: '1px solid rgba(255,255,255,0.1)',
-        paddingTop: '2rem',
-        textAlign: 'center',
-        fontSize: '0.85rem',
-        opacity: 0.6
-      }}>
-        <p>{t('footerNote')}</p>
-        <p style={{ marginTop: '0.5rem' }}>Copyright © 2025 Privacy Policy | The SamurAI</p>
+      <div
+        style={{
+          borderTop: '1px solid rgba(255,255,255,0.1)',
+          paddingTop: '2rem',
+          textAlign: 'center',
+          fontSize: '0.9rem',
+          color: 'rgba(255,255,255,0.6)'
+        }}
+      >
+        <p>
+          &copy; 2025 {t('company')}. {t('rights')}
+        </p>
       </div>
     </footer>
   );

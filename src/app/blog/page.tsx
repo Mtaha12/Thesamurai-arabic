@@ -4,32 +4,22 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { useTranslations } from 'next-intl';
 
+type BlogPost = {
+  id: number;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  readTime: string;
+};
+
 export default function BlogPage() {
   const t = useTranslations('Blog');
   const common = useTranslations('Common');
 
-  const featuredPosts = [
-    {
-      id: 1,
-      title: 'Top Cybersecurity Trends in 2025',
-      excerpt: 'Discover the most important cybersecurity trends shaping the industry this year.',
-      category: 'Security',
-      date: 'May 15, 2025',
-      readTime: '5 min read'
-    },
-    {
-      id: 2,
-      title: 'Implementing Zero Trust Architecture',
-      excerpt: 'A practical guide to implementing zero trust principles in your organization.',
-      category: 'Architecture',
-      date: 'April 28, 2025',
-      readTime: '8 min read'
-    }
-  ];
-
-  const categories = ['Security', 'AI', 'Cloud', 'Compliance', 'DevOps'];
-
-  const latestPosts = [...featuredPosts, ...featuredPosts];
+  const featuredPosts = t.raw('featuredPosts') as BlogPost[];
+  const latestPosts = t.raw('latestPosts') as BlogPost[];
+  const categories = t.raw('categoriesList') as string[];
 
   return (
     <div
@@ -112,7 +102,7 @@ export default function BlogPage() {
                 marginBottom: '1rem'
               }}
             >
-              Featured Stories
+              {t('featuredStories')}
             </h2>
             <p
               style={{
@@ -122,7 +112,7 @@ export default function BlogPage() {
                 maxWidth: '720px'
               }}
             >
-              Stay ahead with curated picks from our experts covering the latest in security, compliance, and innovation.
+              {t('featuredIntro')}
             </p>
           </div>
 
@@ -277,7 +267,7 @@ export default function BlogPage() {
                 fontSize: '0.95rem'
               }}
             >
-              Explore insights across Zero Trust, Automation, Governance, and more areas shaping modern cybersecurity.
+              {t('tagsIntro')}
             </p>
           </div>
         </div>
@@ -411,7 +401,7 @@ export default function BlogPage() {
                 marginBottom: '1rem'
               }}
             >
-              Stay Informed
+              {t('newsletterTitle')}
             </h3>
             <p
               style={{
@@ -421,7 +411,7 @@ export default function BlogPage() {
                 marginBottom: '2rem'
               }}
             >
-              Sign up to receive the latest industry news, expert tips, and curated insights directly in your inbox.
+              {t('newsletterIntro')}
             </p>
             <button
               style={{

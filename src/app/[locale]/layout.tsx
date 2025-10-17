@@ -6,6 +6,7 @@ import { routing } from '@/i18n';
 import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
 import ChatWidget from '@/components/chat/ChatWidget';
+import LocaleHtmlAttributes from '@/components/layout/LocaleHtmlAttributes';
 import '../globals.css';
 
 // Language Switcher Component
@@ -82,6 +83,7 @@ export default async function LocaleLayout({
       messages={messages}
       locale={locale}
     >
+      <LocaleHtmlAttributes locale={locale} />
       <div
         data-locale={locale}
         dir={locale === 'ar' ? 'rtl' : 'ltr'}

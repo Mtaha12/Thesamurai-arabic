@@ -69,10 +69,12 @@ export default function Header(props: HeaderProps) {
       label: t('solutions'),
       type: 'dropdown',
       children: [
-        { id: 'ai-security', label: 'AI Security', href: `/${currentLocale}/solutions/ai-security` },
-        { id: 'identity-management', label: 'Identity Management', href: `/${currentLocale}/solutions/identity-management` },
-        { id: 'zero-trust', label: 'Zero Trust', href: `/${currentLocale}/solutions/zero-trust` },
-        { id: 'cloud-security', label: 'Cloud Security', href: `/${currentLocale}/solutions/cloud-security` },
+        { id: 'ai-security', label: t('aiSecurity'), href: `/${currentLocale}/solutions/ai-security` },
+        { id: 'identity-management', label: t('identityManagement'), href: `/${currentLocale}/solutions/identity-management` },
+        { id: 'zero-trust', label: t('zeroTrust'), href: `/${currentLocale}/solutions/zero-trust` },
+        { id: 'cloud-security', label: t('cloudSecurity'), href: `/${currentLocale}/solutions/cloud-security` },
+        { id: 'network-security', label: t('networkSecurity'), href: `/${currentLocale}/solutions/network-security` },
+        { id: 'endpoint-security', label: t('endpointSecurity'), href: `/${currentLocale}/solutions/endpoint-security` }
       ]
     },
     {
@@ -80,12 +82,12 @@ export default function Header(props: HeaderProps) {
       label: t('services'),
       type: 'dropdown',
       children: [
-        { id: 'consulting', label: 'Consulting', href: `/${currentLocale}/services/consulting` },
-        { id: 'infrastructure', label: 'Infrastructure', href: `/${currentLocale}/services/infrastructure` },
-        { id: 'resourcing', label: 'Resourcing', href: `/${currentLocale}/services/resourcing` },
-        { id: 'training', label: 'Training', href: `/${currentLocale}/services/training` },
-        { id: 'managed-it', label: 'Managed IT', href: `/${currentLocale}/services/managed-it` },
-        { id: 'devsecops', label: 'DevSecOps', href: `/${currentLocale}/services/devsecops` },
+        { id: 'consulting', label: t('servicesMenu.consulting'), href: `/${currentLocale}/services/consulting` },
+        { id: 'infrastructure', label: t('servicesMenu.infrastructure'), href: `/${currentLocale}/services/infrastructure` },
+        { id: 'resourcing', label: t('servicesMenu.resourcing'), href: `/${currentLocale}/services/resourcing` },
+        { id: 'training', label: t('servicesMenu.training'), href: `/${currentLocale}/services/training` },
+        { id: 'managed-it', label: t('servicesMenu.managed'), href: `/${currentLocale}/services/managed-it` },
+        { id: 'devsecops', label: t('servicesMenu.devsecops'), href: `/${currentLocale}/services/devsecops` }
       ]
     },
     {
@@ -93,11 +95,11 @@ export default function Header(props: HeaderProps) {
       label: t('industries'),
       type: 'dropdown',
       children: [
-        { id: 'healthcare', label: 'Healthcare', href: `/${currentLocale}/industries/healthcare` },
-        { id: 'finance', label: 'Finance', href: `/${currentLocale}/industries/finance` },
-        { id: 'government', label: 'Government', href: `/${currentLocale}/industries/government` },
-        { id: 'technology', label: 'Technology', href: `/${currentLocale}/industries/technology` },
-        { id: 'retail', label: 'Retail', href: `/${currentLocale}/industries/retail` },
+        { id: 'healthcare', label: t('industriesMenu.healthcare'), href: `/${currentLocale}/industries/healthcare` },
+        { id: 'finance', label: t('industriesMenu.finance'), href: `/${currentLocale}/industries/finance` },
+        { id: 'government', label: t('industriesMenu.government'), href: `/${currentLocale}/industries/government` },
+        { id: 'technology', label: t('industriesMenu.technology'), href: `/${currentLocale}/industries/technology` },
+        { id: 'retail', label: t('industriesMenu.retail'), href: `/${currentLocale}/industries/retail` }
       ]
     },
     {
@@ -579,9 +581,9 @@ export default function Header(props: HeaderProps) {
                   </button>
                   
                   {/* Mobile Dropdown Content */}
-                  {(item.id === 'services' && servicesOpen) ||
+                  {((item.id === 'services' && servicesOpen) ||
                     (item.id === 'solutions' && solutionsOpen) ||
-                    (item.id === 'industries' && industriesOpen) && (
+                    (item.id === 'industries' && industriesOpen)) && (
                     <div style={{ paddingLeft: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.5rem' }}>
                       {item.children.map((child) => (
                         <Link
