@@ -98,7 +98,11 @@
       "subtitle": "Join thousands of practitioners receiving monthly threat intel, architecture patterns, and automation playbooks.",
       "emailPlaceholder": "Your email address",
       "cta": "Subscribe",
+      "loading": "Subscribing…",
       "success": "Thanks for subscribing! Look out for our next update.",
+      "existing": "You’re already subscribed!",
+      "invalidEmail": "Please enter a valid email address.",
+      "error": "We couldn’t process your subscription. Please try again.",
       "privacy": "We send one email per month. Unsubscribe anytime."
     },
     "contactBlock": {

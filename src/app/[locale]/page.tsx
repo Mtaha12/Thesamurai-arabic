@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
@@ -45,6 +45,73 @@ export default function HomePage() {
     cta: string;
   };
   const resourceCards = (t.raw('resourcesCards') as ResourceCard[]) || [];
+
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [newsletterMessage, setNewsletterMessage] = useState('');
+
+  const handleNewsletterChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setNewsletterEmail(event.target.value);
+    if (newsletterStatus !== 'idle') {
+      setNewsletterStatus('idle');
+      setNewsletterMessage('');
+    }
+  };
+
+  const handleNewsletterSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (newsletterStatus === 'loading') {
+      return;
+    }
+
+    const email = newsletterEmail.trim();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+      setNewsletterStatus('error');
+      setNewsletterMessage(t('newsletter.invalidEmail'));
+      return;
+    }
+
+    setNewsletterStatus('loading');
+    setNewsletterMessage('');
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email,
+          locale: currentLocale,
+          source: 'homepage'
+        })
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok && data?.success) {
+        setNewsletterStatus('success');
+        setNewsletterMessage(data.message || t('newsletter.success'));
+        setNewsletterEmail('');
+        return;
+      }
+
+      if (response.status === 409) {
+        setNewsletterStatus('success');
+        setNewsletterMessage(data.message || t('newsletter.existing'));
+        setNewsletterEmail('');
+        return;
+      }
+
+      setNewsletterStatus('error');
+      setNewsletterMessage(data?.error || t('newsletter.error'));
+    } catch (error) {
+      setNewsletterStatus('error');
+      setNewsletterMessage(t('newsletter.error'));
+    }
+  };
 
   const buildLocaleHref = (href: string) => {
     if (!href) return '#';
@@ -1303,6 +1370,7 @@ export default function HomePage() {
             {t('newsletter.subtitle')}
           </p>
           <form
+            onSubmit={handleNewsletterSubmit}
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
@@ -1313,6 +1381,8 @@ export default function HomePage() {
             <input
               type="email"
               name="newsletter-email"
+              value={newsletterEmail}
+              onChange={handleNewsletterChange}
               placeholder={t('newsletter.emailPlaceholder')}
               style={{
                 padding: '0.9rem 1.2rem',
@@ -1324,6 +1394,7 @@ export default function HomePage() {
             />
             <button
               type="submit"
+              disabled={newsletterStatus === 'loading'}
               style={{
                 background: '#00bcd4',
                 color: '#fff',
@@ -1332,12 +1403,26 @@ export default function HomePage() {
                 padding: '0.9rem 2.5rem',
                 fontWeight: 700,
                 fontSize: '0.95rem',
-                cursor: 'pointer'
+                cursor: newsletterStatus === 'loading' ? 'not-allowed' : 'pointer'
               }}
             >
-              {t('newsletter.cta')}
+              {newsletterStatus === 'loading' ? t('newsletter.loading') : t('newsletter.cta')}
             </button>
           </form>
+          {newsletterStatus !== 'idle' && (
+            <div
+              role="status"
+              aria-live="polite"
+              style={{
+                minHeight: '1.5rem',
+                marginTop: '0.5rem',
+                color: newsletterStatus === 'success' ? '#0a8f44' : '#d03c3c',
+                fontSize: '0.85rem'
+              }}
+            >
+              {newsletterMessage}
+            </div>
+          )}
           <p style={{ color: '#888', fontSize: '0.85rem', marginTop: '1rem' }}>
             {t('newsletter.privacy')}
           </p>
