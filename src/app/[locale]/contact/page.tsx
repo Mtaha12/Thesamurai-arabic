@@ -12,7 +12,7 @@ export default function ContactPage() {
 			<Header />
 			
 			{/* Hero Section */}
-			<section style={{
+			<section className="parallax-wrap fade-section" style={{
 				background: 'linear-gradient(135deg, #1a1f71 0%, #0a0e3d 50%, #00bcd4 100%)',
 				padding: 'clamp(3rem, 8vw, 5rem) clamp(1.5rem, 5vw, 3rem)',
 				textAlign: 'center',
@@ -36,16 +36,18 @@ export default function ContactPage() {
 			</section>
 
 			{/* Contact Form Section */}
-			<section style={{
+			<section className="fade-section delay-2" style={{
 				padding: 'clamp(3rem, 8vw, 5rem) clamp(1.5rem, 5vw, 3rem)',
 				maxWidth: '1200px',
 				margin: '0 auto'
 			}}>
-				<ContactForm />
+				<div className="rise-in delay-2">
+					<ContactForm />
+				</div>
 			</section>
 
 			{/* Contact Info Section */}
-			<section style={{
+			<section className="fade-section delay-3" style={{
 				background: '#0a0e3d',
 				padding: 'clamp(3rem, 8vw, 5rem) clamp(1.5rem, 5vw, 3rem)',
 				color: '#fff'
@@ -59,7 +61,7 @@ export default function ContactPage() {
 					textAlign: 'center'
 				}}>
 					<div>
-						<div style={{
+						<div className="rise-in delay-1" style={{
 							fontSize: '3rem',
 							marginBottom: '1rem'
 						}}>📍</div>
@@ -80,7 +82,7 @@ export default function ContactPage() {
 					</div>
 
 					<div>
-						<div style={{
+						<div className="rise-in delay-2" style={{
 							fontSize: '3rem',
 							marginBottom: '1rem'
 						}}>📞</div>
@@ -101,7 +103,7 @@ export default function ContactPage() {
 					</div>
 
 					<div>
-						<div style={{
+						<div className="rise-in delay-3" style={{
 							fontSize: '3rem',
 							marginBottom: '1rem'
 						}}>✉️</div>
@@ -122,7 +124,7 @@ export default function ContactPage() {
 					</div>
 
 					<div>
-						<div style={{
+						<div className="rise-in delay-4" style={{
 							fontSize: '3rem',
 							marginBottom: '1rem'
 						}}>🕐</div>

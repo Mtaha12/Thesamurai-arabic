@@ -56,22 +56,43 @@
         {
           "name": "Richard Keller",
           "role": "Chief Operating Officer",
-          "bio": "Drives DevSecOps innovation and embeds security-as-code across enterprise programs."
+          "bio": "Drives DevSecOps innovation and embeds security-as-code across enterprise programs.",
+          "photo": "/team/richard-keller.svg"
         },
         {
           "name": "Faheem Dad",
           "role": "Senior Security Engineer",
-          "bio": "Partners with MENA organizations to architect resilient, zero-trust environments."
+          "bio": "Partners with MENA organizations to architect resilient, zero-trust environments.",
+          "photo": "/team/faheem-dad.svg"
         },
         {
           "name": "Sarah Henia",
           "role": "Security Consultant",
-          "bio": "Guides transformation initiatives across Africa & Middle East with security-by-design."
+          "bio": "Guides transformation initiatives across Africa & Middle East with security-by-design.",
+          "photo": "/team/sarah-henia.svg"
         },
         {
           "name": "Prits Logronio",
           "role": "Head of Marketing",
-          "bio": "Amplifies client success stories and ensures our brand reflects measurable outcomes."
+          "bio": "Amplifies client success stories and ensures our brand reflects measurable outcomes.",
+          "photo": "/team/prits-logronio.svg"
+        }
+      ],
+      "missionTitle": "Why we show up every day",
+      "missionDescription": "We rally the brightest cyber talent around a single mission: help enterprises outpace adversaries with pragmatic security, measurable resilience, and a culture of trust.",
+      "valuesTitle": "Our core values",
+      "values": [
+        {
+          "title": "Client-first partnership",
+          "description": "Every roadmap, audit, or SOC runbook starts with your mission and ends in accountable outcomes."
+        },
+        {
+          "title": "Security with empathy",
+          "description": "We design defenses that respect your team’s workflows and empower them to respond at speed."
+        },
+        {
+          "title": "Relentless learning",
+          "description": "Threat landscapes shift hourly. We invest in research, labs, and global knowledge sharing to keep you prepared."
         }
       ]
     },
@@ -90,7 +111,11 @@
         "companyLabel": "Company",
         "roleLabel": "Role / Title",
         "cta": "Send me the report",
-        "success": "Thanks! A download link is on its way to your inbox."
+        "success": "Thanks! A download link is on its way to your inbox.",
+        "loading": "Sending your report...",
+        "error": "We couldn't deliver the report. Please try again.",
+        "invalidEmail": "Please enter a valid work email.",
+        "required": "Full name and work email are required."
       }
     },
     "newsletter": {
@@ -125,6 +150,79 @@
       "ctaLabel": "Talk to an expert",
       "ctaHref": "contact",
       "note": "Prefer a custom briefing? We’ll tailor an agenda for your stakeholders."
+    },
+    "CaseStudies": {
+      "heroTitle": "Outcomes that prove resilience",
+      "heroSubtitle": "See how hybrid enterprises modernize security operations, slash response times, and build trust with The SamurAI.",
+      "heroSupporting": "From school districts to pharmaceutical giants, our playbooks translate complex requirements into measurable wins without disrupting delivery.",
+      "featuredMetrics": [
+        {
+          "label": "Faster containment",
+          "value": "62%",
+          "description": "Average incident response acceleration across featured clients."
+        },
+        {
+          "label": "Automated workflows",
+          "value": "4x",
+          "description": "Increase in closed-loop playbooks replacing manual tasks."
+        },
+        {
+          "label": "Platform coverage",
+          "value": "12",
+          "description": "Critical environments secured across cloud, on-prem, and OT estates."
+        }
+      ],
+      "filtersLabel": "Browse by outcome",
+      "caseStudyList": [
+        {
+          "id": "marple-newtown-school-district",
+          "title": "Marple Newtown School District",
+          "industry": "Education",
+          "summary": "Unified endpoint protection and phishing defense for 5,000+ faculty and students with zero classroom downtime.",
+          "resultHeading": "Impact",
+          "results": [
+            "98% reduction in phishing dwell time",
+            "24/7 SOC coverage with automated escalation",
+            "Staff security awareness scores up 37%"
+          ],
+          "ctaLabel": "Book an education briefing",
+          "ctaHref": "contact?topic=case-study&ref=education"
+        },
+        {
+          "id": "alkem-laboratories",
+          "title": "Alkem Laboratories",
+          "industry": "Life Sciences",
+          "summary": "Harmonized DevSecOps pipelines to protect intellectual property across multi-region research hubs.",
+          "resultHeading": "Impact",
+          "results": [
+            "46% faster compliance evidence gathering",
+            "Zero critical vulnerabilities shipped across 9 releases",
+            "Executive-ready risk dashboards in under 6 weeks"
+          ],
+          "ctaLabel": "Talk to a pharma strategist",
+          "ctaHref": "contact?topic=case-study&ref=life-sciences"
+        },
+        {
+          "id": "city-of-kamloops",
+          "title": "City of Kamloops",
+          "industry": "Public Sector",
+          "summary": "Automated SaaS and collaboration security to serve 100,000 residents without service degradation.",
+          "resultHeading": "Impact",
+          "results": [
+            "Thousands of malicious emails blocked monthly",
+            "Unified identity governance across 40+ applications",
+            "Crisis response tabletop with 15 agencies in 30 days"
+          ],
+          "ctaLabel": "Modernize municipal security",
+          "ctaHref": "contact?topic=case-study&ref=public-sector"
+        }
+      ],
+      "ctaTitle": "Ready to create your next success story?",
+      "ctaSubtitle": "Partner with our strategists to scope a program that delivers measurable resilience from day one.",
+      "ctaPrimaryLabel": "Schedule a discovery call",
+      "ctaPrimaryHref": "contact?topic=case-study",
+      "ctaSecondaryLabel": "Explore recent insights",
+      "ctaSecondaryHref": "blog"
     },
     "cybersecurityTitle": "Cybersecurity, AI",
     "cybersecurityDescription": "In today's ever-changing cyber threat landscape, AI-powered cybersecurity is essential.",
@@ -201,6 +299,79 @@
     "footerEmail": "info@thesamurai.com",
     "footerWebsite": "Discover how SamurAI secures enterprises worldwide.",
     "footerNote": "© 2025 The SamurAI. All rights reserved."
+  },
+  "CaseStudies": {
+    "heroTitle": "Outcomes that prove resilience",
+    "heroSubtitle": "See how hybrid enterprises modernize security operations, slash response times, and build trust with The SamurAI.",
+    "heroSupporting": "From school districts to pharmaceutical giants, our playbooks translate complex requirements into measurable wins without disrupting delivery.",
+    "featuredMetrics": [
+      {
+        "label": "Faster containment",
+        "value": "62%",
+        "description": "Average incident response acceleration across featured clients."
+      },
+      {
+        "label": "Automated workflows",
+        "value": "4x",
+        "description": "Increase in closed-loop playbooks replacing manual tasks."
+      },
+      {
+        "label": "Platform coverage",
+        "value": "12",
+        "description": "Critical environments secured across cloud, on-prem, and OT estates."
+      }
+    ],
+    "filtersLabel": "Browse by outcome",
+    "caseStudyList": [
+      {
+        "id": "marple-newtown-school-district",
+        "title": "Marple Newtown School District",
+        "industry": "Education",
+        "summary": "Unified endpoint protection and phishing defense for 5,000+ faculty and students with zero classroom downtime.",
+        "resultHeading": "Impact",
+        "results": [
+          "98% reduction in phishing dwell time",
+          "24/7 SOC coverage with automated escalation",
+          "Staff security awareness scores up 37%"
+        ],
+        "ctaLabel": "Book an education briefing",
+        "ctaHref": "contact?topic=case-study&ref=education"
+      },
+      {
+        "id": "alkem-laboratories",
+        "title": "Alkem Laboratories",
+        "industry": "Life Sciences",
+        "summary": "Harmonized DevSecOps pipelines to protect intellectual property across multi-region research hubs.",
+        "resultHeading": "Impact",
+        "results": [
+          "46% faster compliance evidence gathering",
+          "Zero critical vulnerabilities shipped across 9 releases",
+          "Executive-ready risk dashboards in under 6 weeks"
+        ],
+        "ctaLabel": "Talk to a pharma strategist",
+        "ctaHref": "contact?topic=case-study&ref=life-sciences"
+      },
+      {
+        "id": "city-of-kamloops",
+        "title": "City of Kamloops",
+        "industry": "Public Sector",
+        "summary": "Automated SaaS and collaboration security to serve 100,000 residents without service degradation.",
+        "resultHeading": "Impact",
+        "results": [
+          "Thousands of malicious emails blocked monthly",
+          "Unified identity governance across 40+ applications",
+          "Crisis response tabletop with 15 agencies in 30 days"
+        ],
+        "ctaLabel": "Modernize municipal security",
+        "ctaHref": "contact?topic=case-study&ref=public-sector"
+      }
+    ],
+    "ctaTitle": "Ready to create your next success story?",
+    "ctaSubtitle": "Partner with our strategists to scope a program that delivers measurable resilience from day one.",
+    "ctaPrimaryLabel": "Schedule a discovery call",
+    "ctaPrimaryHref": "contact?topic=case-study",
+    "ctaSecondaryLabel": "Explore recent insights",
+    "ctaSecondaryHref": "blog"
   },
   "SolutionsPages": {
     "aiSecurity": {
@@ -696,11 +867,16 @@
     "company": "thesamurai",
     "description": "Building innovative solutions for tomorrow",
     "quickLinks": "Quick Links",
-    "rights": "All rights reserved"
+    "rights": "All rights reserved.",
+    "contactUs": "Talk to our team",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "email": "hello@thesamurai.com",
+    "phone": "+1 (855) 425-8383"
   },
   "ContactForm": {
-    "title": "Get In Touch",
-    "subtitle": "Have a question or want to work together? Fill out the form below and we'll get back to you as soon as possible.",
+    "title": "Get in touch",
+    "subtitle": "We're here to help with security assessments, incident response, and strategic advisory.",
     "fields": {
       "name": "Full Name",
       "email": "Email Address",

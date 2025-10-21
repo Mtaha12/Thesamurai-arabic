@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
@@ -33,8 +33,16 @@ export default function HomePage() {
     name: string;
     role: string;
     bio: string;
+    photo?: string;
+  };
+  type TeamValue = {
+    title: string;
+    description: string;
   };
   const teamMembers = (t.raw('team.members') as TeamMember[]) || [];
+  const teamMissionTitle = t('team.missionTitle');
+  const teamMissionDescription = t('team.missionDescription');
+  const teamValues = (t.raw('team.values') as TeamValue[]) || [];
   const gatedAssetPoints = (t.raw('gatedAsset.points') as string[]) || [];
   const contactItems = (t.raw('contactBlock.items') as { label: string; value: string }[]) || [];
   type ResourceCard = {
@@ -49,12 +57,81 @@ export default function HomePage() {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [newsletterMessage, setNewsletterMessage] = useState('');
+  const [gatedAssetStatus, setGatedAssetStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [gatedAssetMessage, setGatedAssetMessage] = useState('');
 
   const handleNewsletterChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewsletterEmail(event.target.value);
     if (newsletterStatus !== 'idle') {
       setNewsletterStatus('idle');
       setNewsletterMessage('');
+    }
+  };
+
+  const handleGatedAssetSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (gatedAssetStatus === 'loading') {
+      return;
+    }
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const name = (formData.get('name') as string | null)?.trim() || '';
+    const email = (formData.get('email') as string | null)?.trim() || '';
+    const company = (formData.get('company') as string | null)?.trim() || '';
+    const role = (formData.get('role') as string | null)?.trim() || '';
+
+    if (!name || !email) {
+      setGatedAssetStatus('error');
+      setGatedAssetMessage(t('gatedAsset.form.required'));
+      return;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setGatedAssetStatus('error');
+      setGatedAssetMessage(t('gatedAsset.form.invalidEmail'));
+      return;
+    }
+
+    setGatedAssetStatus('loading');
+    setGatedAssetMessage(t('gatedAsset.form.loading'));
+
+    try {
+      const response = await fetch('/api/gated-asset', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          company: company || undefined,
+          role: role || undefined,
+          locale: currentLocale,
+          assetSlug: 'miercom-2024-security-benchmark',
+          assetTitle: t('gatedAsset.title')
+        })
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok && data?.success) {
+        setGatedAssetStatus('success');
+        setGatedAssetMessage(data.message || t('gatedAsset.form.success'));
+        form.reset();
+
+        if (data.downloadUrl && typeof window !== 'undefined') {
+          window.open(data.downloadUrl, '_blank', 'noopener');
+        }
+        return;
+      }
+
+      setGatedAssetStatus('error');
+      setGatedAssetMessage(data?.error || t('gatedAsset.form.error'));
+    } catch (error) {
+      setGatedAssetStatus('error');
+      setGatedAssetMessage(t('gatedAsset.form.error'));
     }
   };
 
@@ -125,19 +202,46 @@ export default function HomePage() {
   const contactCtaHref = buildLocaleHref(t('contactBlock.ctaHref'));
   const gatedAssetFormId = 'gated-report-form';
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+        rootMargin: '0px 0px -10%'
+      }
+    );
+
+    const animatedElements = document.querySelectorAll('.fade-section, .tilt-card');
+    animatedElements.forEach((element) => observer.observe(element));
+
+    return () => {
+      animatedElements.forEach((element) => observer.unobserve(element));
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <div style={{ minHeight: '100vh', background: '#fff' }}>
       <Header />
 
       {/* Hero Section */}
-      <section style={{
-        background: 'linear-gradient(135deg, #1a1f71 0%, #0a0e3d 50%, #00bcd4 100%)',
-        padding: 'clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 3rem)',
-        textAlign: 'center',
-        color: '#fff',
-        position: 'relative',
-        overflow: 'hidden'
-      }}>
+      <section
+        className="parallax-wrap fade-section"
+        style={{
+          background: 'linear-gradient(135deg, #1a1f71 0%, #0a0e3d 50%, #00bcd4 100%)',
+          padding: 'clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 3rem)',
+          textAlign: 'center',
+          color: '#fff',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
         <div style={{
           position: 'absolute',
           top: 0,
@@ -187,6 +291,7 @@ export default function HomePage() {
 
         {heroPillars.length > 0 && (
           <div
+            className="fade-section delay-1"
             style={{
               display: 'flex',
               flexWrap: 'wrap',
@@ -218,6 +323,7 @@ export default function HomePage() {
         )}
 
         <div
+          className="fade-section delay-2"
           style={{
             display: 'flex',
             flexWrap: 'wrap',
@@ -229,11 +335,12 @@ export default function HomePage() {
           }}
         >
           <Link
+            className="glow-button ripple-button"
             href={heroPillars.length ? '#miercom-report' : '#resources'}
             prefetch={false}
             style={{
-              background: '#69E8E1',
-              color: '#0a0e3d',
+              background: '#0a0e3d',
+              color: '#fff',
               border: 'none',
               padding: 'clamp(0.75rem, 1.8vw, 0.9rem) clamp(1.8rem, 4vw, 2.6rem)',
               borderRadius: '30px',
@@ -241,7 +348,7 @@ export default function HomePage() {
               fontWeight: 700,
               cursor: 'pointer',
               textDecoration: 'none',
-              boxShadow: '0 10px 30px rgba(105, 232, 225, 0.25)'
+              boxShadow: '0 10px 30px rgba(10, 14, 61, 0.18)'
             }}
           >
             {t('heroPrimaryCta')}
@@ -291,10 +398,14 @@ export default function HomePage() {
       </section>
 
       {/* Partners Section */}
-      <section id="industries" style={{
-        background: '#0a0e3d',
-        padding: 'clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 3rem)'
-      }}>
+      <section
+        id="industries"
+        className="fade-section delay-1"
+        style={{
+          background: '#0a0e3d',
+          padding: 'clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 3rem)'
+        }}
+      >
         <div style={{
           maxWidth: '1180px',
           margin: '0 auto',
@@ -323,21 +434,29 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: 'clamp(1rem, 3vw, 2.5rem)'
-          }}>
+          <div
+            className="fade-section delay-2"
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: 'clamp(1rem, 3vw, 2.5rem)'
+            }}
+          >
             {['ForgeRock', 'Microsoft Azure', 'SentinelOne', 'PingIdentity', 'THALES', 'okta'].map((partner) => (
-              <div key={partner} style={{
-                color: '#fff',
-                fontSize: 'clamp(1rem, 2vw, 1.2rem)',
-                fontWeight: '600',
-                opacity: 0.85,
-                letterSpacing: '0.04em'
-              }}>
+              <div
+                key={partner}
+                className="tilt-card subtle-card"
+                style={{
+                  color: '#fff',
+                  fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+                  fontWeight: '600',
+                  opacity: 0.85,
+                  letterSpacing: '0.04em',
+                  padding: '0.75rem 1.4rem'
+                }}
+              >
                 {partner}
               </div>
             ))}
@@ -347,6 +466,7 @@ export default function HomePage() {
 
       {testimonials.length > 0 && activeTestimonialData && (
         <section
+          className="fade-section delay-2"
           style={{
             background: '#f8f9fa',
             padding: 'clamp(3rem, 8vw, 5.5rem) clamp(1.5rem, 6vw, 3.5rem)'
@@ -362,7 +482,7 @@ export default function HomePage() {
               alignItems: 'center'
             }}
           >
-            <div>
+            <div className="fade-section delay-2">
               <p
                 style={{
                   color: '#00bcd4',
@@ -414,6 +534,7 @@ export default function HomePage() {
                 }}
               >
                 <Link
+                  className="glow-button ripple-button"
                   href={testimonialsCtaHref}
                   prefetch={false}
                   style={{
@@ -445,6 +566,7 @@ export default function HomePage() {
             </div>
 
             <div
+              className="tilt-card delay-3"
               style={{
                 background: '#fff',
                 borderRadius: '24px',
@@ -648,8 +770,9 @@ export default function HomePage() {
       </section>
 
       {/* Team Section */}
-      {teamMembers.length > 0 && (
+      {(teamMembers.length > 0 || teamValues.length > 0) && (
         <section
+          className="fade-section delay-2"
           style={{
             padding: 'clamp(3.2rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)',
             background: '#f8f9fa'
@@ -679,61 +802,162 @@ export default function HomePage() {
             >
               {t('team.subtitle')}
             </p>
-
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
-                gap: 'clamp(1.5rem, 4vw, 2.5rem)'
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+                gap: 'clamp(1.75rem, 4vw, 3rem)',
+                alignItems: 'start'
               }}
             >
-              {teamMembers.map((member) => (
-                <div
-                  key={member.name}
-                  style={{
-                    background: '#fff',
-                    borderRadius: '20px',
-                    padding: '2.2rem',
-                    border: '1px solid rgba(10,14,61,0.07)',
-                    boxShadow: '0 16px 40px rgba(10, 14, 61, 0.08)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '0.75rem'
-                  }}
-                >
-                  <div
+              <div
+                className="tilt-card"
+                style={{
+                  background: '#fff',
+                  borderRadius: '24px',
+                  padding: 'clamp(2rem, 5vw, 2.6rem)',
+                  boxShadow: '0 18px 40px rgba(10, 14, 61, 0.08)',
+                  border: '1px solid rgba(10,14,61,0.06)',
+                  display: 'grid',
+                  gap: '1.6rem'
+                }}
+              >
+                <div>
+                  <h3
                     style={{
-                      width: '64px',
-                      height: '64px',
-                      borderRadius: '16px',
-                      background: '#0a0e3d',
-                      color: '#69E8E1',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontWeight: 700,
-                      fontSize: '1.25rem'
+                      fontSize: 'clamp(1.4rem, 3vw, 1.85rem)',
+                      fontWeight: 800,
+                      color: '#0a0e3d',
+                      marginBottom: '0.75rem'
                     }}
                   >
-                    {member.name.split(' ').map((part) => part[0]).join('').slice(0, 2)}
-                  </div>
+                    {teamMissionTitle}
+                  </h3>
+                  <p style={{ color: '#404060', lineHeight: 1.7 }}>{teamMissionDescription}</p>
+                </div>
+
+                {teamValues.length > 0 && (
                   <div>
-                    <p
+                    <h4
                       style={{
-                        fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
+                        fontSize: 'clamp(1.1rem, 2.4vw, 1.35rem)',
                         fontWeight: 700,
-                        color: '#0a0e3d'
+                        color: '#0a0e3d',
+                        marginBottom: '1rem'
                       }}
                     >
-                      {member.name}
-                    </p>
-                    <p style={{ color: '#00bcd4', fontWeight: 600, marginBottom: '0.5rem' }}>
-                      {member.role}
-                    </p>
-                    <p style={{ color: '#555', lineHeight: 1.7 }}>{member.bio}</p>
+                      {t('team.valuesTitle')}
+                    </h4>
+                    <div style={{ display: 'grid', gap: '1rem' }}>
+                      {teamValues.map((value, index) => (
+                        <div
+                          className={`tilt-card subtle-card delay-${index + 1}`}
+                          key={value.title}
+                          style={{
+                            border: '1px solid rgba(10,14,61,0.08)',
+                            borderRadius: '18px',
+                            padding: '1.2rem 1.4rem',
+                            background: '#f5f7ff'
+                          }}
+                        >
+                          <p
+                            style={{
+                              fontWeight: 700,
+                              color: '#0a0e3d',
+                              marginBottom: '0.35rem',
+                              fontSize: '1rem'
+                            }}
+                          >
+                            {value.title}
+                          </p>
+                          <p style={{ color: '#4c4c66', lineHeight: 1.6 }}>{value.description}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
+                )}
+              </div>
+
+              {teamMembers.length > 0 && (
+                <div
+                  className="team-grid"
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
+                    gap: 'clamp(1.4rem, 3vw, 2rem)'
+                  }}
+                >
+                  {teamMembers.map((member, index) => (
+                    <div
+                      className={`tilt-card delay-${index + 1}`}
+                      key={member.name}
+                      style={{
+                        background: '#fff',
+                        borderRadius: '20px',
+                        padding: '2rem',
+                        border: '1px solid rgba(10,14,61,0.08)',
+                        boxShadow: '0 16px 36px rgba(10, 14, 61, 0.08)',
+                        display: 'grid',
+                        gap: '0.9rem'
+                      }}
+                    >
+                      <div
+                        className="pulse-border"
+                        style={{
+                          width: '72px',
+                          height: '72px',
+                          borderRadius: '18px',
+                          overflow: 'hidden',
+                          background: '#0a0e3d',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center'
+                        }}
+                      >
+                        {member.photo ? (
+                          <Image
+                            src={member.photo}
+                            alt={`${member.name}`}
+                            width={72}
+                            height={72}
+                            sizes="72px"
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          />
+                        ) : (
+                          <span
+                            style={{
+                              color: '#69E8E1',
+                              fontWeight: 700,
+                              fontSize: '1.4rem'
+                            }}
+                          >
+                            {member.name
+                              .split(' ')
+                              .map((part) => part[0])
+                              .join('')
+                              .slice(0, 2)}
+                          </span>
+                        )}
+                      </div>
+                      <div>
+                        <p
+                          style={{
+                            fontSize: 'clamp(1.05rem, 2vw, 1.25rem)',
+                            fontWeight: 700,
+                            color: '#0a0e3d'
+                          }}
+                        >
+                          {member.name}
+                        </p>
+                        <p style={{ color: '#00bcd4', fontWeight: 600, marginBottom: '0.5rem' }}>
+                          {member.role}
+                        </p>
+                        <p style={{ color: '#4c4c66', lineHeight: 1.7 }}>{member.bio}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </section>
@@ -1230,6 +1454,7 @@ export default function HomePage() {
           </div>
 
           <div
+            className="tilt-card"
             style={{
               background: '#fff',
               borderRadius: '24px',
@@ -1247,7 +1472,12 @@ export default function HomePage() {
             >
               {t('gatedAsset.form.title')}
             </h4>
-            <form id={gatedAssetFormId} style={{ display: 'grid', gap: '1rem' }}>
+            <form
+              id={gatedAssetFormId}
+              className="fade-section delay-2"
+              onSubmit={handleGatedAssetSubmit}
+              style={{ display: 'grid', gap: '1rem' }}
+            >
               <label style={{ display: 'grid', gap: '0.4rem', fontSize: '0.9rem', color: '#444' }}>
                 {t('gatedAsset.form.nameLabel')}
                 <input
@@ -1258,7 +1488,8 @@ export default function HomePage() {
                     padding: '0.85rem 1rem',
                     borderRadius: '12px',
                     border: '1px solid #dce0f5',
-                    fontSize: '0.95rem'
+                    fontSize: '0.95rem',
+                    transition: 'all 0.3s ease-in-out'
                   }}
                   required
                 />
@@ -1273,7 +1504,8 @@ export default function HomePage() {
                     padding: '0.85rem 1rem',
                     borderRadius: '12px',
                     border: '1px solid #dce0f5',
-                    fontSize: '0.95rem'
+                    fontSize: '0.95rem',
+                    transition: 'all 0.3s ease-in-out'
                   }}
                   required
                 />
@@ -1288,7 +1520,8 @@ export default function HomePage() {
                     padding: '0.85rem 1rem',
                     borderRadius: '12px',
                     border: '1px solid #dce0f5',
-                    fontSize: '0.95rem'
+                    fontSize: '0.95rem',
+                    transition: 'all 0.3s ease-in-out'
                   }}
                 />
               </label>
@@ -1302,13 +1535,16 @@ export default function HomePage() {
                     padding: '0.85rem 1rem',
                     borderRadius: '12px',
                     border: '1px solid #dce0f5',
-                    fontSize: '0.95rem'
+                    fontSize: '0.95rem',
+                    transition: 'all 0.3s ease-in-out'
                   }}
                 />
               </label>
 
               <button
+                className="glow-button"
                 type="submit"
+                disabled={gatedAssetStatus === 'loading'}
                 style={{
                   marginTop: '0.5rem',
                   background: '#0a0e3d',
@@ -1318,14 +1554,27 @@ export default function HomePage() {
                   padding: '0.9rem 2.4rem',
                   fontWeight: 700,
                   fontSize: '0.95rem',
-                  cursor: 'pointer'
+                  cursor: gatedAssetStatus === 'loading' ? 'not-allowed' : 'pointer',
+                  opacity: gatedAssetStatus === 'loading' ? 0.8 : 1,
+                  transition: 'all 0.3s ease-in-out'
                 }}
               >
-                {t('gatedAsset.form.cta')}
+                {gatedAssetStatus === 'loading' ? t('gatedAsset.form.loading') : t('gatedAsset.form.cta')}
               </button>
-              <p style={{ color: '#3c3c66', fontSize: '0.85rem', lineHeight: 1.6 }}>
-                {t('gatedAsset.form.success')}
-              </p>
+              {gatedAssetStatus !== 'idle' && (
+                <p
+                  role="status"
+                  aria-live="polite"
+                  style={{
+                    color: gatedAssetStatus === 'success' ? '#0a8f44' : '#d03c3c',
+                    fontSize: '0.85rem',
+                    lineHeight: 1.6,
+                    transition: 'all 0.3s ease-in-out'
+                  }}
+                >
+                  {gatedAssetMessage}
+                </p>
+              )}
             </form>
           </div>
         </div>
@@ -1333,6 +1582,7 @@ export default function HomePage() {
 
       {/* Newsletter Section */}
       <section
+        className="fade-section delay-3"
         style={{
           background: '#f5fbfb',
           padding: 'clamp(3rem, 9vw, 5.5rem) clamp(1.5rem, 6vw, 3.5rem)'
@@ -1354,7 +1604,8 @@ export default function HomePage() {
               fontSize: 'clamp(1.8rem, 3.5vw, 2.3rem)',
               fontWeight: 800,
               color: '#0a0e3d',
-              marginBottom: '1rem'
+              marginBottom: '1rem',
+              transition: 'all 0.3s ease-in-out'
             }}
           >
             {t('newsletter.title')}
@@ -1364,12 +1615,14 @@ export default function HomePage() {
               color: '#555',
               lineHeight: 1.8,
               fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
-              marginBottom: '1.75rem'
+              marginBottom: '1.75rem',
+              transition: 'all 0.3s ease-in-out'
             }}
           >
             {t('newsletter.subtitle')}
           </p>
           <form
+            className="fade-section delay-3"
             onSubmit={handleNewsletterSubmit}
             style={{
               display: 'grid',
@@ -1388,11 +1641,13 @@ export default function HomePage() {
                 padding: '0.9rem 1.2rem',
                 borderRadius: '999px',
                 border: '1px solid #dce0f5',
-                fontSize: '0.95rem'
+                fontSize: '0.95rem',
+                transition: 'all 0.3s ease-in-out'
               }}
               required
             />
             <button
+              className="glow-button"
               type="submit"
               disabled={newsletterStatus === 'loading'}
               style={{

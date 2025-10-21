@@ -57,6 +57,7 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 	return (
 		<div style={{ background: '#fff', minHeight: '100vh' }}>
 			<section
+				className="parallax-wrap fade-section"
 				style={{
 					background: 'linear-gradient(135deg, #1a1f71 0%, #0a0e3d 50%, #00bcd4 100%)',
 					padding: 'clamp(4rem, 10vw, 7rem) clamp(1.5rem, 6vw, 3.5rem)',
@@ -74,7 +75,10 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 						pointerEvents: 'none'
 					}}
 				/>
-				<div style={{ position: 'relative', zIndex: 1, maxWidth: '920px', margin: '0 auto' }}>
+				<div
+					className="fade-section delay-1"
+					style={{ position: 'relative', zIndex: 1, maxWidth: '920px', margin: '0 auto' }}
+				>
 					<h1
 						style={{
 							fontSize: 'clamp(2.2rem, 5vw, 3.6rem)',
@@ -85,8 +89,9 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 						{heroTitle}
 					</h1>
 					<p
+						className="fade-section delay-2"
 						style={{
-							fontSize: 'clamp(1.05rem, 2vw, 1.25rem)',
+							fontSize: 'clamp(1rem, 1.8vw, 1.15rem)',
 							lineHeight: 1.8,
 							opacity: 0.9,
 							marginBottom: '1.5rem'
@@ -95,6 +100,7 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 						{heroSubtitle}
 					</p>
 					<p
+						className="fade-section delay-3"
 						style={{
 							fontSize: 'clamp(0.95rem, 1.6vw, 1.05rem)',
 							opacity: 0.85,
@@ -105,6 +111,7 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 						{heroSupporting}
 					</p>
 					<div
+						className="fade-section delay-4"
 						style={{
 							display: 'flex',
 							flexWrap: 'wrap',
@@ -113,6 +120,7 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 						}}
 					>
 						<Link
+							className="glow-button rise-in delay-1"
 							href={buildHref(primaryCtaHref)}
 							prefetch={false}
 							style={{
@@ -129,6 +137,7 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 							{primaryCta}
 						</Link>
 						<Link
+							className="glow-button rise-in delay-2"
 							href={buildHref(secondaryCtaHref)}
 							prefetch={false}
 							style={{
@@ -149,6 +158,7 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 			</section>
 
 			<section
+				className="fade-section delay-2"
 				style={{
 					padding: 'clamp(3rem, 8vw, 5.5rem) clamp(1.5rem, 6vw, 3.5rem)',
 					maxWidth: '1100px',
@@ -156,6 +166,7 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 				}}
 			>
 				<h2
+					className="fade-section delay-1"
 					style={{
 						fontSize: 'clamp(1.7rem, 3.5vw, 2.4rem)',
 						fontWeight: 800,
@@ -167,6 +178,7 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 					{t('pillarsTitle')}
 				</h2>
 				<div
+					className="fade-section delay-2"
 					style={{
 						display: 'grid',
 						gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
@@ -175,6 +187,7 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 				>
 					{pillars.map((pillar, index) => (
 						<div
+							className={`tilt-card glow-card gradient-border rise-in delay-${(index % 5) + 1}`}
 							key={index}
 							style={{
 								background: '#fff',
@@ -219,12 +232,16 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 			</section>
 
 			<section
+				className="fade-section delay-3"
 				style={{
 					background: '#0a0e3d',
 					padding: 'clamp(3.2rem, 8vw, 6rem) clamp(1.5rem, 6vw, 3.5rem)'
 				}}
 			>
-				<div style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center' }}>
+				<div
+					className="fade-section delay-1"
+					style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center' }}
+				>
 					<h2
 						style={{
 							fontSize: 'clamp(1.8rem, 4vw, 2.6rem)',
@@ -236,28 +253,31 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 						{servicesTitle}
 					</h2>
 					<p
+						className="fade-section delay-2"
 						style={{
 							color: 'rgba(255,255,255,0.75)',
 							maxWidth: '760px',
 							margin: '0 auto clamp(2.5rem, 6vw, 3.5rem)',
 							lineHeight: 1.8,
-							fontSize: 'clamp(0.95rem, 1.6vw, 1.05rem)'
+							fontSize: 'clamp(0.98rem, 1.6vw, 1.05rem)'
 						}}
 					>
 						{servicesDescription}
 					</p>
 					<div
+						className="fade-section delay-2"
 						style={{
 							display: 'grid',
-							gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
-							gap: 'clamp(1.8rem, 4.5vw, 2.8rem)'
+							gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+							gap: 'clamp(1.8rem, 4vw, 2.6rem)'
 						}}
 					>
-						{services.map((service) => (
+						{services.map((service, index) => (
 							<div
+								className={`tilt-card glow-card gradient-border rise-in delay-${(index % 5) + 1}`}
 								key={service.id}
 								style={{
-									background: '#1a1f71',
+									background: '#fff',
 									borderRadius: '20px',
 									padding: '2.2rem',
 									border: '1px solid rgba(105, 232, 225, 0.18)',
@@ -321,14 +341,16 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 			</section>
 
 			<section
+				className="fade-section delay-3"
 				style={{
-					padding: 'clamp(3.2rem, 8vw, 6rem) clamp(1.5rem, 6vw, 3.5rem)',
+					padding: 'clamp(3rem, 8vw, 5.5rem) clamp(1.5rem, 6vw, 3.5rem)',
 					background: '#f8f9fa'
 				}}
 			>
 				<div
+					className="fade-section delay-1"
 					style={{
-						maxWidth: '1020px',
+						maxWidth: '1100px',
 						margin: '0 auto',
 						background: '#fff',
 						borderRadius: '24px',
@@ -348,6 +370,7 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 						{ctaTitle}
 					</h3>
 					<p
+						className="fade-section delay-2"
 						style={{
 							fontSize: 'clamp(0.98rem, 1.6vw, 1.05rem)',
 							color: '#555',
@@ -358,6 +381,7 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 						{ctaSubtitle}
 					</p>
 					<div
+						className="fade-section delay-3"
 						style={{
 							display: 'flex',
 							flexWrap: 'wrap',
@@ -366,6 +390,7 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 						}}
 					>
 						<Link
+							className="glow-button rise-in delay-1"
 							href={buildHref(ctaPrimaryHref)}
 							prefetch={false}
 							style={{
@@ -382,6 +407,7 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 							{ctaPrimary}
 						</Link>
 						<Link
+							className="glow-button rise-in delay-2"
 							href={buildHref(ctaSecondaryHref)}
 							prefetch={false}
 							style={{
@@ -398,12 +424,14 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 			</section>
 
 			<section
+				className="fade-section delay-4"
 				style={{
 					padding: 'clamp(3rem, 8vw, 5rem) clamp(1.5rem, 6vw, 3.5rem)',
 					textAlign: 'center'
 				}}
 			>
 				<h4
+					className="fade-section delay-1"
 					style={{
 						fontSize: 'clamp(1.4rem, 3vw, 2rem)',
 						fontWeight: 800,
@@ -413,16 +441,24 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 				>
 					{supportTitle}
 				</h4>
-				<p
+				<div
+					className="fade-section delay-2"
 					style={{
-						color: '#666',
-						lineHeight: 1.8,
+						opacity: 0.75,
+						lineHeight: 1.7,
 						maxWidth: '760px',
 						margin: '0 auto'
 					}}
 				>
-					{supportSummary}
-				</p>
+					{supportSummary.split('\n').map((line, index) => (
+						<p
+							className={`rise-in delay-${(index % 5) + 1}`}
+							key={index}
+						>
+							{line}
+						</p>
+					))}
+				</div>
 			</section>
 		</div>
 	);

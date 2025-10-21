@@ -7,6 +7,175 @@ interface EmailOptions {
   text?: string;
 }
 
+export async function sendGatedAssetDownloadEmail(lead: {
+  name: string;
+  email: string;
+  company?: string;
+  role?: string;
+  locale: string;
+  assetTitle: string;
+  downloadUrl: string;
+}) {
+  try {
+    const isArabic = lead.locale === 'ar';
+    const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'The Samurai';
+
+    const subject = isArabic
+      ? `تقريرك جاهز: ${lead.assetTitle}`
+      : `Your requested report is ready: ${lead.assetTitle}`;
+
+    const intro = isArabic
+      ? 'شكرًا لاهتمامك بمصادرنا. يمكنك تنزيل التقرير من الرابط أدناه:'
+      : 'Thanks for your interest in our resources. You can download the report using the link below:';
+
+    const companyLine = lead.company
+      ? `<p style="margin: 6px 0;"><strong>${isArabic ? 'الشركة' : 'Company'}:</strong> ${lead.company}</p>`
+      : '';
+    const roleLine = lead.role
+      ? `<p style="margin: 6px 0;"><strong>${isArabic ? 'المنصب' : 'Role'}:</strong> ${lead.role}</p>`
+      : '';
+
+    const html = `
+      <div dir="${isArabic ? 'rtl' : 'ltr'}" style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e0e0e0; border-radius: 8px;">
+        <h2 style="color: #1a1f71; margin-top: 0;">${isArabic ? 'تقريرك جاهز' : 'Your report is ready'}</h2>
+        <p>${isArabic ? 'مرحبًا' : 'Hello'} <strong>${lead.name}</strong>,</p>
+        <p>${intro}</p>
+        <p style="margin: 18px 0;">
+          <a href="${lead.downloadUrl}" style="background: #1a1f71; color: #fff; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
+            ${isArabic ? 'تنزيل التقرير' : 'Download the report'}
+          </a>
+        </p>
+        <p style="font-size: 0.95rem; color: #555;">
+          ${isArabic ? 'إذا لم يعمل الزر، انسخ الرابط التالي في متصفحك:' : 'If the button does not work, copy and paste the following link into your browser:'}
+          <br />
+          <a href="${lead.downloadUrl}" style="color: #1a1f71;">${lead.downloadUrl}</a>
+        </p>
+        <div style="background: #f9f9f9; padding: 16px; border-radius: 6px; margin: 18px 0;">
+          <p style="margin: 0 0 10px 0;"><strong>${isArabic ? 'تفاصيل الطلب' : 'Request details'}:</strong></p>
+          ${companyLine}
+          ${roleLine}
+        </div>
+        <p>${isArabic ? 'نحن هنا إذا احتجت لأي مساعدة إضافية.' : 'We are here if you need any further assistance.'}</p>
+        <p style="margin-bottom: 0;">
+          ${isArabic ? 'مع أطيب التحيات' : 'Best regards'},<br />
+          <strong>${siteName} ${isArabic ? 'فريق' : 'Team'}</strong>
+        </p>
+      </div>
+    `;
+
+    const text = `${isArabic ? 'تقريرك جاهز' : 'Your report is ready'}\n\n${lead.downloadUrl}`;
+
+    return await sendEmail({
+      to: lead.email,
+      subject,
+      html,
+      text,
+    });
+  } catch (error) {
+    console.error('Error in sendGatedAssetDownloadEmail:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+      details: error,
+    };
+  }
+}
+
+export async function sendGatedAssetAdminNotification(lead: {
+  name: string;
+  email: string;
+  company?: string;
+  role?: string;
+  locale: string;
+  assetTitle: string;
+  downloadUrl: string;
+}) {
+  try {
+    const adminEmails = process.env.ADMIN_EMAILS?.split(',').map((email) => email.trim()).filter(Boolean) || [];
+
+    if (adminEmails.length === 0) {
+      console.warn('No admin emails configured. Set ADMIN_EMAILS environment variable for gated asset notifications.');
+      return {
+        success: false,
+        error: 'No admin emails configured',
+        details: 'Please set the ADMIN_EMAILS environment variable with comma-separated email addresses',
+      };
+    }
+
+    const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'The Samurai';
+
+    const subject = `New gated asset request: ${lead.assetTitle}`;
+
+    const html = `
+      <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e0e0e0; border-radius: 8px;">
+        <h2 style="color: #1a1f71; margin-top: 0;">${siteName} · Gated asset lead</h2>
+        <p style="margin: 6px 0;"><strong>Name:</strong> ${lead.name}</p>
+        <p style="margin: 6px 0;"><strong>Email:</strong> ${lead.email}</p>
+        ${lead.company ? `<p style="margin: 6px 0;"><strong>Company:</strong> ${lead.company}</p>` : ''}
+        ${lead.role ? `<p style="margin: 6px 0;"><strong>Role:</strong> ${lead.role}</p>` : ''}
+        <p style="margin: 6px 0;"><strong>Locale:</strong> ${lead.locale}</p>
+        <p style="margin: 6px 0;"><strong>Asset:</strong> ${lead.assetTitle}</p>
+        <p style="margin: 12px 0;"><a href="${lead.downloadUrl}" style="color: #1a1f71;">Download link</a></p>
+      </div>
+    `;
+
+    const textLines = [
+      'New gated asset lead received',
+      `Name: ${lead.name}`,
+      `Email: ${lead.email}`,
+    ];
+
+    if (lead.company) {
+      textLines.push(`Company: ${lead.company}`);
+    }
+    if (lead.role) {
+      textLines.push(`Role: ${lead.role}`);
+    }
+
+    textLines.push(`Locale: ${lead.locale}`);
+    textLines.push(`Asset: ${lead.assetTitle}`);
+    textLines.push(`Download: ${lead.downloadUrl}`);
+
+    const text = textLines.join('\n');
+
+    const results = await Promise.allSettled(
+      adminEmails.map((email) =>
+        sendEmail({
+          to: email,
+          subject,
+          html,
+          text,
+        })
+      )
+    );
+
+    const successes = results.filter((result) => result.status === 'fulfilled' && result.value.success).length;
+
+    if (successes === 0) {
+      console.error('Failed to send gated asset admin notification to any recipient', results);
+      return {
+        success: false,
+        error: 'Failed to send admin notification',
+        details: results,
+      };
+    }
+
+    return {
+      success: true,
+      successCount: successes,
+      totalCount: adminEmails.length,
+      results,
+    };
+  } catch (error) {
+    console.error('Error in sendGatedAssetAdminNotification:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+      details: error,
+    };
+  }
+}
+
 // src/lib/email.ts
 
 function createTransporter() {

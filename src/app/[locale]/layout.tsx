@@ -8,6 +8,7 @@ import { setRequestLocale } from 'next-intl/server';
 import ChatWidget from '@/components/chat/ChatWidget';
 import LocaleHtmlAttributes from '@/components/layout/LocaleHtmlAttributes';
 import '../globals.css';
+import ScrollAnimator from '@/components/layout/ScrollAnimator';
 
 // Language Switcher Component
 function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {
@@ -98,6 +99,7 @@ export default async function LocaleLayout({
         }}
       >
         {children}
+        <ScrollAnimator />
         <ChatWidget />
       </div>
     </NextIntlClientProvider>

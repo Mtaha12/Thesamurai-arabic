@@ -122,28 +122,85 @@ export default function Footer() {
             padding: '2rem',
             display: 'flex',
             flexDirection: 'column',
-            gap: '1.25rem'
+            gap: '1.4rem'
           }}
         >
-          <h4
-            style={{
-              fontSize: '1rem',
-              fontWeight: '700'
-            }}
-          >
-            {navT('blog')}
-          </h4>
-          <p
-            style={{
-              color: 'rgba(255,255,255,0.85)',
-              lineHeight: '1.7',
-              fontSize: '0.95rem'
-            }}
-          >
-            {t('description')}
-          </p>
+          <div>
+            <h4
+              style={{
+                fontSize: '1rem',
+                fontWeight: '700',
+                marginBottom: '0.85rem'
+              }}
+            >
+              {t('contactUs')}
+            </h4>
+            <div
+              style={{
+                display: 'grid',
+                gap: '0.85rem',
+                color: 'rgba(255,255,255,0.9)',
+                fontSize: '0.95rem'
+              }}
+            >
+              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                <span
+                  aria-hidden
+                  style={{
+                    background: 'rgba(105, 232, 225, 0.2)',
+                    color: '#69E8E1',
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '1rem'
+                  }}
+                >
+                  ✉️
+                </span>
+                <div style={{ display: 'grid', gap: '0.2rem' }}>
+                  <span style={{ opacity: 0.7 }}>{t('emailLabel')}</span>
+                  <Link
+                    href={`mailto:${t('email')}`}
+                    style={{ color: '#69E8E1', textDecoration: 'none', fontWeight: 600 }}
+                  >
+                    {t('email')}
+                  </Link>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                <span
+                  aria-hidden
+                  style={{
+                    background: 'rgba(105, 232, 225, 0.2)',
+                    color: '#69E8E1',
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '1rem'
+                  }}
+                >
+                  ☎️
+                </span>
+                <div style={{ display: 'grid', gap: '0.2rem' }}>
+                  <span style={{ opacity: 0.7 }}>{t('phoneLabel')}</span>
+                  <Link
+                    href={`tel:${t('phone').replace(/[^\d+]/g, '')}`}
+                    style={{ color: '#69E8E1', textDecoration: 'none', fontWeight: 600 }}
+                  >
+                    {t('phone')}
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
           <Link
-            href={`/${currentLocale}/blog`}
+            href={`/${currentLocale}/contact`}
             prefetch={false}
             style={{
               alignSelf: 'flex-start',
@@ -162,25 +219,8 @@ export default function Footer() {
               event.currentTarget.style.transform = 'translateY(0)';
             }}
           >
-            {commonT('readMore')}
-          </Link>
-        </div>
-
-        <div>
-          <h4
-            style={{
-              fontSize: '1rem',
-              fontWeight: '700',
-              marginBottom: '1rem'
-            }}
-          >
             {navT('contact')}
-          </h4>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', color: 'rgba(255,255,255,0.8)' }}>
-            <span>📧 hello@thesamurai.com</span>
-            <span>📞 +1 (555) 123-4567</span>
-            <span>📍 123 Business District</span>
-          </div>
+          </Link>
         </div>
       </div>
 
@@ -195,6 +235,16 @@ export default function Footer() {
       >
         <p>
           &copy; 2025 {t('company')}. {t('rights')}
+        </p>
+        <p>
+          {t('contactUs')}{' '}
+          <Link href={`mailto:${t('email')}`} style={{ color: 'rgba(255,255,255,0.8)' }}>
+            {t('email')}
+          </Link>{' '}
+          | {t('phoneLabel')}{' '}
+          <Link href={`tel:${t('phone').replace(/[^\d+]/g, '')}`} style={{ color: 'rgba(255,255,255,0.8)' }}>
+            {t('phone')}
+          </Link>
         </p>
       </div>
     </footer>
