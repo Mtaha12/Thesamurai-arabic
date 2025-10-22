@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { listBlogArticles, type BlogArticleContent } from '../src/data/blogPosts';
 
 // MongoDB URI - directly configured
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://samuraiadmin:phoneix1234@cluster0.18dsp1k.mongodb.net/project-phoenix?retryWrites=true&w=majority&appName=Cluster0';
@@ -74,6 +75,33 @@ const chatMessageSchema = new mongoose.Schema({
 });
 
 const ChatMessage = mongoose.models.ChatMessage || mongoose.model('ChatMessage', chatMessageSchema);
+
+function serializeArticleContent(content: BlogArticleContent, locale: 'en' | 'ar'): string {
+  const sections = content.sections
+    .map((section) => {
+      const heading = `## ${section.heading}`;
+      const paragraphs = section.paragraphs.join('\n\n');
+      return `${heading}\n\n${paragraphs}`;
+    })
+    .join('\n\n');
+
+  const takeawaysHeading = locale === 'ar' ? '### أبرز النقاط' : '### Key Takeaways';
+  const conclusionHeading = locale === 'ar' ? '### الخلاصة' : '### Conclusion';
+
+  const takeaways = content.takeaways.length
+    ? `${takeawaysHeading}\n\n${content.takeaways.map((item) => `- ${item}`).join('\n')}`
+    : '';
+
+  const parts = [
+    content.kicker ? `_${content.kicker}_` : '',
+    content.description,
+    sections,
+    takeaways,
+    `${conclusionHeading}\n\n${content.conclusion}`
+  ].filter(Boolean);
+
+  return parts.join('\n\n');
+}
 
 // Content Data
 const contentData = [
@@ -190,6 +218,25 @@ const contentData = [
     category: 'faq'
   }
 ];
+
+const blogArticles = listBlogArticles();
+
+for (const article of blogArticles) {
+  contentData.push({
+    slug: article.slug,
+    en: {
+      title: article.en.title,
+      description: article.en.description,
+      content: serializeArticleContent(article.en, 'en')
+    },
+    ar: {
+      title: article.ar.title,
+      description: article.ar.description,
+      content: serializeArticleContent(article.ar, 'ar')
+    },
+    category: 'blog'
+  });
+}
 
 // Contact Data
 const contactData = [

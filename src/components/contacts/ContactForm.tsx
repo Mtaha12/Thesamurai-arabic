@@ -171,7 +171,8 @@ export default function ContactForm() {
       padding: 'clamp(1.5rem, 4vw, 2rem)',
       background: '#fff',
       borderRadius: '16px',
-      boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
+      boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+      color: '#0a0e3d'
     }}>
       <h2 style={{
         fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
@@ -252,7 +253,10 @@ export default function ContactForm() {
               borderRadius: '8px',
               fontSize: 'clamp(0.9rem, 1.2vw, 1rem)',
               transition: 'border-color 0.3s',
-              outline: 'none'
+              outline: 'none',
+              color: '#0a0e3d',
+              backgroundColor: '#fff',
+              caretColor: '#0a0e3d'
             }}
             onFocus={(e) => e.target.style.borderColor = '#00bcd4'}
             onBlur={(e) => e.target.style.borderColor = errors.name ? '#dc3545' : '#ddd'}
@@ -289,7 +293,10 @@ export default function ContactForm() {
               borderRadius: '8px',
               fontSize: 'clamp(0.9rem, 1.2vw, 1rem)',
               transition: 'border-color 0.3s',
-              outline: 'none'
+              outline: 'none',
+              color: '#0a0e3d',
+              backgroundColor: '#fff',
+              caretColor: '#0a0e3d'
             }}
             onFocus={(e) => e.target.style.borderColor = '#00bcd4'}
             onBlur={(e) => e.target.style.borderColor = errors.email ? '#dc3545' : '#ddd'}
@@ -326,7 +333,10 @@ export default function ContactForm() {
               borderRadius: '8px',
               fontSize: 'clamp(0.9rem, 1.2vw, 1rem)',
               transition: 'border-color 0.3s',
-              outline: 'none'
+              outline: 'none',
+              color: '#0a0e3d',
+              backgroundColor: '#fff',
+              caretColor: '#0a0e3d'
             }}
             onFocus={(e) => e.target.style.borderColor = '#00bcd4'}
             onBlur={(e) => e.target.style.borderColor = errors.phone ? '#dc3545' : '#ddd'}
@@ -362,8 +372,8 @@ export default function ContactForm() {
               fontSize: 'clamp(0.9rem, 1.2vw, 1rem)',
               transition: 'border-color 0.3s',
               outline: 'none',
-              background: '#fff',
-              color: '#333'
+              backgroundColor: '#fff',
+              color: '#0a0e3d'
             }}
             onFocus={(e) => e.target.style.borderColor = '#00bcd4'}
             onBlur={(e) => e.target.style.borderColor = errors.subject ? '#dc3545' : '#ddd'}
@@ -403,7 +413,8 @@ export default function ContactForm() {
           rows={6}
           style={{
             width: '100%',
-            padding: 'clamp(0.7rem, 1.5vw, 0.9rem)',
+            minHeight: '160px',
+            padding: 'clamp(0.8rem, 1.5vw, 1rem)',
             border: errors.message ? '2px solid #dc3545' : '1px solid #ddd',
             borderRadius: '8px',
             fontSize: 'clamp(0.9rem, 1.2vw, 1rem)',
@@ -411,7 +422,9 @@ export default function ContactForm() {
             outline: 'none',
             resize: 'vertical',
             fontFamily: 'inherit',
-            color: '#333'
+            color: '#0a0e3d',
+            backgroundColor: '#fff',
+            caretColor: '#0a0e3d'
           }}
           onFocus={(e) => e.target.style.borderColor = '#00bcd4'}
           onBlur={(e) => e.target.style.borderColor = errors.message ? '#dc3545' : '#ddd'}

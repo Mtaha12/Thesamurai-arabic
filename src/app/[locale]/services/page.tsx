@@ -1,4 +1,9 @@
-import { getTranslations } from 'next-intl/server';
+"use client";
+
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import { useTranslations } from 'next-intl';
+import { usePathname, useParams } from 'next/navigation';
 import Link from 'next/link';
 
 type Pillar = {
@@ -16,15 +21,13 @@ type ServiceCard = {
 	href: string;
 };
 
-type ServicesPageProps = {
-	params: {
-		locale: string;
-	};
-};
-
-export default async function ServicesPage({ params: { locale } }: ServicesPageProps) {
-	const t = await getTranslations('ServicesOverview');
-	const localePrefix = `/${locale}`;
+export default function ServicesPage() {
+	const t = useTranslations('ServicesOverview');
+	const pathname = usePathname();
+	const params = useParams<{ locale?: string }>();
+	const localeFromParams = params?.locale;
+	const currentLocale = (Array.isArray(localeFromParams) ? localeFromParams[0] : localeFromParams) || pathname.split('/')[1] || 'en';
+	const localePrefix = `/${currentLocale}`;
 	const heroTitle = t('heroTitle');
 	const heroSubtitle = t('heroSubtitle');
 	const heroSupporting = t('heroSupporting');
@@ -32,8 +35,8 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 	const primaryCtaHref = t('primaryCtaHref');
 	const secondaryCta = t('secondaryCta');
 	const secondaryCtaHref = t('secondaryCtaHref');
-	const pillars = (await t.raw('pillars')) as Pillar[];
-	const services = (await t.raw('services')) as ServiceCard[];
+	const pillars = (t.raw('pillars') as Pillar[]) || [];
+	const services = (t.raw('services') as ServiceCard[]) || [];
 	const servicesTitle = t('servicesTitle');
 	const servicesDescription = t('servicesDescription');
 	const ctaTitle = t('ctaTitle');
@@ -55,7 +58,9 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 	};
 
 	return (
-		<div style={{ background: '#fff', minHeight: '100vh' }}>
+		<div style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+			<Header />
+			<main style={{ flex: 1 }}>
 			<section
 				className="parallax-wrap fade-section"
 				style={{
@@ -460,6 +465,8 @@ export default async function ServicesPage({ params: { locale } }: ServicesPageP
 					))}
 				</div>
 			</section>
+			</main>
+			<Footer />
 		</div>
 	);
 }

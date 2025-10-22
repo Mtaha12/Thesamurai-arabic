@@ -713,68 +713,50 @@
     "featuredPosts": [
       {
         "id": 1,
-        "title": "Penetration Testing Tools Shaping 2025",
-        "excerpt": "See which offensive security toolkits elite red teams keep in rotation this year.",
-        "category": "Security",
-        "date": "June 18, 2025",
-        "readTime": "6 min read",
-        "slug": "penetration-testing-tools-shaping-2025"
+        "title": "AI Guardrails for Enterprise LLMs",
+        "excerpt": "Design evaluation pipelines and policy-as-code guardrails that keep generative AI deployments trustworthy.",
+        "category": "AI",
+        "date": "October 10, 2025",
+        "readTime": "8 min read",
+        "slug": "ai-guardrails-for-enterprise-llms"
       },
       {
         "id": 2,
-        "title": "Security Service Bundles Modern Enterprises Need",
-        "excerpt": "From MDR to zero-trust roadmaps, explore managed offerings that accelerate resilience.",
-        "category": "Services",
-        "date": "June 4, 2025",
-        "readTime": "7 min read",
-        "slug": "security-service-bundles-modern-enterprises-need"
+        "title": "Operationalizing Zero Trust in Hybrid Enterprises",
+        "excerpt": "Sequence identity, network, and data controls to compress attack surfaces without disrupting delivery teams.",
+        "category": "Security",
+        "date": "September 28, 2025",
+        "readTime": "9 min read",
+        "slug": "operationalizing-zero-trust-hybrid-enterprises"
       },
       {
         "id": 3,
-        "title": "Black Hat USA 2025: Field Notes for CISOs",
-        "excerpt": "Key takeaways, demos, and strategy sessions you can apply to second-half planning.",
+        "title": "GISEC Global 2025: Threat Intelligence Highlights",
+        "excerpt": "Recap region-specific adversaries, SOC automation demos, and executive priorities from Dubai.",
         "category": "Events",
-        "date": "May 28, 2025",
-        "readTime": "8 min read",
-        "slug": "black-hat-usa-2025-field-notes"
+        "date": "September 15, 2025",
+        "readTime": "6 min read",
+        "slug": "gisec-global-2025-threat-highlights"
       }
     ],
     "latestPosts": [
       {
         "id": 4,
-        "title": "AI-Driven Playbooks for Lightning-Fast SOC Response",
-        "excerpt": "Blend automation and analyst intuition to shrink dwell time below 10 minutes.",
+        "title": "Blueprinting AI Incident Response Runbooks",
+        "excerpt": "Blend red-team findings with SOC automations to contain AI-native threats before they cascade.",
         "category": "AI",
-        "date": "May 12, 2025",
+        "date": "October 5, 2025",
         "readTime": "6 min read",
-        "slug": "ai-driven-soc-playbooks"
+        "slug": "blueprinting-ai-incident-response-runbooks"
       },
       {
         "id": 5,
-        "title": "Designing Cloud Landing Zones with Guardrails",
-        "excerpt": "Blueprint a multi-cloud foundation that bakes in security, observability, and compliance.",
-        "category": "Cloud",
-        "date": "April 30, 2025",
-        "readTime": "7 min read",
-        "slug": "cloud-landing-zones-with-guardrails"
-      },
-      {
-        "id": 6,
-        "title": "From VPN to Zero Trust Identity in 180 Days",
-        "excerpt": "A phased execution plan for migrating authentication and access controls at scale.",
+        "title": "Zero Trust Quick Wins for Legacy Environments",
+        "excerpt": "Prioritize segmentation, PAM, and continuous verification programs that ship value within 90 days.",
         "category": "Compliance",
-        "date": "April 10, 2025",
-        "readTime": "9 min read",
-        "slug": "vpn-to-zero-trust-identity"
-      },
-      {
-        "id": 7,
-        "title": "DevSecOps Release Checklist for 2025",
-        "excerpt": "Ensure every deployment passes security gates without slowing engineering velocity.",
-        "category": "DevOps",
-        "date": "March 22, 2025",
-        "readTime": "5 min read",
-        "slug": "devsecops-release-checklist-2025"
+        "date": "September 20, 2025",
+        "readTime": "7 min read",
+        "slug": "zero-trust-quick-wins-legacy-environments"
       }
     ]
   },

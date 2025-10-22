@@ -14,6 +14,7 @@ export default function HomePage() {
   const common = useTranslations('Common');
   const pathname = usePathname();
   const currentLocale = pathname.split('/')[1] || 'en';
+  const isArabic = currentLocale === 'ar';
   const heroPillars = (t.raw('heroPillars') as string[]) || [];
   type Testimonial = {
     quote: string;
@@ -29,6 +30,19 @@ export default function HomePage() {
     : `/${currentLocale}`;
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const activeTestimonialData = testimonials[activeTestimonial] ?? null;
+  useEffect(() => {
+    if (!testimonials.length) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setActiveTestimonial((prev) =>
+        prev === testimonials.length - 1 ? 0 : prev + 1
+      );
+    }, 6000);
+
+    return () => window.clearInterval(interval);
+  }, [testimonials.length]);
   type TeamMember = {
     name: string;
     role: string;
@@ -482,7 +496,18 @@ export default function HomePage() {
               alignItems: 'center'
             }}
           >
-            <div className="fade-section delay-2">
+            <div className="fade-section delay-2" style={{ position: 'relative' }}>
+              <div
+                className="pulse-border"
+                style={{
+                  position: 'absolute',
+                  inset: '-18px',
+                  borderRadius: '32px',
+                  border: '1px solid rgba(10, 14, 61, 0.08)',
+                  opacity: 0.3,
+                  pointerEvents: 'none'
+                }}
+              ></div>
               <p
                 style={{
                   color: '#00bcd4',
@@ -574,9 +599,35 @@ export default function HomePage() {
                 boxShadow: '0 20px 45px rgba(10, 14, 61, 0.08)',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '1.5rem'
+                gap: '1.5rem',
+                position: 'relative',
+                overflow: 'hidden'
               }}
             >
+              <span
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  top: '-80px',
+                  right: '-40px',
+                  width: '180px',
+                  height: '180px',
+                  borderRadius: '50%',
+                  background: 'radial-gradient(circle, rgba(105, 232, 225, 0.25), transparent 60%)'
+                }}
+              ></span>
+              <span
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  bottom: '-60px',
+                  left: '-30px',
+                  width: '140px',
+                  height: '140px',
+                  borderRadius: '50%',
+                  background: 'radial-gradient(circle, rgba(10, 14, 61, 0.15), transparent 60%)'
+                }}
+              ></span>
               <p
                 style={{
                   fontSize: 'clamp(1.1rem, 2vw, 1.35rem)',
@@ -807,7 +858,8 @@ export default function HomePage() {
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
                 gap: 'clamp(1.75rem, 4vw, 3rem)',
-                alignItems: 'start'
+                alignItems: 'start',
+                textAlign: isArabic ? 'right' : 'left'
               }}
             >
               <div
@@ -819,7 +871,8 @@ export default function HomePage() {
                   boxShadow: '0 18px 40px rgba(10, 14, 61, 0.08)',
                   border: '1px solid rgba(10,14,61,0.06)',
                   display: 'grid',
-                  gap: '1.6rem'
+                  gap: '1.6rem',
+                  textAlign: isArabic ? 'right' : 'left'
                 }}
               >
                 <div>
@@ -833,7 +886,7 @@ export default function HomePage() {
                   >
                     {teamMissionTitle}
                   </h3>
-                  <p style={{ color: '#404060', lineHeight: 1.7 }}>{teamMissionDescription}</p>
+                  <p style={{ color: '#404060', lineHeight: 1.7, textAlign: isArabic ? 'right' : 'left' }}>{teamMissionDescription}</p>
                 </div>
 
                 {teamValues.length > 0 && (
@@ -848,7 +901,7 @@ export default function HomePage() {
                     >
                       {t('team.valuesTitle')}
                     </h4>
-                    <div style={{ display: 'grid', gap: '1rem' }}>
+                    <div style={{ display: 'grid', gap: '1rem', textAlign: isArabic ? 'right' : 'left' }}>
                       {teamValues.map((value, index) => (
                         <div
                           className={`tilt-card subtle-card delay-${index + 1}`}
@@ -857,7 +910,8 @@ export default function HomePage() {
                             border: '1px solid rgba(10,14,61,0.08)',
                             borderRadius: '18px',
                             padding: '1.2rem 1.4rem',
-                            background: '#f5f7ff'
+                            background: '#f5f7ff',
+                            textAlign: isArabic ? 'right' : 'left'
                           }}
                         >
                           <p
@@ -865,12 +919,13 @@ export default function HomePage() {
                               fontWeight: 700,
                               color: '#0a0e3d',
                               marginBottom: '0.35rem',
-                              fontSize: '1rem'
+                              fontSize: '1rem',
+                              textAlign: isArabic ? 'right' : 'left'
                             }}
                           >
                             {value.title}
                           </p>
-                          <p style={{ color: '#4c4c66', lineHeight: 1.6 }}>{value.description}</p>
+                          <p style={{ color: '#4c4c66', lineHeight: 1.6, textAlign: isArabic ? 'right' : 'left' }}>{value.description}</p>
                         </div>
                       ))}
                     </div>
@@ -884,7 +939,8 @@ export default function HomePage() {
                   style={{
                     display: 'grid',
                     gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
-                    gap: 'clamp(1.4rem, 3vw, 2rem)'
+                    gap: 'clamp(1.4rem, 3vw, 2rem)',
+                    textAlign: isArabic ? 'right' : 'left'
                   }}
                 >
                   {teamMembers.map((member, index) => (
@@ -898,7 +954,8 @@ export default function HomePage() {
                         border: '1px solid rgba(10,14,61,0.08)',
                         boxShadow: '0 16px 36px rgba(10, 14, 61, 0.08)',
                         display: 'grid',
-                        gap: '0.9rem'
+                        gap: '0.9rem',
+                        textAlign: isArabic ? 'right' : 'left'
                       }}
                     >
                       <div
@@ -911,13 +968,14 @@ export default function HomePage() {
                           background: '#0a0e3d',
                           display: 'flex',
                           alignItems: 'center',
-                          justifyContent: 'center'
+                          justifyContent: 'center',
+                          marginInline: isArabic ? '0 0 auto' : '0 auto 0'
                         }}
                       >
                         {member.photo ? (
                           <Image
                             src={member.photo}
-                            alt={`${member.name}`}
+                            alt={member.role ? `${member.name}, ${member.role}` : member.name}
                             width={72}
                             height={72}
                             sizes="72px"
@@ -944,15 +1002,16 @@ export default function HomePage() {
                           style={{
                             fontSize: 'clamp(1.05rem, 2vw, 1.25rem)',
                             fontWeight: 700,
-                            color: '#0a0e3d'
+                            color: '#0a0e3d',
+                            textAlign: isArabic ? 'right' : 'left'
                           }}
                         >
                           {member.name}
                         </p>
-                        <p style={{ color: '#00bcd4', fontWeight: 600, marginBottom: '0.5rem' }}>
+                        <p style={{ color: '#00bcd4', fontWeight: 600, marginBottom: '0.5rem', textAlign: isArabic ? 'right' : 'left' }}>
                           {member.role}
                         </p>
-                        <p style={{ color: '#4c4c66', lineHeight: 1.7 }}>{member.bio}</p>
+                        <p style={{ color: '#4c4c66', lineHeight: 1.7, textAlign: isArabic ? 'right' : 'left' }}>{member.bio}</p>
                       </div>
                     </div>
                   ))}
@@ -962,623 +1021,6 @@ export default function HomePage() {
           </div>
         </section>
       )}
-
-      {/* Cybersecurity Solutions Section */}
-      <section id="locations" style={{
-        background: '#0a0e3d',
-        padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))',
-        gap: 'clamp(2rem, 5vw, 4rem)',
-        alignItems: 'center'
-      }}>
-        <div>
-          <h2 style={{
-            fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-            fontWeight: '800',
-            color: '#fff',
-            marginBottom: '1.5rem'
-          }}>
-            {t('solutionsTitle')}
-          </h2>
-          <p style={{ color: '#ccc', lineHeight: '1.8', marginBottom: '2rem', fontSize: 'clamp(0.95rem, 1.5vw, 1rem)' }}>
-            {t('solutionsIntro')}
-          </p>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <button style={{
-              background: '#00bcd4',
-              color: '#0a0e3d',
-              border: 'none',
-              padding: '1rem 1.5rem',
-              borderRadius: '8px',
-              fontWeight: '700',
-              textAlign: 'left',
-              cursor: 'pointer',
-              fontSize: '1rem'
-            }}>
-              {t('solutions.aiSecurity')}
-            </button>
-            <button style={{
-              background: 'transparent',
-              color: '#fff',
-              border: '1px solid rgba(255,255,255,0.2)',
-              padding: '1rem 1.5rem',
-              borderRadius: '8px',
-              fontWeight: '600',
-              textAlign: 'left',
-              cursor: 'pointer'
-            }}>
-              {t('solutions.identity')}
-            </button>
-            <button style={{
-              background: 'transparent',
-              color: '#fff',
-              border: '1px solid rgba(255,255,255,0.2)',
-              padding: '1rem 1.5rem',
-              borderRadius: '8px',
-              fontWeight: '600',
-              textAlign: 'left',
-              cursor: 'pointer'
-            }}>
-              {t('solutions.lorem')}
-            </button>
-            <button style={{
-              background: 'transparent',
-              color: '#fff',
-              border: '1px solid rgba(255,255,255,0.2)',
-              padding: '1rem 1.5rem',
-              borderRadius: '8px',
-              fontWeight: '600',
-              textAlign: 'left',
-              cursor: 'pointer'
-            }}>
-              {t('solutions.zeroTrust')}
-            </button>
-            <button style={{
-              background: 'transparent',
-              color: '#fff',
-              border: '1px solid rgba(255,255,255,0.2)',
-              padding: '1rem 1.5rem',
-              borderRadius: '8px',
-              fontWeight: '600',
-              textAlign: 'left',
-              cursor: 'pointer'
-            }}>
-              {t('solutions.network')}
-            </button>
-            <button style={{
-              background: 'transparent',
-              color: '#fff',
-              border: '1px solid rgba(255,255,255,0.2)',
-              padding: '1rem 1.5rem',
-              borderRadius: '8px',
-              fontWeight: '600',
-              textAlign: 'left',
-              cursor: 'pointer'
-            }}>
-              {t('solutions.cloud')}
-            </button>
-            <button style={{
-              background: 'transparent',
-              color: '#fff',
-              border: '1px solid rgba(255,255,255,0.2)',
-              padding: '1rem 1.5rem',
-              borderRadius: '8px',
-              fontWeight: '600',
-              textAlign: 'left',
-              cursor: 'pointer'
-            }}>
-              {t('solutions.endpoint')}
-            </button>
-          </div>
-        </div>
-
-        <div style={{
-          background: '#1a1f71',
-          borderRadius: '20px',
-          padding: '3rem',
-          height: '500px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
-          <div style={{
-            width: '100%',
-            height: '100%',
-            background: 'linear-gradient(135deg, rgba(0,188,212,0.1) 0%, transparent 100%)',
-            borderRadius: '15px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '4rem'
-          }}>
-            👨‍💻
-          </div>
-        </div>
-      </section>
-
-      {/* Our Services Section */}
-      <section style={{
-        background: '#0a0e3d',
-        padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)'
-      }}>
-        <h2 style={{
-          fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-          fontWeight: '800',
-          color: '#fff',
-          textAlign: 'center',
-          marginBottom: '1rem'
-        }}>
-          {t('servicesTitle')}
-        </h2>
-        <p style={{
-          color: '#ccc',
-          textAlign: 'center',
-          maxWidth: '800px',
-          margin: '0 auto clamp(2rem, 5vw, 4rem)',
-          lineHeight: '1.8',
-          padding: '0 1rem',
-          fontSize: 'clamp(0.95rem, 1.5vw, 1rem)'
-        }}>
-          {t('servicesIntro')}
-        </p>
-
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-          gap: 'clamp(1.5rem, 3vw, 2rem)',
-          maxWidth: '1400px',
-          margin: '0 auto'
-        }}>
-          {[
-            { title: t('services.consulting'), desc: t('services.consultingDesc'), icon: '📊' },
-            { title: t('services.infrastructure'), desc: t('services.infrastructureDesc'), icon: '🏗️' },
-            { title: t('services.resourcing'), desc: t('services.resourcingDesc'), icon: '👥' },
-            { title: t('services.training'), desc: t('services.trainingDesc'), icon: '🎓' },
-            { title: t('services.managed'), desc: t('services.managedDesc'), icon: '⚙️' },
-            { title: t('services.devsecops'), desc: t('services.devsecopsDesc'), icon: '🔧' }
-          ].map((service, idx) => (
-            <div key={idx} style={{
-              background: '#1a1f71',
-              borderRadius: '15px',
-              padding: '2rem',
-              border: '1px solid rgba(0,188,212,0.2)',
-              transition: 'transform 0.3s'
-            }}>
-              <div style={{
-                width: '60px',
-                height: '60px',
-                background: '#0a0e3d',
-                borderRadius: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.5rem',
-                fontSize: '2rem'
-              }}>
-                {service.icon}
-              </div>
-              <h3 style={{
-                fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
-                fontWeight: '700',
-                color: '#fff',
-                marginBottom: '1rem'
-              }}>
-                {service.title}
-              </h3>
-              <p style={{
-                color: '#ccc',
-                lineHeight: '1.6',
-                fontSize: 'clamp(0.9rem, 1.2vw, 0.95rem)',
-                marginBottom: '1.5rem'
-              }}>
-                {service.desc}
-              </p>
-              <button style={{
-                background: 'transparent',
-                border: 'none',
-                color: '#00bcd4',
-                fontSize: '2rem',
-                cursor: 'pointer'
-              }}>→</button>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Core Value Statements Section */}
-      <section style={{
-        background: '#00bcd4',
-        padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))',
-        gap: 'clamp(2rem, 5vw, 4rem)',
-        alignItems: 'center'
-      }}>
-        <div>
-          <h2 style={{
-            fontSize: '2.5rem',
-            fontWeight: '800',
-            color: '#0a0e3d',
-            marginBottom: '2rem'
-          }}>
-            {t('valuesTitle')}
-          </h2>
-          <div style={{
-            fontSize: '8rem',
-            fontWeight: '900',
-            color: '#0a0e3d',
-            opacity: 0.3,
-            lineHeight: 1
-          }}>
-            "
-          </div>
-          <p style={{
-            color: '#0a0e3d',
-            lineHeight: '1.8',
-            fontSize: '1.05rem',
-            marginBottom: '1rem'
-          }}>
-            {t('valuesDescription1')}
-          </p>
-          <p style={{
-            color: '#0a0e3d',
-            lineHeight: '1.8',
-            fontSize: '0.95rem'
-          }}>
-            {t('valuesDescription2')}
-          </p>
-        </div>
-
-        <div style={{
-          background: '#fff',
-          borderRadius: '20px',
-          padding: '3rem',
-          height: '400px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
-          <div style={{
-            width: '100%',
-            height: '100%',
-            background: 'linear-gradient(135deg, rgba(10,14,61,0.05) 0%, transparent 100%)',
-            borderRadius: '15px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '4rem'
-          }}>
-            👥
-          </div>
-        </div>
-      </section>
-
-      {/* Resources Section */}
-      <section id="resources" style={{
-        background: '#fff',
-        padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)'
-      }}>
-        <h2 style={{
-          fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-          fontWeight: '800',
-          color: '#0a0e3d',
-          textAlign: 'center',
-          marginBottom: '1rem'
-        }}>
-          {t('resourcesTitle')}
-        </h2>
-        <p style={{
-          color: '#666',
-          textAlign: 'center',
-          maxWidth: '800px',
-          margin: '0 auto clamp(2rem, 5vw, 4rem)',
-          lineHeight: '1.8',
-          padding: '0 1rem',
-          fontSize: 'clamp(0.95rem, 1.5vw, 1rem)'
-        }}>
-          {t('resourcesIntro')}
-        </p>
-
-        {resourceCards.length > 0 && (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-            gap: 'clamp(1.5rem, 3vw, 2rem)',
-            maxWidth: '1400px',
-            margin: '0 auto'
-          }}>
-            {resourceCards.map((card) => (
-              <div key={card.title} style={{
-                background: '#0a0e3d',
-                borderRadius: '15px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                display: 'flex',
-                flexDirection: 'column',
-                minHeight: '100%'
-              }}>
-                <div style={{
-                  height: '200px',
-                  background: 'linear-gradient(135deg, #1a1f71 0%, #0a0e3d 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '4rem'
-                }}>
-                  {card.emoji}
-                </div>
-                <div style={{ padding: 'clamp(1.5rem, 3vw, 2rem)', display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1 }}>
-                  <h3 style={{
-                    fontSize: 'clamp(1rem, 1.5vw, 1.1rem)',
-                    fontWeight: 700,
-                    color: '#fff',
-                    lineHeight: 1.4
-                  }}>
-                    {card.title}
-                  </h3>
-                  <p style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.6, fontSize: '0.95rem', flexGrow: 1 }}>
-                    {card.description}
-                  </p>
-                  <Link
-                    href={buildLocaleHref(card.slug)}
-                    prefetch={false}
-                    style={{
-                      alignSelf: 'flex-start',
-                      background: '#00bcd4',
-                      color: '#0a0e3d',
-                      borderRadius: '8px',
-                      padding: '0.65rem 1.4rem',
-                      fontWeight: 600,
-                      fontSize: '0.9rem',
-                      textDecoration: 'none'
-                    }}
-                  >
-                    {card.cta}
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </section>
-
-      {/* CTA Section */}
-      <section id="careers" style={{
-        background: '#fff',
-        padding: 'clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 3rem)',
-        textAlign: 'center'
-      }}>
-        <div style={{
-          maxWidth: '800px',
-          margin: '0 auto',
-          background: '#f8f9fa',
-          borderRadius: '20px',
-          padding: 'clamp(2rem, 5vw, 3rem)',
-          border: '2px solid #e0e0e0'
-        }}>
-          <h2 style={{
-            fontSize: 'clamp(1.5rem, 3vw, 2rem)',
-            fontWeight: '800',
-            color: '#0a0e3d',
-            marginBottom: '1rem'
-          }}>
-            {t('footerTitle')}
-          </h2>
-          <p style={{
-            color: '#666',
-            marginBottom: '2rem',
-            fontSize: 'clamp(0.95rem, 1.5vw, 1rem)'
-          }}>
-            {t('footerTagline')}
-          </p>
-          <button style={{
-            background: '#00bcd4',
-            color: '#fff',
-            border: 'none',
-            padding: 'clamp(0.8rem, 2vw, 1rem) clamp(2rem, 4vw, 3rem)',
-            borderRadius: '30px',
-            fontSize: 'clamp(0.9rem, 1.5vw, 1rem)',
-            fontWeight: '700',
-            cursor: 'pointer',
-            boxShadow: '0 4px 12px rgba(0,188,212,0.3)'
-          }}>
-            Lorem Ipsum
-          </button>
-        </div>
-      </section>
-
-      {/* Gated Asset Section */}
-      <section
-        style={{
-          background: '#0a0e3d',
-          padding: 'clamp(3rem, 9vw, 6rem) clamp(1.5rem, 6vw, 3.5rem)'
-        }}
-      >
-        <div
-          style={{
-            maxWidth: '1200px',
-            margin: '0 auto',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 360px), 1fr))',
-            gap: 'clamp(2rem, 5vw, 3rem)',
-            alignItems: 'center'
-          }}
-        >
-          <div
-            style={{
-              background: '#1a1f71',
-              borderRadius: '24px',
-              padding: 'clamp(2.2rem, 6vw, 3rem)',
-              boxShadow: '0 25px 50px rgba(10, 14, 61, 0.25)'
-            }}
-          >
-            <h3
-              style={{
-                fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
-                fontWeight: 800,
-                color: '#69E8E1',
-                marginBottom: '1rem'
-              }}
-            >
-              {t('gatedAsset.title')}
-            </h3>
-            <p
-              style={{
-                color: 'rgba(255,255,255,0.85)',
-                lineHeight: 1.8,
-                fontSize: 'clamp(0.98rem, 1.6vw, 1.1rem)',
-                marginBottom: '1.75rem'
-              }}
-            >
-              {t('gatedAsset.subtitle')}
-            </p>
-            <ul
-              style={{
-                listStyle: 'none',
-                padding: 0,
-                margin: 0,
-                display: 'grid',
-                gap: '0.75rem',
-                color: 'rgba(255,255,255,0.8)'
-              }}
-            >
-              {gatedAssetPoints.map((point) => (
-                <li key={point}>
-                  <span style={{ color: '#69E8E1', marginRight: '0.5rem' }}>•</span>
-                  {point}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div
-            className="tilt-card"
-            style={{
-              background: '#fff',
-              borderRadius: '24px',
-              padding: 'clamp(2.2rem, 6vw, 3rem)',
-              boxShadow: '0 25px 50px rgba(10, 14, 61, 0.25)'
-            }}
-          >
-            <h4
-              style={{
-                fontSize: 'clamp(1.4rem, 3vw, 2rem)',
-                fontWeight: 800,
-                color: '#0a0e3d',
-                marginBottom: '1.5rem'
-              }}
-            >
-              {t('gatedAsset.form.title')}
-            </h4>
-            <form
-              id={gatedAssetFormId}
-              className="fade-section delay-2"
-              onSubmit={handleGatedAssetSubmit}
-              style={{ display: 'grid', gap: '1rem' }}
-            >
-              <label style={{ display: 'grid', gap: '0.4rem', fontSize: '0.9rem', color: '#444' }}>
-                {t('gatedAsset.form.nameLabel')}
-                <input
-                  type="text"
-                  name="name"
-                  placeholder={t('gatedAsset.form.nameLabel')}
-                  style={{
-                    padding: '0.85rem 1rem',
-                    borderRadius: '12px',
-                    border: '1px solid #dce0f5',
-                    fontSize: '0.95rem',
-                    transition: 'all 0.3s ease-in-out'
-                  }}
-                  required
-                />
-              </label>
-              <label style={{ display: 'grid', gap: '0.4rem', fontSize: '0.9rem', color: '#444' }}>
-                {t('gatedAsset.form.emailLabel')}
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="you@company.com"
-                  style={{
-                    padding: '0.85rem 1rem',
-                    borderRadius: '12px',
-                    border: '1px solid #dce0f5',
-                    fontSize: '0.95rem',
-                    transition: 'all 0.3s ease-in-out'
-                  }}
-                  required
-                />
-              </label>
-              <label style={{ display: 'grid', gap: '0.4rem', fontSize: '0.9rem', color: '#444' }}>
-                {t('gatedAsset.form.companyLabel')}
-                <input
-                  type="text"
-                  name="company"
-                  placeholder={t('gatedAsset.form.companyLabel')}
-                  style={{
-                    padding: '0.85rem 1rem',
-                    borderRadius: '12px',
-                    border: '1px solid #dce0f5',
-                    fontSize: '0.95rem',
-                    transition: 'all 0.3s ease-in-out'
-                  }}
-                />
-              </label>
-              <label style={{ display: 'grid', gap: '0.4rem', fontSize: '0.9rem', color: '#444' }}>
-                {t('gatedAsset.form.roleLabel')}
-                <input
-                  type="text"
-                  name="role"
-                  placeholder={t('gatedAsset.form.roleLabel')}
-                  style={{
-                    padding: '0.85rem 1rem',
-                    borderRadius: '12px',
-                    border: '1px solid #dce0f5',
-                    fontSize: '0.95rem',
-                    transition: 'all 0.3s ease-in-out'
-                  }}
-                />
-              </label>
-
-              <button
-                className="glow-button"
-                type="submit"
-                disabled={gatedAssetStatus === 'loading'}
-                style={{
-                  marginTop: '0.5rem',
-                  background: '#0a0e3d',
-                  color: '#fff',
-                  border: 'none',
-                  borderRadius: '30px',
-                  padding: '0.9rem 2.4rem',
-                  fontWeight: 700,
-                  fontSize: '0.95rem',
-                  cursor: gatedAssetStatus === 'loading' ? 'not-allowed' : 'pointer',
-                  opacity: gatedAssetStatus === 'loading' ? 0.8 : 1,
-                  transition: 'all 0.3s ease-in-out'
-                }}
-              >
-                {gatedAssetStatus === 'loading' ? t('gatedAsset.form.loading') : t('gatedAsset.form.cta')}
-              </button>
-              {gatedAssetStatus !== 'idle' && (
-                <p
-                  role="status"
-                  aria-live="polite"
-                  style={{
-                    color: gatedAssetStatus === 'success' ? '#0a8f44' : '#d03c3c',
-                    fontSize: '0.85rem',
-                    lineHeight: 1.6,
-                    transition: 'all 0.3s ease-in-out'
-                  }}
-                >
-                  {gatedAssetMessage}
-                </p>
-              )}
-            </form>
-          </div>
-        </div>
-      </section>
 
       {/* Newsletter Section */}
       <section
@@ -1596,7 +1038,7 @@ export default function HomePage() {
             borderRadius: '24px',
             padding: 'clamp(2.2rem, 6vw, 3rem)',
             boxShadow: '0 20px 40px rgba(10, 14, 61, 0.08)',
-            textAlign: 'center'
+            textAlign: isArabic ? 'right' : 'left'
           }}
         >
           <h3
@@ -1616,7 +1058,8 @@ export default function HomePage() {
               lineHeight: 1.8,
               fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
               marginBottom: '1.75rem',
-              transition: 'all 0.3s ease-in-out'
+              transition: 'all 0.3s ease-in-out',
+              textAlign: isArabic ? 'right' : 'left'
             }}
           >
             {t('newsletter.subtitle')}
@@ -1628,7 +1071,8 @@ export default function HomePage() {
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
               gap: '1rem',
-              alignItems: 'center'
+              alignItems: 'center',
+              direction: isArabic ? 'rtl' : 'ltr'
             }}
           >
             <input
@@ -1642,7 +1086,9 @@ export default function HomePage() {
                 borderRadius: '999px',
                 border: '1px solid #dce0f5',
                 fontSize: '0.95rem',
-                transition: 'all 0.3s ease-in-out'
+                transition: 'all 0.3s ease-in-out',
+                textAlign: isArabic ? 'right' : 'left',
+                color: '#0a0e3d'
               }}
               required
             />
@@ -1658,7 +1104,10 @@ export default function HomePage() {
                 padding: '0.9rem 2.5rem',
                 fontWeight: 700,
                 fontSize: '0.95rem',
-                cursor: newsletterStatus === 'loading' ? 'not-allowed' : 'pointer'
+                cursor: newsletterStatus === 'loading' ? 'not-allowed' : 'pointer',
+                opacity: newsletterStatus === 'loading' ? 0.8 : 1,
+                transition: 'all 0.3s ease-in-out',
+                alignSelf: isArabic ? 'flex-end' : 'flex-start'
               }}
             >
               {newsletterStatus === 'loading' ? t('newsletter.loading') : t('newsletter.cta')}
@@ -1672,13 +1121,14 @@ export default function HomePage() {
                 minHeight: '1.5rem',
                 marginTop: '0.5rem',
                 color: newsletterStatus === 'success' ? '#0a8f44' : '#d03c3c',
-                fontSize: '0.85rem'
+                fontSize: '0.85rem',
+                textAlign: isArabic ? 'right' : 'left'
               }}
             >
               {newsletterMessage}
             </div>
           )}
-          <p style={{ color: '#888', fontSize: '0.85rem', marginTop: '1rem' }}>
+          <p style={{ color: '#888', fontSize: '0.85rem', marginTop: '1rem', textAlign: isArabic ? 'right' : 'left' }}>
             {t('newsletter.privacy')}
           </p>
         </div>
@@ -1700,7 +1150,8 @@ export default function HomePage() {
             color: '#fff',
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-            gap: 'clamp(1.8rem, 5vw, 2.5rem)'
+            gap: 'clamp(1.8rem, 5vw, 2.5rem)',
+            textAlign: isArabic ? 'right' : 'left'
           }}
         >
           <div>
@@ -1708,7 +1159,8 @@ export default function HomePage() {
               style={{
                 fontSize: 'clamp(1.7rem, 3.5vw, 2.3rem)',
                 fontWeight: 800,
-                marginBottom: '0.75rem'
+                marginBottom: '0.75rem',
+                textAlign: isArabic ? 'right' : 'left'
               }}
             >
               {t('contactBlock.title')}
@@ -1718,7 +1170,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gap: '0.75rem' }}>
+          <div style={{ display: 'grid', gap: '0.75rem', direction: isArabic ? 'rtl' : 'ltr' }}>
             {contactItems.map((item) => (
               <div key={item.label} style={{ color: 'rgba(255,255,255,0.75)' }}>
                 <span style={{ color: '#69E8E1', fontWeight: 600 }}>{item.label}</span>
@@ -1733,14 +1185,15 @@ export default function HomePage() {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              gap: '1.5rem'
+              gap: '1.5rem',
+              alignItems: isArabic ? 'flex-end' : 'flex-start'
             }}
           >
             <Link
               href={contactCtaHref}
               prefetch={false}
               style={{
-                alignSelf: 'flex-start',
+                alignSelf: isArabic ? 'flex-end' : 'flex-start',
                 background: '#69E8E1',
                 color: '#0a0e3d',
                 padding: '0.95rem 2.6rem',

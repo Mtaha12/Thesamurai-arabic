@@ -3,6 +3,8 @@
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 type BlogPost = {
   id: number;
@@ -11,11 +13,15 @@ type BlogPost = {
   category: string;
   date: string;
   readTime: string;
+  slug: string;
 };
 
 export default function BlogPage() {
   const t = useTranslations('Blog');
   const common = useTranslations('Common');
+  const pathname = usePathname();
+  const currentLocale = pathname.split('/')[1] || 'en';
+  const localePrefix = currentLocale === 'ar' ? '/ar' : '/en';
 
   const featuredPosts = t.raw('featuredPosts') as BlogPost[];
   const latestPosts = t.raw('latestPosts') as BlogPost[];
@@ -171,6 +177,19 @@ export default function BlogPage() {
                 >
                   {post.excerpt}
                 </p>
+                <Link
+                  href={`${localePrefix}/blog/${post.slug}`}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    color: '#69E8E1',
+                    fontWeight: 600,
+                    textDecoration: 'none'
+                  }}
+                >
+                  {t('readMore')} →
+                </Link>
                 <div
                   style={{
                     display: 'flex',
@@ -305,7 +324,7 @@ export default function BlogPage() {
               {t('recentPosts')}
             </h2>
             <a
-              href="#"
+              href={`${localePrefix}/blog/${latestPosts[0]?.slug ?? ''}`}
               style={{
                 color: '#69E8E1',
                 fontWeight: 600,
@@ -357,8 +376,8 @@ export default function BlogPage() {
                 >
                   {post.excerpt}
                 </p>
-                <a
-                  href="#"
+                <Link
+                  href={`${localePrefix}/blog/${post.slug}`}
                   style={{
                     color: '#69E8E1',
                     textDecoration: 'none',
@@ -369,7 +388,7 @@ export default function BlogPage() {
                   }}
                 >
                   {t('readMore')} →
-                </a>
+                </Link>
               </div>
             ))}
           </div>
