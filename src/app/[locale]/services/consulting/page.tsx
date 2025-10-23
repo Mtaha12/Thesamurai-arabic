@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Header from '@/components/layout/Header';
-import ServiceFooter from '@/components/layout/ServiceFooter';
+import Footer from '@/components/layout/Footer';
 import Image from 'next/image';
 
 export default function ConsultingPage() {
@@ -371,7 +371,7 @@ export default function ConsultingPage() {
         </div>
       </section>
 
-      <ServiceFooter />
+      <Footer />
     </div>
   );
 }

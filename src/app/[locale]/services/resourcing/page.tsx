@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import ServiceFooter from '@/components/layout/ServiceFooter';
 
 export default function ResourcingPage() {
   const pathname = usePathname();
@@ -368,7 +367,7 @@ export default function ResourcingPage() {
         </div>
       </section>
 
-      <ServiceFooter />
+      <Footer />
     </div>
   );
 }

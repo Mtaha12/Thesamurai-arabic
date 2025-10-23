@@ -496,7 +496,7 @@ export default function HomePage() {
               alignItems: 'center'
             }}
           >
-            <div className="fade-section delay-2" style={{ position: 'relative' }}>
+            <div className="fade-section delay-2 testimonial-card-frame" style={{ position: 'relative' }}>
               <div
                 className="pulse-border"
                 style={{
@@ -591,7 +591,7 @@ export default function HomePage() {
             </div>
 
             <div
-              className="tilt-card delay-3"
+              className="tilt-card delay-3 testimonial-card-frame"
               style={{
                 background: '#fff',
                 borderRadius: '24px',
@@ -629,6 +629,7 @@ export default function HomePage() {
                 }}
               ></span>
               <p
+                className="testimonial-quote-area"
                 style={{
                   fontSize: 'clamp(1.1rem, 2vw, 1.35rem)',
                   lineHeight: 1.8,

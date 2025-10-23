@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { Menu, X, ChevronDown, ChevronUp, User } from 'lucide-react';
 import Image from 'next/image';
 
 // Helper function for responsive values
@@ -54,7 +54,10 @@ export default function Header(props: HeaderProps) {
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [industriesOpen, setIndustriesOpen] = useState(false);
   const [iconSize, setIconSize] = useState(24);
+  const [userInitial, setUserInitial] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const mobileNavRef = useRef<HTMLDivElement>(null);
+  const hasUser = Boolean(userInitial);
 
   // Navigation items data
   const navItems: NavItem[] = [
@@ -119,6 +122,18 @@ export default function Header(props: HeaderProps) {
       label: t('aboutUs'),
       type: 'scroll',
       scrollTarget: 'about'
+    },
+    {
+      id: 'login',
+      label: t('login'),
+      href: `/${currentLocale}/auth/login`,
+      type: 'link'
+    },
+    {
+      id: 'signup',
+      label: t('signup'),
+      href: `/${currentLocale}/auth/signup`,
+      type: 'link'
     }
   ];
 
@@ -130,8 +145,71 @@ export default function Header(props: HeaderProps) {
 
     updateIconSize();
     window.addEventListener('resize', updateIconSize);
-    
+
     return () => window.removeEventListener('resize', updateIconSize);
+  }, []);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const loadUser = () => {
+      try {
+        const stored = window.localStorage.getItem('samuraiUser');
+        if (!stored) {
+          setUserInitial(null);
+          return;
+        }
+        const parsed = JSON.parse(stored);
+        if (parsed && typeof parsed === 'object' && typeof parsed.name === 'string' && parsed.name.trim().length) {
+          setUserInitial(parsed.name.trim().charAt(0).toUpperCase());
+        } else if (parsed && typeof parsed.email === 'string' && parsed.email.trim().length) {
+          setUserInitial(parsed.email.trim().charAt(0).toUpperCase());
+        } else {
+          setUserInitial(null);
+        }
+      } catch (error) {
+        setUserInitial(null);
+      }
+    };
+
+    loadUser();
+
+    const handleAuthChange = (event: Event) => {
+      if (!('detail' in event)) {
+        loadUser();
+        return;
+      }
+      const customEvent = event as CustomEvent<any>;
+      const detail = customEvent.detail;
+      if (detail && typeof detail === 'object' && typeof detail.name === 'string' && detail.name.trim().length) {
+        setUserInitial(detail.name.trim().charAt(0).toUpperCase());
+      } else if (detail && typeof detail.email === 'string' && detail.email.trim().length) {
+        setUserInitial(detail.email.trim().charAt(0).toUpperCase());
+      } else {
+        setUserInitial(null);
+      }
+    };
+
+    window.addEventListener('samurai-auth-changed', handleAuthChange as EventListener);
+
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === 'samuraiUser') {
+        loadUser();
+      }
+    };
+
+    window.addEventListener('storage', handleStorage);
+
+    return () => {
+      window.removeEventListener('samurai-auth-changed', handleAuthChange as EventListener);
+      window.removeEventListener('storage', handleStorage);
+    };
   }, []);
 
   // Close mobile menu when clicking outside
@@ -427,33 +505,61 @@ export default function Header(props: HeaderProps) {
             </div>
           ))}
           
-          {/* Contact Button */}
-          <Link href={`/${currentLocale}/contact`} style={{ textDecoration: 'none', marginLeft: '1rem' }}>
-            <button 
-              style={{
-                background: 'transparent',
-                color: '#fff',
-                border: '2px solid #fff',
-                padding: 'clamp(0.5rem, 1.2vw, 0.6rem) clamp(1rem, 1.5vw, 1.5rem)',
-                borderRadius: '25px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                fontSize: 'clamp(0.8rem, 1.2vw, 0.9rem)',
-                transition: 'all 0.3s ease',
-                whiteSpace: 'nowrap'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#fff';
-                e.currentTarget.style.color = '#001F3F';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.color = '#fff';
-              }}
-            >
-              {t('contact')}
-            </button>
-          </Link>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginLeft: '1rem' }}>
+            <Link href={`/${currentLocale}/contact`} style={{ textDecoration: 'none' }}>
+              <button 
+                style={{
+                  background: 'transparent',
+                  color: '#fff',
+                  border: '2px solid #fff',
+                  padding: 'clamp(0.5rem, 1.2vw, 0.6rem) clamp(1rem, 1.5vw, 1.5rem)',
+                  borderRadius: '25px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  fontSize: 'clamp(0.8rem, 1.2vw, 0.9rem)',
+                  transition: 'all 0.3s ease',
+                  whiteSpace: 'nowrap'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#fff';
+                  e.currentTarget.style.color = '#001F3F';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'transparent';
+                  e.currentTarget.style.color = '#fff';
+                }}
+              >
+                {t('contact')}
+              </button>
+            </Link>
+            <Link href={`/${currentLocale}/auth/signup`} style={{ textDecoration: 'none' }}>
+              <button
+                style={{
+                  background: 'linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%)',
+                  color: '#001F3F',
+                  border: 'none',
+                  padding: 'clamp(0.5rem, 1.2vw, 0.6rem) clamp(1rem, 1.5vw, 1.5rem)',
+                  borderRadius: '25px',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  fontSize: 'clamp(0.8rem, 1.2vw, 0.9rem)',
+                  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                  whiteSpace: 'nowrap',
+                  boxShadow: '0 10px 24px rgba(56, 189, 248, 0.3)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 14px 32px rgba(56, 189, 248, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 10px 24px rgba(56, 189, 248, 0.3)';
+                }}
+              >
+                {t('signup')}
+              </button>
+            </Link>
+          </div>
         </nav>
 
         {/* Right Section - Language Switcher and Mobile Menu */}
@@ -464,7 +570,35 @@ export default function Header(props: HeaderProps) {
           zIndex: 1001
         }}>
           <LanguageSwitcher />
-          
+
+          <div
+            className="header-avatar-shell"
+            aria-label={isMounted && hasUser ? t('welcomeBack') : t('login')}
+            style={{
+              width: 'clamp(38px, 4vw, 44px)',
+              height: 'clamp(38px, 4vw, 44px)',
+              borderRadius: '14px',
+              background: 'linear-gradient(135deg, rgba(105, 232, 225, 0.4) 0%, rgba(56, 189, 248, 0.65) 100%)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 700,
+              fontSize: 'clamp(0.95rem, 1.8vw, 1.1rem)',
+              color: '#001F3F',
+              boxShadow: '0 12px 26px rgba(56, 189, 248, 0.28)'
+            }}
+          >
+            {isMounted && hasUser ? (
+              userInitial
+            ) : (
+              <User
+                size={Math.min(Math.max(iconSize - 6, 18), 26)}
+                strokeWidth={2.1}
+                color="#001F3F"
+              />
+            )}
+          </div>
+
           {/* Mobile menu button */}
           <button
             className="mobile-menu-btn"
@@ -542,6 +676,50 @@ export default function Header(props: HeaderProps) {
         >
           <X size={24} />
         </button>
+
+        <div
+          className="header-avatar-shell"
+          style={{
+            marginTop: '4.5rem',
+            marginBottom: '2rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
+            padding: '1.25rem 1rem',
+            borderRadius: '18px',
+            background: 'linear-gradient(135deg, rgba(105, 232, 225, 0.15) 0%, rgba(56, 189, 248, 0.2) 100%)',
+            border: '1px solid rgba(105, 232, 225, 0.35)'
+          }}
+        >
+          <div
+            style={{
+              width: '52px',
+              height: '52px',
+              borderRadius: '18px',
+              background: 'linear-gradient(135deg, rgba(105, 232, 225, 0.45) 0%, rgba(56, 189, 248, 0.7) 100%)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 700,
+              fontSize: '1.1rem',
+              color: '#001F3F',
+              boxShadow: '0 16px 32px rgba(56, 189, 248, 0.22)'
+            }}
+          >
+            {hasUser ? (
+              userInitial
+            ) : (
+              <User
+                size={26}
+                strokeWidth={2.1}
+                color="#001F3F"
+              />
+            )}
+          </div>
+          <span style={{ color: '#e2e8f0', fontSize: '1rem', fontWeight: 600 }}>
+            {isMounted && hasUser ? t('welcomeBack') : t('login')}
+          </span>
+        </div>
 
         {/* Mobile Navigation Links */}
         <nav style={{ 
@@ -687,6 +865,41 @@ export default function Header(props: HeaderProps) {
               }}
             >
               {t('contact')}
+            </button>
+          </Link>
+
+          <Link
+            href={`/${currentLocale}/auth/signup`}
+            style={{
+              textDecoration: 'none',
+              marginTop: '1rem'
+            }}
+            onClick={closeMobileMenu}
+          >
+            <button
+              style={{
+                background: 'linear-gradient(135deg, #69E8E1 0%, #38bdf8 100%)',
+                color: '#001F3F',
+                border: 'none',
+                padding: '1rem 2rem',
+                borderRadius: '25px',
+                fontWeight: '700',
+                cursor: 'pointer',
+                fontSize: '1rem',
+                width: '100%',
+                transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                boxShadow: '0 18px 36px rgba(56, 189, 248, 0.35)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 22px 40px rgba(56, 189, 248, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 18px 36px rgba(56, 189, 248, 0.35)';
+              }}
+            >
+              {t('signup')}
             </button>
           </Link>
         </nav>

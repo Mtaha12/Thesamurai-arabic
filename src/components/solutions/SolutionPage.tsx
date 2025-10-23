@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import Header from '@/components/layout/Header';
-import ServiceFooter from '@/components/layout/ServiceFooter';
+import Footer from '@/components/layout/Footer';
 
 type Highlight = {
   icon?: string;
@@ -396,7 +396,7 @@ export default function SolutionPage({ namespace }: SolutionPageProps) {
         </section>
       </main>
 
-      <ServiceFooter />
+      <Footer />
     </div>
   );
 }

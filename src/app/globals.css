@@ -57,6 +57,42 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+:root {
+  --toast-min-height: 56px;
+  --toast-min-width: 240px;
+  --toast-border-radius: 18px;
+  --header-avatar-size: 44px;
+  --testimonial-card-min-height: 360px;
+  --testimonial-quote-min-height: 160px;
+}
+
+.toast-fixed {
+  position: fixed;
+  top: clamp(1rem, 4vw, 2.5rem);
+  min-height: var(--toast-min-height);
+  min-width: var(--toast-min-width);
+  border-radius: var(--toast-border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.header-avatar-shell {
+  width: var(--header-avatar-size);
+  height: var(--header-avatar-size);
+}
+
+.testimonial-card-frame {
+  min-height: var(--testimonial-card-min-height);
+}
+
+.testimonial-quote-area {
+  min-height: var(--testimonial-quote-min-height);
+  display: flex;
+  align-items: center;
+}
+
 /* Motion enhancements */
 .fade-section {
   opacity: 0;
