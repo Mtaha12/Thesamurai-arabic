@@ -2,14 +2,13 @@
 const withNextIntl = require('next-intl/plugin')('./src/i18n.ts');
 
 const nextConfig = {
-  // Add this to fix the lockfile warning
-  outputFileTracingRoot: __dirname,
+  // Remove outputFileTracingRoot for Netlify compatibility
   compress: true,
   
-  // Image optimization - disable if still having issues
+  // Simplify image optimization - disable for Netlify
   images: {
-    formats: ['image/avif', 'image/webp'],
-    unoptimized: process.env.NODE_ENV === 'production' ? false : true
+    unoptimized: true,
+    domains: [],
   },
   
   experimental: {
@@ -24,32 +23,25 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   
-  // Output configuration
-  output: 'standalone',
+  // Change output for Netlify compatibility
+  output: 'export',
+  trailingSlash: true,
   
-  // ADD these for better build performance
+  // Performance optimizations
   poweredByHeader: false,
   generateEtags: false,
-  
-  // ADD this to handle dynamic routes better
-  trailingSlash: false,
-  
-  // ADD this to skip source maps in production for faster builds
   productionBrowserSourceMaps: false,
+  
+  // Disable strict mode for build stability
+  reactStrictMode: false,
+  
+  // Increase timeout for build
+  staticPageGenerationTimeout: 1000,
 
   async headers() {
     return [
       {
         source: '/_next/static/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
-      },
-      {
-        source: '/images/:path*',
         headers: [
           {
             key: 'Cache-Control',
