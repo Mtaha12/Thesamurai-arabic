@@ -6,7 +6,13 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 const localeFallback: BlogLocale = 'en';
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
+// If you have generateStaticParams, comment it out temporarily:
+// export async function generateStaticParams() {
+//   return [];
+// }
 type ArticlePageProps = {
   params: {
     slug: string;
@@ -14,9 +20,9 @@ type ArticlePageProps = {
   };
 };
 
-export function generateStaticParams() {
-  return listBlogArticles().map(({ slug }) => ({ slug }));
-}
+// export function generateStaticParams() {
+//  return listBlogArticles().map(({ slug }) => ({ slug }));
+//}
 
 export function generateMetadata({ params }: ArticlePageProps): Metadata {
   const article = getBlogArticle(params.slug);
