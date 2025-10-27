@@ -6,13 +6,11 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 const localeFallback: BlogLocale = 'en';
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
 
-// If you have generateStaticParams, comment it out temporarily:
-// export async function generateStaticParams() {
-//   return [];
-// }
+// Remove these lines - they conflict with static generation
+// export const dynamic = 'force-dynamic';
+// export const revalidate = 0;
+
 type ArticlePageProps = {
   params: {
     slug: string;
@@ -20,9 +18,10 @@ type ArticlePageProps = {
   };
 };
 
-// export function generateStaticParams() {
-//  return listBlogArticles().map(({ slug }) => ({ slug }));
-//}
+// Enable static generation for better performance
+export function generateStaticParams() {
+  return listBlogArticles().map(({ slug }) => ({ slug }));
+}
 
 export function generateMetadata({ params }: ArticlePageProps): Metadata {
   const article = getBlogArticle(params.slug);
@@ -45,99 +44,7 @@ export function generateMetadata({ params }: ArticlePageProps): Metadata {
 export default async function BlogArticlePage({ params }: ArticlePageProps) {
   const article = getBlogArticle(params.slug);
   if (!article) {
-    const isArabicFallback = params.locale === 'ar';
-    const blogHref = isArabicFallback ? '/ar/blog' : '/en/blog';
-    const contactHref = isArabicFallback ? '/ar/contact' : '/en/contact';
-    const heading = isArabicFallback ? 'المقال غير متاح حاليًا' : 'Article coming soon';
-    const message = isArabicFallback
-      ? 'لم نتمكن من العثور على المقال المطلوب. تصفح أحدث التحليلات أو عد إلى صفحة المدونة للمزيد.'
-      : "We couldn't find the story you were after. Explore the latest insights or return to the blog homepage for more coverage.";
-    const browseLabel = isArabicFallback ? 'تصفح كل المقالات' : 'View all articles';
-    const contactLabel = isArabicFallback ? 'تواصل مع فريقنا' : 'Talk to our team';
-
-    return (
-      <div
-        style={{
-          minHeight: '100vh',
-          background: '#f8f9fa',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '3rem'
-        }}
-      >
-        <div
-          style={{
-            maxWidth: '520px',
-            background: '#fff',
-            borderRadius: '20px',
-            padding: '2.5rem',
-            boxShadow: '0 20px 45px rgba(10, 14, 61, 0.12)',
-            textAlign: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1.5rem'
-          }}
-        >
-          <h1
-            style={{
-              fontSize: 'clamp(1.8rem, 4vw, 2.6rem)',
-              fontWeight: 800,
-              color: '#0a0e3d',
-              margin: 0
-            }}
-          >
-            {heading}
-          </h1>
-          <p
-            style={{
-              color: '#4b5563',
-              lineHeight: 1.7,
-              fontSize: '1.05rem',
-              margin: 0
-            }}
-          >
-            {message}
-          </p>
-          <div
-            style={{
-              display: 'flex',
-              gap: '1rem',
-              flexWrap: 'wrap',
-              justifyContent: 'center'
-            }}
-          >
-            <Link
-              href={blogHref}
-              style={{
-                background: '#0a0e3d',
-                color: '#fff',
-                padding: '0.9rem 2.2rem',
-                borderRadius: '28px',
-                fontWeight: 600,
-                textDecoration: 'none'
-              }}
-            >
-              {browseLabel}
-            </Link>
-            <Link
-              href={contactHref}
-              style={{
-                background: 'transparent',
-                border: '2px solid #0a0e3d',
-                color: '#0a0e3d',
-                padding: '0.9rem 2.2rem',
-                borderRadius: '28px',
-                fontWeight: 600,
-                textDecoration: 'none'
-              }}
-            >
-              {contactLabel}
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
+    notFound(); // Use Next.js notFound instead of custom 404
   }
 
   const locale: BlogLocale = params.locale === 'ar' ? 'ar' : localeFallback;
