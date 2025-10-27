@@ -9,3 +9,6 @@
 # Add this for serverless functions support
 [functions]
   directory = ".next/functions"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
