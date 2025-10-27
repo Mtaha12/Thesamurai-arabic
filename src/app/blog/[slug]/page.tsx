@@ -14,17 +14,20 @@ type ArticlePageProps = {
   };
 };
 
-// Add error handling to generateStaticParams
+// Safe generateStaticParams with error handling
 export function generateStaticParams() {
   try {
     const articles = listBlogArticles();
+    console.log('Generating static params for', articles.length, 'articles');
     return articles.map(({ slug }) => ({ slug }));
   } catch (error) {
     console.error('Error in generateStaticParams:', error);
-    return []; // Return empty array if there's an error
+    // Return empty array to allow build to continue
+    return [];
   }
 }
 
+// Safe metadata generation
 export function generateMetadata({ params }: ArticlePageProps): Metadata {
   try {
     const article = getBlogArticle(params.slug);
@@ -39,8 +42,8 @@ export function generateMetadata({ params }: ArticlePageProps): Metadata {
     const content = article[locale];
 
     return {
-      title: content.title,
-      description: content.description.slice(0, 155)
+      title: content?.title || 'Article',
+      description: content?.description?.slice(0, 155) || 'Blog article'
     };
   } catch (error) {
     console.error('Error generating metadata for slug:', params.slug, error);
@@ -56,6 +59,7 @@ export default async function BlogArticlePage({ params }: ArticlePageProps) {
   
   try {
     article = getBlogArticle(params.slug);
+    console.log('Fetched article for slug:', params.slug, article ? 'found' : 'not found');
   } catch (error) {
     console.error('Error fetching article for slug:', params.slug, error);
     notFound();
@@ -67,13 +71,14 @@ export default async function BlogArticlePage({ params }: ArticlePageProps) {
 
   const locale: BlogLocale = params.locale === 'ar' ? 'ar' : localeFallback;
   const content = article[locale];
-  const isArabic = locale === 'ar';
-
-  // Add validation for content properties
-  if (!content || !content.sections || !content.takeaways) {
-    console.error('Invalid content structure for article:', params.slug);
+  
+  // Validate content structure before rendering
+  if (!content || typeof content !== 'object') {
+    console.error('Invalid content structure for article:', params.slug, content);
     notFound();
   }
+
+  const isArabic = locale === 'ar';
 
   return (
     <div
@@ -124,11 +129,11 @@ export default async function BlogArticlePage({ params }: ArticlePageProps) {
                 fontSize: '0.95rem'
               }}
             >
-              <span>{article.category}</span>
+              <span>{article.category || 'Uncategorized'}</span>
               <span style={{ opacity: 0.6 }}>•</span>
-              <span>{article.date}</span>
+              <span>{article.date || 'Unknown date'}</span>
               <span style={{ opacity: 0.6 }}>•</span>
-              <span>{article.readTime}</span>
+              <span>{article.readTime || 'Unknown read time'}</span>
             </div>
             <h1
               style={{
@@ -187,9 +192,9 @@ export default async function BlogArticlePage({ params }: ArticlePageProps) {
             </span>
           </div>
 
-          {content.sections?.map((section, index) => (
+          {(content.sections || []).map((section, index) => (
             <article
-              key={section.heading || `section-${index}`}
+              key={section?.heading || `section-${index}`}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -206,7 +211,7 @@ export default async function BlogArticlePage({ params }: ArticlePageProps) {
                   margin: 0
                 }}
               >
-                {section.heading || 'Section Heading'}
+                {section?.heading || 'Section Heading'}
               </h2>
               <div
                 style={{
@@ -218,11 +223,11 @@ export default async function BlogArticlePage({ params }: ArticlePageProps) {
                   lineHeight: 1.85
                 }}
               >
-                {section.paragraphs?.map((paragraph, pIndex) => (
+                {(section?.paragraphs || ['No content available.']).map((paragraph, pIndex) => (
                   <p key={pIndex} style={{ margin: 0 }}>
                     {paragraph}
                   </p>
-                )) || <p>No content available.</p>}
+                ))}
               </div>
             </article>
           ))}
@@ -259,9 +264,9 @@ export default async function BlogArticlePage({ params }: ArticlePageProps) {
                 lineHeight: 1.7
               }}
             >
-              {content.takeaways?.map((takeaway, tIndex) => (
+              {(content.takeaways || ['No takeaways available.']).map((takeaway, tIndex) => (
                 <li key={tIndex}>{takeaway}</li>
-              )) || <li>No takeaways available.</li>}
+              ))}
             </ul>
           </div>
 
