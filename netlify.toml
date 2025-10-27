@@ -4,3 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  NODE_ENV = "production"
+
+# Add this for serverless functions support
+[functions]
+  directory = ".next/functions"
