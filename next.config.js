@@ -12,13 +12,16 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react']
   },
   
-  // ADD THESE LINES TO FIX THE BUILD ERRORS:
+  // ESLint and TypeScript ignore
   eslint: {
     ignoreDuringBuilds: true,
   },
   typescript: {
     ignoreBuildErrors: true,
   },
+  
+  // ADD THIS to fix prerendering errors
+  output: 'standalone',
   
   async headers() {
     return [
