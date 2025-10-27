@@ -7,10 +7,6 @@ import { notFound } from 'next/navigation';
 
 const localeFallback: BlogLocale = 'en';
 
-// Remove these lines - they conflict with static generation
-// export const dynamic = 'force-dynamic';
-// export const revalidate = 0;
-
 type ArticlePageProps = {
   params: {
     slug: string;
@@ -18,38 +14,66 @@ type ArticlePageProps = {
   };
 };
 
-// Enable static generation for better performance
+// Add error handling to generateStaticParams
 export function generateStaticParams() {
-  return listBlogArticles().map(({ slug }) => ({ slug }));
+  try {
+    const articles = listBlogArticles();
+    return articles.map(({ slug }) => ({ slug }));
+  } catch (error) {
+    console.error('Error in generateStaticParams:', error);
+    return []; // Return empty array if there's an error
+  }
 }
 
 export function generateMetadata({ params }: ArticlePageProps): Metadata {
-  const article = getBlogArticle(params.slug);
-  if (!article) {
+  try {
+    const article = getBlogArticle(params.slug);
+    if (!article) {
+      return {
+        title: 'Article not found',
+        description: 'The requested article could not be located.'
+      };
+    }
+
+    const locale = params.locale === 'ar' ? 'ar' : localeFallback;
+    const content = article[locale];
+
     return {
-      title: 'Article not found',
-      description: 'The requested article could not be located.'
+      title: content.title,
+      description: content.description.slice(0, 155)
+    };
+  } catch (error) {
+    console.error('Error generating metadata for slug:', params.slug, error);
+    return {
+      title: 'Article',
+      description: 'Blog article'
     };
   }
-
-  const locale = params.locale === 'ar' ? 'ar' : localeFallback;
-  const content = article[locale];
-
-  return {
-    title: content.title,
-    description: content.description.slice(0, 155)
-  };
 }
 
 export default async function BlogArticlePage({ params }: ArticlePageProps) {
-  const article = getBlogArticle(params.slug);
+  let article;
+  
+  try {
+    article = getBlogArticle(params.slug);
+  } catch (error) {
+    console.error('Error fetching article for slug:', params.slug, error);
+    notFound();
+  }
+
   if (!article) {
-    notFound(); // Use Next.js notFound instead of custom 404
+    notFound();
   }
 
   const locale: BlogLocale = params.locale === 'ar' ? 'ar' : localeFallback;
   const content = article[locale];
   const isArabic = locale === 'ar';
+
+  // Add validation for content properties
+  if (!content || !content.sections || !content.takeaways) {
+    console.error('Invalid content structure for article:', params.slug);
+    notFound();
+  }
 
   return (
     <div
@@ -114,7 +138,7 @@ export default async function BlogArticlePage({ params }: ArticlePageProps) {
                 margin: 0
               }}
             >
-              {content.title}
+              {content.title || 'Untitled Article'}
             </h1>
             <p
               style={{
@@ -124,7 +148,7 @@ export default async function BlogArticlePage({ params }: ArticlePageProps) {
                 margin: 0
               }}
             >
-              {content.description}
+              {content.description || 'No description available.'}
             </p>
           </div>
         </section>
@@ -159,13 +183,13 @@ export default async function BlogArticlePage({ params }: ArticlePageProps) {
                 fontSize: '0.85rem'
               }}
             >
-              {content.kicker}
+              {content.kicker || 'Insight'}
             </span>
           </div>
 
-          {content.sections.map((section) => (
+          {content.sections?.map((section, index) => (
             <article
-              key={section.heading}
+              key={section.heading || `section-${index}`}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -182,7 +206,7 @@ export default async function BlogArticlePage({ params }: ArticlePageProps) {
                   margin: 0
                 }}
               >
-                {section.heading}
+                {section.heading || 'Section Heading'}
               </h2>
               <div
                 style={{
@@ -194,11 +218,11 @@ export default async function BlogArticlePage({ params }: ArticlePageProps) {
                   lineHeight: 1.85
                 }}
               >
-                {section.paragraphs.map((paragraph, index) => (
-                  <p key={index} style={{ margin: 0 }}>
+                {section.paragraphs?.map((paragraph, pIndex) => (
+                  <p key={pIndex} style={{ margin: 0 }}>
                     {paragraph}
                   </p>
-                ))}
+                )) || <p>No content available.</p>}
               </div>
             </article>
           ))}
@@ -235,9 +259,9 @@ export default async function BlogArticlePage({ params }: ArticlePageProps) {
                 lineHeight: 1.7
               }}
             >
-              {content.takeaways.map((takeaway) => (
-                <li key={takeaway}>{takeaway}</li>
-              ))}
+              {content.takeaways?.map((takeaway, tIndex) => (
+                <li key={tIndex}>{takeaway}</li>
+              )) || <li>No takeaways available.</li>}
             </ul>
           </div>
 
@@ -270,7 +294,7 @@ export default async function BlogArticlePage({ params }: ArticlePageProps) {
                 margin: 0
               }}
             >
-              {content.conclusion}
+              {content.conclusion || 'No conclusion available.'}
             </p>
             <div>
               <Link
