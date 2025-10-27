@@ -2,10 +2,9 @@
 const withNextIntl = require('next-intl/plugin')('./src/i18n.ts');
 
 const nextConfig = {
-  // Remove outputFileTracingRoot for Netlify compatibility
   compress: true,
   
-  // Simplify image optimization - disable for Netlify
+  // Image optimization
   images: {
     unoptimized: true,
     domains: [],
@@ -23,9 +22,8 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   
-  // Change output for Netlify compatibility
-  output: 'export',
-  trailingSlash: true,
+  // REMOVED: output: 'export' - This was causing the API route error
+  trailingSlash: false,
   
   // Performance optimizations
   poweredByHeader: false,
