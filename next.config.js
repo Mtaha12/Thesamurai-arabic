@@ -5,9 +5,13 @@ const nextConfig = {
   // Add this to fix the lockfile warning
   outputFileTracingRoot: __dirname,
   compress: true,
+  
+  // Image optimization - disable if still having issues
   images: {
-    formats: ['image/avif', 'image/webp']
+    formats: ['image/avif', 'image/webp'],
+    unoptimized: process.env.NODE_ENV === 'production' ? false : true
   },
+  
   experimental: {
     optimizePackageImports: ['lucide-react']
   },
@@ -20,9 +24,19 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   
-  // ADD THIS to fix prerendering errors
+  // Output configuration
   output: 'standalone',
   
+  // ADD these for better build performance
+  poweredByHeader: false,
+  generateEtags: false,
+  
+  // ADD this to handle dynamic routes better
+  trailingSlash: false,
+  
+  // ADD this to skip source maps in production for faster builds
+  productionBrowserSourceMaps: false,
+
   async headers() {
     return [
       {
