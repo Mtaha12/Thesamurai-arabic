@@ -7,11 +7,6 @@ const nextConfig = {
   // Image optimization
   images: {
     unoptimized: true,
-    domains: [],
-  },
-  
-  experimental: {
-    optimizePackageImports: ['lucide-react']
   },
   
   // ESLint and TypeScript ignore
@@ -22,9 +17,6 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   
-  // REMOVED: output: 'export' - This was causing the API route error
-  trailingSlash: false,
-  
   // Performance optimizations
   poweredByHeader: false,
   generateEtags: false,
@@ -32,9 +24,6 @@ const nextConfig = {
   
   // Disable strict mode for build stability
   reactStrictMode: false,
-  
-  // Increase timeout for build
-  staticPageGenerationTimeout: 1000,
 
   async headers() {
     return [
