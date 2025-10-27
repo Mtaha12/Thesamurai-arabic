@@ -2,6 +2,9 @@
   "name": "project-foundation",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18.0.0 <=20.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -17,7 +20,7 @@
     "test:report": "playwright show-report",
     "test:unit": "jest",
     "test:unit:watch": "jest --watch",
-     "test:load": "artillery run tests/load/site-smoke.yml",
+    "test:load": "artillery run tests/load/site-smoke.yml",
     "test:load:local": "LOAD_TEST_BASE_URL=http://localhost:3000 artillery run tests/load/site-smoke.yml",
     "test:load:staging": "LOAD_TEST_BASE_URL=https://staging.yoursite.com artillery run tests/load/site-smoke.yml",
     "test:load:prod": "LOAD_TEST_BASE_URL=https://yoursite.com artillery run tests/load/site-smoke.yml"
